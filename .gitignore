@@ -15,6 +15,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
+/src/styles/main.css
+/src/styles/FormDatePicker.css
 
 npm-debug.log*
 yarn-debug.log*
