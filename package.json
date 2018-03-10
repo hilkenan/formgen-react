@@ -7,7 +7,13 @@
   "homepage": "https://github.com/hilkenan/formgen-react",
   "main": "Form",
   "module": "es",
-  "keywords": ["react", "uifabric", "formula", "genertor", "react-component"],
+  "keywords": [
+    "react",
+    "uifabric",
+    "formula",
+    "genertor",
+    "react-component"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/hilkenan/formgen-react.git"
@@ -23,6 +29,7 @@
     "intl": "^1.2.5",
     "json2typescript": "^1.0.5",
     "moment": "^2.20.1",
+    "node-sass-chokidar": "^1.1.0",
     "office-ui-fabric-react": "^5.52.0",
     "rc-cascader": "^0.12.2",
     "react": "^16.2.0",
