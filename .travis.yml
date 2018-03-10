@@ -8,3 +8,6 @@ script:
   - npm run build-css
   - npm run build
   - npm run test
+  - npm install codecov -g
+after_success:
+  - codecov
