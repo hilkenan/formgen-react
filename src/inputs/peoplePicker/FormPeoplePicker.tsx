@@ -4,11 +4,10 @@ import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBase
 import { IFormContext } from '../../form/Form.types';
 import { CompactPeoplePicker, IPersonaProps, IBasePickerSuggestionsProps, ValidationState } from 'office-ui-fabric-react';
 import { InnerControl } from '../../controls/innerControl/InnerControl';
-import Rendering from '../../form/Rendering';
+import Rendering from '../../form/Rendering';;
 import { Helper } from '../../Helper';
 import { IFormPeoplePickerState, IFormPeoplePickerProps } from './FormPeoplePicker.types';
 import { LocalsPeoplePicker } from '../../locales/LocalsPeoplePicker';
-
 
 /**
  * DatePicker input for Form

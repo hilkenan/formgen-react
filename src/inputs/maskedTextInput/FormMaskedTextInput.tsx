@@ -6,8 +6,7 @@ import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { InnerControl } from '../../controls/innerControl/InnerControl';
 import { SyntheticEvent } from 'react';
-import Rendering from '../../form/Rendering';
-
+import Rendering from '../../form/Rendering';;
 
 /**
  * TextBox input for the Form.

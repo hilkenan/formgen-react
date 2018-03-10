@@ -13,11 +13,11 @@ import '../styles/main.css';
 import { IFormState, IFormProps, IFormContext, IFormValidationResult } from './Form.types';
 import { TranslatedProperty, ValidatorTypes } from '../Enums';
 import { GenericFormInput } from '../formBaseInput/FormBaseInput';
-import Rendering from './Rendering';
 import { Control } from '../objects/Control';
 import { Row } from '../objects/Row';
 import { addLocaleData } from 'react-intl';
 import '../polyfills';
+import Rendering from './Rendering';
 
 global.Intl = require('intl');
 
