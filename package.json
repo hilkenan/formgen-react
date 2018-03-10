@@ -52,6 +52,28 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
+  "badges": [{
+      "href": "http://badge.fury.io/js/formgen-react",
+      "url": "https://badge.fury.io/js/formgen-react.svg",
+      "description": "npm version"
+    },{
+      "href": "https://travis-ci.org/hilkenan/formgen-react",
+      "url": "https://secure.travis-ci.org/hilkenan/formgen-react.svg",
+      "description": "build status"
+    },{
+      "href": "https://david-dm.org/hilkenan/formgen-react",
+      "url": "https://david-dm.org/hilkenan/formgen-react.svg",
+      "description": "dependency status"
+    },{
+      "href": "https://codecov.io/gh/hilkenan/formgen-react",
+      "url": "https://codecov.io/gh/hilkenan/formgen-react/branch/master/graph/badge.svg",
+      "description": "code coverage"
+    },{
+      "href": "https://npmjs.org/package/formgen-react",
+      "url": "http://img.shields.io/npm/dm/formgen-react.svg",
+      "description": "downloads"
+    }
+  ],
   "devDependencies": {
     "@types/jest": "^22.1.3",
     "@types/node": "^9.4.6",

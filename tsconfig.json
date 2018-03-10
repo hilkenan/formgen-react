@@ -30,6 +30,7 @@
     "webpack",
     "jest",
     "styles",
+    "coverage",
     "src/setupTests.ts"
   ]
 }
