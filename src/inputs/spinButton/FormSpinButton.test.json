@@ -1,0 +1,27 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [{
+                "id": "spin",
+                    "validators": [{
+                        "validator_type": [ "Required" ]
+                    },
+                    {
+                        "validator_type": ["MinValue" ],
+                        "value": 3,
+                        "message": "min 3"
+                    }
+                ],
+                "title": "Spin",
+                "value": 1,
+                "control_type": [ "SpinButton" ]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}

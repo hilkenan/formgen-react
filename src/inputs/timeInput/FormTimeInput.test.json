@@ -1,0 +1,33 @@
+{
+    "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [{
+				"id": "control1",
+				"control_type": ["Time"],
+				"validators": [{
+					"validator_type":[ "Required" ]
+                },
+                {
+                    "validator_type":[ "MaxValue" ],
+                    "value": 39600,
+                    "message": "max 09:00"
+				}],
+				"value": 39600,
+				"title": "Time",
+				"config": {
+					"hideSeconds": true,
+					"maxSeconds": 36000
+				}
+			},
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}
+                    
+
+

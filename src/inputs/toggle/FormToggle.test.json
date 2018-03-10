@@ -1,0 +1,22 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+                "id": "toggle",
+                    "validators": [{
+                        "validator_type": [ "Required" ]
+                    }],
+                "title": "Toggle",
+                "value": true,
+                "control_type": [ "Toggle" ]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}

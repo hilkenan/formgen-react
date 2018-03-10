@@ -1,0 +1,384 @@
+{
+	 "$schema": "../schemas/jfrom-schema.json",
+	 "id": "testform",
+	 "theme": "red",
+	 "title": "Test EN",
+	 "title_trans": {
+		 "de": "Test DE",
+		 "fr": "Test FR",
+         "it": "Test IT"
+	},
+	"rows": [{
+		"columns": [{
+				"controls": [{
+					"id": "info",
+                "title": "<b>This is a Info about this Test Document in Englisch</b>",
+				"control_type": [ "InfoText" ],
+				"title_trans": {
+					"de": "<b>Das ist ein Info Text über dieses Dokument in Deutsch</b>",
+					"fr": "<b>Ceci est un texte d'information sur ce document en français</ b>",					
+					"it": "<b>Questo è un testo informativo su questo documento in italiano</ b>"
+					}
+				}]
+			}]
+		},
+		{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+                "id": "dropdown",
+                "title": "DropDown",
+                "config": {
+                    "options": [
+                        { "key": "1", "text": "Option 1" },
+                        { "key": "2", "text": "Option 2" },
+                        { "key": "3", "text": "Option 3" }]
+                },
+                "control_type": [ "DropDown" ],
+				"info": "Info Test",
+				"validators": [{
+                        "validator_type": [ "Required" ]
+                    },{
+						"validator_type": [ "MinValue"],
+						"value": 2,
+                        "message": "Min 2"
+                    }],
+                "label_position": [ "Top"]
+			},{
+                "id": "combobox",
+                "title": "ComboBox",
+                "config": {
+                    "options": [
+                        { "key": "1", "text": "Option 1" },
+                        { "key": "2", "text": "Option 2" },
+                        { "key": "3", "text": "Option 3" }]
+				},
+				"value": "1",
+                "control_type": [ "ComboBox" ],
+				"info": "Info Test",
+				"validators": [{
+                        "validator_type": [ "Required" ]
+                    },{
+						"validator_type": [ "MinValue"],
+						"value": 2,
+                        "message": "Min 2"
+                    }],
+                "label_position": [ "Top"]
+			}		
+		]
+		},{
+			"label_with": 4,
+			"controls": [{
+				"id": "cascader",
+				"title": "Cascading DropDown",
+				"config": {
+					"placeHolder": "Select all"
+				},
+				"config_trans": {
+					"properties": [{
+						"key": "placeHolder",
+						"object_trans": {
+							"de": "Select all DE",
+							"fr": "Select all FR",
+							"it": "Select all IT"
+						}
+					}]					
+				},
+				"validators": [{
+                        "validator_type": [ "Required" ]
+					},
+					{
+						"validator_type": [ "MaxLength"],
+						"value": 2,
+						"message": "Max 2 Levels"
+					}
+				],
+				"databinders": [ "options" ],
+				"control_type": [ "CascadingDropDown" ],
+				"info": "Info Cascading EN",
+				"info_trans": {
+					"de": "Info Cascading DE",
+					"fr": "Info Cascading FR",
+					"it": "Info Cascading IT"
+				},
+				"info_action": {
+					"link": "http://www.google.ch",
+					"text": "Google"
+				},
+				"label_position": [ "Top"]
+			}, {
+				"id": "textbox",
+				"title": "TextBox",
+				"value": "Test Vaule",
+				"control_type": [ "Textbox" ],
+				"info": "Info Test",
+				"validators": [{
+						"validator_type": [ "Required" ]
+					},{
+						"validator_type": [ "MaxLength" ],
+						"value": 10,
+						"message": "Maximal 10 chars"
+					}
+				],
+				"label_position": [ "Top"]
+			}
+		]
+		}]
+	},
+	{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+                "id": "choicegroup",
+                "title": "ChoiceGroup",
+                "config": {
+                    "options": [
+                        { "key": "1", "text": "Option 1" },
+                        { "key": "2", "text": "Option 2" },
+                        { "key": "3", "text": "Option 3" }]
+				},
+				"value": "1",
+                "control_type": [ "ChoiceGroup" ],
+				"info": "Info Test",
+				"validators": [{
+                        "validator_type": [ "Required" ]
+                    },{
+						"validator_type": [ "MinValue"],
+						"value": 2,
+                        "message": "Min 2"
+                    }],
+                "label_position": [ "Top"]
+			},                {
+                "id": "maskedtextbox",
+                "control_type": ["MaskedTextbox"],
+                "validators": [{
+                    "validator_type":[ "Required" ]
+                }],
+                "label_position": [
+                    "Top"
+                ],
+                "title": "MaskedTextbox EN",
+				"info": "Info Test",
+                "info_trans": {
+					"de": "Info Test DE",
+					"fr": "Info Test FR",
+					"it": "Info Test IT"
+                },
+                "config": {
+                    "placeholder": "hh:mm:ss",
+                    "mask": "11:11:11"
+                },
+                "title_trans": {
+					"de": "MaskedTextbox DE",
+					"fr": "MaskedTextbox FR",
+                    "it": "MaskedTextbox IT"
+				}
+			}]
+		},{
+			"controls": [{
+                "id": "checkbox",
+                "title": "Checkbox",
+				"value": false,
+                "control_type": [ "Checkbox" ],
+				"info": "Info Test",
+				"validators": [{
+                        "validator_type": [ "Required" ]
+                    }],
+                "label_position": [ "Top"]
+			},{
+                "id": "richtext",
+                "title": "Richtext",
+				"value": "<b>This is a Test</b>",
+                "control_type": [ "RichtTex" ],
+				"info": "Info Test",
+				"validators": [{
+                        "validator_type": [ "Required" ]
+                    }],
+                "label_position": [ "Top"]
+			}]
+		}]
+	},
+	{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+                "id": "datepicker",
+                "title": "DatePicker",
+				"value": "2018-05-31",
+                "control_type": [ "DatePicker" ],
+				"info": "Info Test",
+				"validators": [{
+                        "validator_type": [ "Required" ]
+                    }],
+                "label_position": [ "Top"]
+			},{
+                "id": "spinbutton",
+                "title": "SpinButton",
+                "control_type": [ "SpinButton" ],
+				"validators": [{
+					"validator_type": [ "Required" ]
+					},{
+						"validator_type": ["MaxValue" ],
+						"value": 3,
+						"message": "Maximal 3"
+				}],
+				"info": "Info Test",
+                "label_position": [ "Top"]
+			},{
+                "id": "toggle",
+                "title": "Toggle",
+                "control_type": [ "Toggle" ],
+				"validators": [{
+					"validator_type": [ "Required" ]
+					}],
+                "label_position": [ "Top"]
+			}]
+		},
+		{
+			"label_with": 4,
+			"controls": [{
+                "id": "time",
+                "title": "Time",
+				"value": 43200,
+                "control_type": [ "Time" ],
+				"info": "Info Test",
+				"validators": [{
+					"validator_type": [ "Required" ]
+					},{
+						"validator_type": ["MaxValue" ],
+						"value": 54000,
+						"message": "Maximal at 15:00"
+				}],
+                "label_position": [ "Top"]
+			},{
+                "id": "slider",
+                "title": "Slider",
+                "control_type": [ "Slider" ],
+				"validators": [{
+					"validator_type": [ "Required" ]
+					},{
+						"validator_type": ["MaxValue" ],
+						"value": 5,
+						"message": "Maximal 5"
+				}],
+				"info": "Info Test",
+                "label_position": [ "Top"]
+			}]
+		}]
+	},
+	{
+	"columns": [{
+		"controls": [{
+			"id": "tabContainer",
+			"control_type": ["TabContainer"],
+			"subcontrols": [{
+					"id": "tab1",
+					"control_type": ["Tab"],
+					"title": "Tab 1",
+					"subrows": [{
+						"columns": [{
+							"controls": [{
+								"id": "datetimepicker",
+								"control_type": [ "DateTimePicker" ],
+								"title": "DateTimePicker",
+								"label_position": [
+									"Top"
+								],
+								"info": "Test Info",
+								"validators": [{
+									"validator_type": [
+										"Required"
+									]},
+									{
+										"validator_type": [
+											"MaxValue"
+										],
+										"message": "At 14:00",
+										"value": 50400
+								}]
+							}]
+						}]
+					}]
+				},
+				{
+					"id": "tab2",
+					"control_type": ["Tab"],
+					"title": "Tab 2",
+					"config": {
+						"itemIcon": "Edit"
+					},
+					"subrows": [{
+						"columns": [{
+							"controls": [{
+								"id": "timepicker",
+								"control_type": [ "TimePicker" ],
+								"title": "TimePicker",
+								"label_position": [
+									"Top"
+								],
+								"info": "Test Info",
+								"validators": [{
+									"validator_type": [ "Required" ]
+								}]
+							},{
+								"id": "pepople",
+								"control_type": [ "PeoplePicker" ],
+								"title": "PeoplePicker",
+								"config": {
+									"allowMultiple": true
+								},
+								"label_position": [
+									"Top"
+								],
+								"validators": [{
+									"validator_type": [ "Required" ]
+								},{
+									"validator_type": [ "MaxLength" ],
+									"value": 2,
+									"message": "Max 2 Persons"
+								}],
+								"info": "Test Info",
+								"databinders": [ "filteredPeoples" ]
+                    		}]
+						}]
+					}]
+				}]
+			}]
+		}]
+	},
+	{
+	"columns": [{
+		"controls": [{
+			"id": "submit",
+			"control_type": ["SubmitButton"],
+			"title": "Send",
+			"title_trans": {
+				"fr": "Send FR",
+				"it": "Send IT",
+				"de": "Send DE"
+				}
+			},
+			{
+			"id": "cancel",
+			"control_type": ["CancelButton"],
+			"title": "Cancel",
+			"title_trans": {
+				"fr": "Cancel FR",
+				"it": "Cancel IT",
+				"de": "Cancel DE"
+				}
+			},
+			{
+			"id": "custom",
+			"control_type": [ "CustomButton" ],
+			"customtype_name": "TestCustom1",
+			"title": "Custom",
+			"title_trans": {
+				"fr": "Custom FR",
+				"it": "Custom IT",
+				"de": "Custom DE"
+				}
+			}
+		]}
+	]}
+]}

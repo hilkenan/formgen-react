@@ -1,0 +1,23 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+				"id": "control1",
+				"control_type": [ "Textbox"],
+				"validators": [{
+					"validator_type":[ "Required" ]
+                }]
+                },{
+                "id": "cancelButton",
+                "title": "Cancel",
+                "control_type": ["CancelButton" ]
+            }]
+        }]
+    }]
+}
+                    
+
+

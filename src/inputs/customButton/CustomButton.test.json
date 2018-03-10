@@ -1,0 +1,21 @@
+{
+	"id": "testform",
+	"title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [{
+				"id": "control1",
+				"control_type": [ "Textbox"],
+				"validators": [{
+					"validator_type":[ "Required" ]
+                }]
+				},			{
+					"id": "custom1",
+					"control_type": [ "CustomButton" ],
+					"title": "Custom 1",
+					"customtype_name": "TestCustom1"
+					}
+		]
+        }]
+    }]
+}

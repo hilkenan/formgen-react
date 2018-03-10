@@ -1,0 +1,27 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [					{
+                "id": "pepoplepicker",
+                "control_type": [ "PeoplePicker" ],
+                "title": "PeoplePicker",
+                "config": {
+                    "allowMultiple": false
+                },
+                "value": [{"primaryText":"Muster Hans"}],
+                "databinders": [
+                    "filteredPeoples"
+                ]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}
+                    
+
+

@@ -1,0 +1,99 @@
+@import 'node_modules/office-ui-fabric-react/dist/sass/Fabric.scss';
+
+.Form {
+  @include ms-Fabric;
+}
+
+.Form-header {
+  h1 {
+    @include ms-fontSize-xxl;
+    @include ms-fontWeight-semibold;
+  }
+}
+
+.Form-content {
+  @include ms-Grid;
+}
+
+.infoIconSmall {
+  @include ms-font-m-plus;
+  margin-top: 8px;
+}
+
+.colElements {
+  @include ms-Grid-col;
+  button.ms-Button:not(.ms-ComboBox-CaretDown-button):not(.ms-UpButton):not(.ms-DownButton) {
+    margin: 10px;
+  }
+  .ms-Grid {
+    margin-top: 10px;
+    margin-bottom: 10px;  
+  }
+}
+
+.rowElements  {
+  @include ms-Grid-row;
+}
+
+.infoNearControl {
+  position: absolute;
+  top:0px;
+  left: 40px;
+}
+
+.checkBoxPadding {
+  @include ms-Grid-col;
+  button {
+    padding-top: 5px;
+  }
+}
+
+.cascaderPopupClassName > div > ul {
+  @include ms-Fabric;
+  @include ms-font-m;
+  width: 150px;
+}
+
+.ms-ComboBox-FormInput .ms-ComboBox-Input {
+  margin-top: 1px;
+}
+
+.forminputError {
+  @include ms-font-s;
+  color: $ms-color-redDark;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  > i {
+      @include ms-margin-right(5px);
+      margin-top: auto;
+      font-size: 14px; // Fabric TextField's validation icon size
+  }
+}
+.timePickerInvalid {
+  border: 2px red solid;
+}
+
+.timePickerIcon {
+  display:inline;
+}
+.timePickerIcon div {
+  display:block;
+  float: left;
+}
+.timePickerIcon div:nth-child(2) {
+  margin-top: 8px;
+}
+
+.timePickerIcon:hover {
+  cursor: pointer;
+}
+
+.timePickerIcon svg {
+  width: 20px !important;
+  height: 20px !important;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+

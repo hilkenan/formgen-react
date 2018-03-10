@@ -1,0 +1,27 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+                "id": "datepicker",
+                    "validators": [{
+                        "validator_type": [ "Required" ]
+                    }],
+                "title": "Datepicker",
+                "value": "2018-03-11T15:30:30.000Z",
+                "control_type": [ "DateTimePicker" ],
+                "info": "Info Test",
+                "label_position": [ "Left"]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}
+                    
+
+

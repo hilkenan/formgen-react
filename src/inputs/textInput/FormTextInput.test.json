@@ -1,0 +1,30 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+                "id": "text",
+                    "validators": [{
+                        "validator_type": [ "Required" ]
+                    },{
+                        "validator_type": [ "Integer"],
+                        "message": "no int"
+                    }],
+                "title": "Textbox",
+                "value": "test",
+                "control_type": [ "Textbox" ],
+                "info": "Info Test",
+                "label_position": [ "Left"]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}
+                    
+
+

@@ -1,0 +1,25 @@
+{
+	"id": "testform",
+	"title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [{
+                "id": "cascading",
+                "databinders": [
+                    "options"
+                ],
+                "value": [{"label":"Super langer ultra test","value":"fj","children":[{"label":"Test 1","value":"fuzhou","children":[{"label":"diabled","value":"mawei"}]},{"label":"Test 2","value":"quanzhou"}]},{"label":"Test 1","value":"fuzhou","children":[{"label":"diabled","value":"mawei"}]},{"label":"diabled","value":"mawei"}],
+                "title": "Cascading",
+                "control_type": [ "CascadingDropDown" ],
+                "label_position": [ "Left" ]
+            },				
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}
+                    
+
+

@@ -1,0 +1,22 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"label_with": 4,
+			"controls": [{
+                "id": "timepicker",
+                    "validators": [{
+                        "validator_type": [ "Required" ]
+                    }],
+                "title": "TimePicker",
+                "value": "12:30",
+                "control_type": [ "TimePicker" ]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}

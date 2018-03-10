@@ -1,0 +1,23 @@
+{
+	"$schema": "../../schemas/jfrom-schema.json",
+	"id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [{
+				"id": "tabContainer",
+				"control_type": ["TabContainer"],
+				"subcontrols": [{
+					"id": "tab1",
+					"control_type": ["Tab"],
+					"title": "Tab 1"
+				},
+				{
+					"id": "tab2",
+					"control_type": ["Tab"],
+					"title": "Tab 2"
+				}]
+			}]
+        }]
+    }]
+}

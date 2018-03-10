@@ -1,0 +1,30 @@
+{
+	 "id": "testform",
+	 "title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [{
+                "id": "rating",
+                    "validators": [{
+                        "validator_type": [ "Required" ]
+                    },
+                    {
+                        "validator_type": ["MinValue" ],
+                        "value": 3,
+                        "message": "min 3"
+                    }
+                ],
+                "title": "Rating",
+                "value": 1,
+                "control_type": [ "Rating" ]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}
+                    
+
+
