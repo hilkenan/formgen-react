@@ -21,6 +21,6 @@ describe('FormInfoText Unit Tests', () => {
       <Form jsonFormData={ jsonForm }/>
     ) as Form;
     let lable: HTMLLabelElement = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, 'ms-Label') as HTMLLabelElement;
-    expect(lable.innerHTML).toEqual("This is a info text");
+    expect(lable.innerHTML).toEqual("<div>This is a info text</div>");
   });
 });

@@ -5,7 +5,7 @@ import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
 import { InnerControl } from '../../controls/innerControl/InnerControl';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
 import { ChoiceGroup, IChoiceGroupProps, IChoiceGroupOption } from "office-ui-fabric-react/lib";
-import Rendering from 'src/form/Rendering';
+import Rendering from '../../form/Rendering';
 
 /**
  * ChoiceGroup input for Form
