@@ -14,6 +14,7 @@ Formula generator with JSON for react. UI Fabric controls are used for rendering
 - Responsive
 - 24 Out of the Box controls
 - 10 Validators
+
 The Basic Code for the validation for the formula comes from the experiments from ui Fabric<br/>
 <a href="https://github.com/OfficeDev/office-ui-fabric-react/tree/master/packages/experiments/src/components/Form">UI Fabric Form Experiments</a>
 
