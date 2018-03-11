@@ -19,7 +19,6 @@ The example below shows how to use the form generator with a simple json definit
 
 ```ts
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import Form from 'formgen-react';
 var jsonForm = require('./samples/test.json');
 
@@ -37,8 +36,6 @@ render() {
 ## Configuration
 
 The above test.json file could look like this:
-
-
 {
 	 "$schema": "../schemas/jfrom-schema.json",
 	 "id": "testform",
@@ -65,15 +62,23 @@ The above test.json file could look like this:
 	}]
  }
 ```
+The JSON has to fit the the JSON Schema Definition:
+[Form Schema](schemas/jfrom-schema.json)
+You need also the following global Schemas:
+[Translation](schemas/translation-schema.json)
+[Object Translation](schemas/objecttranslation-schema.json)
+
 Full documentation will provided in some days.
 
-### Localization
+### Translating / Localization 
 
-The form is fully translatable. Included are defauld translations for DE, IT, EN, and ES
+The form is fully translatable. Included are defauld translations for DE, IT, EN, and ES. Time and Date Controls can be localized. If you want provide other language, please let me know, or contribute with other languages.
 
 ### Browser Support
 
-The date picker is compatible with the latest versions of Chrome, Firefox, and IE10+.
+The most Controls are UI Fabric Control. Also the Layout classes comes from UI Fabric. Here the Browser Support for UI Fabrict:
+<a href="https://github.com/OfficeDev/office-ui-fabric-react/blob/master/ghdocs/BROWSERSUPPORT.md">Browser support</a>
+
 
 ## Local Development
 
@@ -83,4 +88,4 @@ You can run `npm test` to execute the test suite. To help you develop the compon
 
 ## License
 
-Copyright (c) 2018 hilkenan Inc. and individual contributors. Licensed under MIT license, see [LICENSE](LICENSE) for the full license.
+Copyright (c) 2018 to hilkean and individual contributors. Licensed under MIT license, see [LICENSE](LICENSE) for the full license.
