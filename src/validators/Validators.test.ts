@@ -1,4 +1,4 @@
-import { Validators } from './Validators';
+import { Validators } from "./Validators";
 
 describe('Simple form validators test', () => {
   let customMessage = 'Custom Error Message';

@@ -58,23 +58,37 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
   },
-  "badges": [{
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/*.types.ts",
+      "!src/index.tsx",
+      "!src/registerServiceWorker.ts"
+    ],
+    "coverageReporters" : ["lcov", "text"]
+  },
+  "badges": [
+    {
       "href": "http://badge.fury.io/js/formgen-react",
       "url": "https://badge.fury.io/js/formgen-react.svg",
       "description": "npm version"
-    },{
+    },
+    {
       "href": "https://travis-ci.org/hilkenan/formgen-react",
       "url": "https://secure.travis-ci.org/hilkenan/formgen-react.svg",
       "description": "build status"
-    },{
+    },
+    {
       "href": "https://david-dm.org/hilkenan/formgen-react",
       "url": "https://david-dm.org/hilkenan/formgen-react.svg",
       "description": "dependency status"
-    },{
+    },
+    {
       "href": "https://codecov.io/gh/hilkenan/formgen-react",
       "url": "https://codecov.io/gh/hilkenan/formgen-react/branch/master/graph/badge.svg",
       "description": "code coverage"
-    },{
+    },
+    {
       "href": "https://npmjs.org/package/formgen-react",
       "url": "http://img.shields.io/npm/dm/formgen-react.svg",
       "description": "downloads"
@@ -86,6 +100,8 @@
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
     "codecov": "^3.0.0",
+    "karma-typescript": "^3.0.12",
+    "mocha": "^5.0.4",
     "react-times": "^3.0.0",
     "typescript": "^2.7.2"
   }

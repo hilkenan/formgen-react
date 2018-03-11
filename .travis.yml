@@ -1,13 +1,11 @@
 language: node_js
 node_js:
   - '8'
+install:
+  - npm install -g codecov
 script:
-  - if [ $TRAVIS_BRANCH == "master" ] && [ $TRAVIS_PULL_REQUEST == "true" ]; then
-      npm run checkchange;
-    fi
   - npm run build-css
   - npm run build
-  - npm run test
-  - npm install codecov -g
+  - npm test -- --coverage
 after_success:
-  - codecov
+  - codecov -t 8a045ae0-f9d2-4bf2-8b21-b6c1da2a161c
