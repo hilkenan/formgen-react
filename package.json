@@ -10,14 +10,20 @@
   "keywords": [
     "react",
     "uifabric",
-    "formula",
+    "form",
     "genertor",
-    "react-component"
+    "react-component",
+    "translatable",
+    "loclizable",
+    "typescript",
+    "responsive",
+    "json"
   ],
   "repository": {
     "type": "git",
     "url": "git://github.com/hilkenan/formgen-react.git"
   },
+  "readme": "README.md",
   "bugs": {
     "url": "https://github.com/hilkenan/formgen-react/issues"
   },
