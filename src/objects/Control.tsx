@@ -12,7 +12,7 @@ import Rendering from '../form/Rendering';
 import { IValidator, Validators } from '../validators/Validators';
 import { Helper } from '../Helper';
 import { FormValidator } from './FormValidator';
-import { DataBinder } from './DataBinder';
+import { DataBinder } from './DataBinder.types';
 import { ActionLink } from "./ActionLink";
 import { LocalsCommon } from '../locales/LocalsCommon';
 

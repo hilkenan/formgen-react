@@ -1,10 +1,10 @@
 /* tslint:disable:no-any */
 import * as React from 'react';
-import { DynamicControl } from '../objects/DynamicControl';
+import { DynamicControl } from '../objects/DynamicControl.types';
 import { GenericFormInput } from '../formBaseInput/FormBaseInput';
-import { CustomValidator } from '../objects/CustomValidator';
-import { CustomActions } from '../objects/CustomActions';
-import { DataBinder } from '../objects/DataBinder';
+import { CustomValidator } from '../objects/CustomValidator.types';
+import { CustomActions } from '../objects/CustomActions.types';
+import { DataBinder } from '../objects/DataBinder.types';
 
 /**
  * The state for Form

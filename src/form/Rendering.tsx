@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { CSSProperties } from 'react';
 import { Helper } from '../Helper';
-import { DynamicControl } from '../objects/DynamicControl';
+import { DynamicControl } from '../objects/DynamicControl.types';
 import { Control } from '../objects/Control';
 import { Column } from '../objects/Column';
 import { Row } from '../objects/Row';
 import { Icon, css } from 'office-ui-fabric-react';
-import { DataBinder } from '../objects/DataBinder';
-import { CustomValidator } from '../objects/CustomValidator';
-import { CustomActions } from '../objects/CustomActions';
+import { DataBinder } from '../objects/DataBinder.types';
+import { CustomValidator } from '../objects/CustomValidator.types';
+import { CustomActions } from '../objects/CustomActions.types';
 import { FormInputs } from './FormInputs';
 
 /**

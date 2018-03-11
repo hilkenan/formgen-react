@@ -18,8 +18,7 @@
     "noImplicitAny": false,
     "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
-    "isolatedModules": true
+    "noUnusedLocals": true
   },
 
   "exclude": [

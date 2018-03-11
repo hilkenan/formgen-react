@@ -7,7 +7,7 @@ import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities
 import { TranslatedProperty, LabelPositions, ValidatorTypes, BinderType } from '../Enums';
 import { IFormContext, IFormValidationResult } from '../form/Form.types';
 import { autobind } from '@uifabric/utilities';
-import { IDataBinder, IDataBinderAsync, IDataBinderFilterAsync } from '../objects/DataBinder';
+import { IDataBinder, IDataBinderAsync, IDataBinderFilterAsync } from '../objects/DataBinder.types';
 import { LocalsCommon } from '../locales/LocalsCommon';
 import { Helper } from '../Helper';
 

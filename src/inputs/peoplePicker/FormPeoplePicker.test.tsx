@@ -4,7 +4,7 @@ import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
 import { Form } from '../../form/Form';
 import { BinderType } from '../../Enums';
-import { DataBinder } from '../../objects/DataBinder';
+import { DataBinder } from '../../objects/DataBinder.types';
 import { Control } from '../../objects/Control';
 import { IPersonaProps } from 'office-ui-fabric-react';
 import { FormPeoplePicker } from './FormPeoplePicker';

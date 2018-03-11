@@ -4,7 +4,7 @@ import * as sinon from 'sinon';
 
 import { Form } from '../../form/Form';
 import { FormTextInput } from '../textInput/FormTextInput';
-import { CustomActions } from '../../objects/CustomActions';
+import { CustomActions } from '../../objects/CustomActions.types';
 import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
 var jsonForm = require('./CustomButton.test.json');
 

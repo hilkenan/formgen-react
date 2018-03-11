@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
 import { Form } from '../../form/Form';
-import { DataBinder } from '../../objects/DataBinder';
+import { DataBinder } from '../../objects/DataBinder.types';
 import { BinderType } from '../../Enums';
 import { Control } from '../../objects/Control';
 import { FormCascader } from './FormCascader';

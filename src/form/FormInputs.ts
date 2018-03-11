@@ -1,4 +1,4 @@
-import { DynamicControl } from "../objects/DynamicControl";
+import { DynamicControl } from "../objects/DynamicControl.types";
 import { FormCheckBox } from "../inputs/checkbox/FormCheckBox";
 import { FormTextInput } from "../inputs/textInput/FormTextInput";
 import { SubmitButton } from '../inputs/submitButton/SubmitButton';
