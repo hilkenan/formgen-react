@@ -6,7 +6,16 @@
 [![codecov](https://codecov.io/gh/hilkenan/formgen-react/branch/master/graph/badge.svg)](https://codecov.io/gh/hilkenan/formgen-react)
 [![Downloads](http://img.shields.io/npm/dm/formgen-react.svg)](https://npmjs.org/package/formgen-react)
 
-Formula generator with JSON for react. UI Fabric controls are used for rendering
+Formula generator with JSON for react. UI Fabric controls are used for rendering. 
+## Fetures
+- Validation
+- Translatable form
+- With custom controls, validators, and custom actions enhanceable
+- Responsive
+- 24 Out of the Box controls
+- 10 Validators
+The Basic Code for the validation for the formula comes from the experiments from ui Fabric<br/>
+<a href="https://github.com/OfficeDev/office-ui-fabric-react/tree/master/packages/experiments/src/components/Form">UI Fabric Form Experiments</a>
 
 ## Installation
 
@@ -20,7 +29,7 @@ The example below shows how to use the form generator with a simple json definit
 ```ts
 import * as React from 'react';
 import Form from 'formgen-react';
-var jsonForm = require('./samples/test.json');
+var jsonForm = require('./test.json');
 
 export class Example extends React.Component {
 render() {
@@ -31,11 +40,12 @@ render() {
     jsonFormData={jsonForm}  />)
   }
 }
-...
+```
 
 ## Configuration
+The above ./test.json file could look like this:
 
-The above test.json file could look like this:
+```JSON
 {
 	 "$schema": "../schemas/jfrom-schema.json",
 	 "id": "testform",
@@ -62,11 +72,11 @@ The above test.json file could look like this:
 	}]
  }
 ```
-The JSON has to fit the the JSON Schema Definition:
-[Form Schema](schemas/jfrom-schema.json)
-You need also the following global Schemas:
-[Translation](schemas/translation-schema.json)
-[Object Translation](schemas/objecttranslation-schema.json)
+The JSON has to fit the the JSON Schema Definition:<br/>
+[Form Schema](src/schemas/jfrom-schema.json)<br/>
+You need also the following global Schemas:<br/>
+[Translation](src/schemas/translation-schema.json)<br/>
+[Object Translation](src/schemas/objecttranslation-schema.json)<br/><br/>
 
 Full documentation will provided in some days.
 
