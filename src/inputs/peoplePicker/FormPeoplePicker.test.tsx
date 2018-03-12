@@ -6,8 +6,9 @@ import { Form } from '../../form/Form';
 import { BinderType } from '../../Enums';
 import { DataBinder } from '../../objects/DataBinder.types';
 import { Control } from '../../objects/Control';
-import { IPersonaProps } from 'office-ui-fabric-react';
 import { FormPeoplePicker } from './FormPeoplePicker';
+import { IPersonaProps } from 'office-ui-fabric-react';
+import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
 var jsonForm = require('./FormPeoplePicker.test.json');
 
 function _doesTextStartWith(text: string, filterText: string): boolean {
@@ -18,7 +19,17 @@ const selKey = [{"primaryText":"Muster Hans"}];
 const newKey = [{"primaryText":"Muster Fritz"}];
 
 describe('FormDropdown Unit Tests', () => {
+  let clock: sinon.SinonFakeTimers;
+  beforeEach(() => {
+    clock = sinon.useFakeTimers(Date.now());
+  });
+
+  afterEach(() => {
+    clock.restore();
+  });
+
   describe('Renders for all combinations of props', () => {
+    
     let renderedForm: Form;
     let renderedInput: HTMLInputElement;
 
@@ -33,6 +44,7 @@ describe('FormDropdown Unit Tests', () => {
         binderType: BinderType.AsyncFilter,  
         binderFunction: {
           retrieveData(controlConfig: Control, lang:string, filterText: string):Promise<any[]> {
+          console.log("ok" + filterText);
            return new Promise<any[]>((resolve, reject)  => {
               let dropDonwEntries:IPersonaProps[] = [{
                 primaryText: "Muster Hans"
@@ -58,8 +70,12 @@ describe('FormDropdown Unit Tests', () => {
         <Form jsonFormData={ jsonForm } dataBinders={ binders } onSubmitForm={ (formData: any) => { result = formData; } } />
       ) as Form;
 
-      renderedInput = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, 'ms-BasePicker-input') as HTMLInputElement;
       let form: HTMLFormElement = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'form') as HTMLFormElement;
+      let picker:FormPeoplePicker = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormPeoplePicker);
+      renderedInput = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, 'ms-BasePicker-input') as HTMLInputElement;
+      ReactTestUtils.Simulate.keyPress(renderedInput,  { which: 13, keyCode:13})
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(picker.state.mostRecentlyUsed.length).toEqual(0);
       ReactTestUtils.Simulate.submit(form);
       let outValue = result["rows"]["0"]["columns"][0]["controls"][0]["value"];
       expect(outValue).toEqual(selKey);
@@ -67,15 +83,6 @@ describe('FormDropdown Unit Tests', () => {
   });
 
   describe('Dropdown update tests', () => {
-    let clock: sinon.SinonFakeTimers;
-    beforeEach(() => {
-      clock = sinon.useFakeTimers(Date.now());
-    });
-
-    afterEach(() => {
-      clock.restore();
-    });
-
     it('PeoplePicker is updating', () => {
         let updateStub: sinon.SinonStub = sinon.stub();
         let renderedForm = ReactTestUtils.renderIntoDocument(

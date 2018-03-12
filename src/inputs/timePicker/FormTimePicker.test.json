@@ -11,7 +11,16 @@
                     }],
                 "title": "TimePicker",
                 "value": "12:30",
-                "control_type": [ "TimePicker" ]
+                "control_type": [ "TimePicker" ],
+                "config": {
+                    "focused": "test",
+                    "onFocusChange": "test",
+                    "onHourChange": "test",
+                    "onMinuteChange": "test",
+                    "onTimeChange": "test",
+                    "language": "test",
+                    "time": "test"
+                }
             },
             {
                 "id": "submit",

@@ -127,7 +127,7 @@ export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputP
   @autobind
   private setControlToInValid(value: string) {
     var control = document.getElementsByName(this.props.inputKey);
-    control[0].focus();
+    if (control.length > 0) control[0].focus();
     this.setState({
       currentText: value,
       currentValue: undefined,

@@ -1,10 +1,12 @@
 # React Form Generator with UI Fabric React Components
 
 [![npm version](https://badge.fury.io/js/formgen-react.svg)](http://badge.fury.io/js/formgen-react)
+[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
 [![Build Status](https://secure.travis-ci.org/hilkenan/formgen-react.svg)](https://travis-ci.org/hilkenan/formgen-react)
 [![Dependency Status](https://david-dm.org/hilkenan/formgen-react.svg)](https://david-dm.org/hilkenan/formgen-react)
 [![codecov](https://codecov.io/gh/hilkenan/formgen-react/branch/master/graph/badge.svg)](https://codecov.io/gh/hilkenan/formgen-react)
 [![Downloads](http://img.shields.io/npm/dm/formgen-react.svg)](https://npmjs.org/package/formgen-react)
+
 
 Responsive form generator with JSON for react. UI Fabric and other controls are used for rendering the 24 control types.
 

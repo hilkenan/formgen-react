@@ -32,7 +32,7 @@ describe('FormSpinButton Unit Tests', () => {
     });
   });
 
-  describe('Slider update tests', () => {
+  describe('SpinButton update tests', () => {
     let clock: sinon.SinonFakeTimers;
     beforeEach(() => {
       clock = sinon.useFakeTimers(Date.now());
@@ -42,7 +42,7 @@ describe('FormSpinButton Unit Tests', () => {
       clock.restore();
     });
 
-    it('Rating is leading and trailing debounced', () => {
+    it('SpinButton is leading and trailing debounced', () => {
         let updateStub: sinon.SinonStub = sinon.stub();
         let renderedForm = ReactTestUtils.renderIntoDocument(
             <Form jsonFormData={ jsonForm } onUpdated={ updateStub } />
@@ -55,6 +55,21 @@ describe('FormSpinButton Unit Tests', () => {
         expect(updateStub.callCount).toEqual(0);
         clock.tick(DEFAULT_DEBOUNCE);
         expect(updateStub.callCount).toEqual(1);
+
+    });
+    it('SpinButton is update over buttons', () => {
+      let renderedForm = ReactTestUtils.renderIntoDocument(
+          <Form jsonFormData={ jsonForm } />
+      ) as Form;
+
+      let spin: FormSpinButton = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormSpinButton);
+      let box = ReactTestUtils.findRenderedDOMComponentWithClass(spin, 'ms-spinButton-input') as HTMLButtonElement;
+      ReactTestUtils.Simulate.keyDown(box, {key: "Up", keyCode: 38, which: 38});
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(box.getAttribute("value")).toEqual("2");
+      ReactTestUtils.Simulate.keyDown(box, {key: "Down", keyCode: 40, which: 40});
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(box.getAttribute("value")).toEqual("1");
     });
   });
 
