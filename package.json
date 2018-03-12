@@ -1,7 +1,7 @@
 {
   "author": "hilkenan",
   "name": "formgen-react",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Formula generator with JSON for react. UI Fabric controls are used for rendering",
   "license": "MIT",
   "homepage": "https://github.com/hilkenan/formgen-react",
@@ -47,8 +47,7 @@
     "react-quill": "^1.2.6",
     "react-scripts-ts": "2.13.0",
     "react-times": "^3.0.0",
-    "sinon": "^4.4.2",
-    "webpack": "^3.11.0"
+    "sinon": "^4.4.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -65,7 +64,10 @@
       "!src/index.tsx",
       "!src/registerServiceWorker.ts"
     ],
-    "coverageReporters" : ["lcov", "text"]
+    "coverageReporters": [
+      "lcov",
+      "text"
+    ]
   },
   "badges": [
     {
@@ -103,6 +105,7 @@
     "karma-typescript": "^3.0.12",
     "mocha": "^5.0.4",
     "react-times": "^3.0.0",
-    "typescript": "^2.7.2"
+    "typescript": "^2.7.2",
+    "webpack": "^3.11.0"        
   }
 }
