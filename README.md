@@ -46,6 +46,10 @@ render() {
 }
 ```
 
+## Documentation
+Full documentation will provide in some days:<br/>
+<a href="https://github.com/hilkenan/formgen-react/wiki">Documentation</a>
+
 ## Configuration
 The above ./test.json file could look like this:
 
@@ -81,8 +85,6 @@ The JSON has to fit the Schema Definition:<br/>
 You need also the following global Schemas:<br/>
 [Translation](src/schemas/translation-schema.json)<br/>
 [Object Translation](src/schemas/objecttranslation-schema.json)<br/><br/>
-
-Full documentation will provide in some days.
 
 ### Translating / Localization 
 
