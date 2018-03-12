@@ -1,7 +1,7 @@
 # React Form Generator with UI Fabric React Components
 
 [![npm version](https://badge.fury.io/js/formgen-react.svg)](http://badge.fury.io/js/formgen-react)
-[![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://secure.travis-ci.org/hilkenan/formgen-react.svg)](https://travis-ci.org/hilkenan/formgen-react)
 [![Dependency Status](https://david-dm.org/hilkenan/formgen-react.svg)](https://david-dm.org/hilkenan/formgen-react)
 [![codecov](https://codecov.io/gh/hilkenan/formgen-react/branch/master/graph/badge.svg)](https://codecov.io/gh/hilkenan/formgen-react)
