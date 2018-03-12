@@ -1,17 +1,16 @@
 /* tslint:disable:no-any jsx-no-lambda no-string-literal */
 import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
-import * as sinon from 'sinon';
 
-import Form from '../../form/Form';
 import { PrimaryButton } from 'office-ui-fabric-react';
+import { Form } from '../../..';
 import { FormToggle } from './FormToggle';
+import * as sinon from 'sinon';
 
 var jsonForm = require('./FormToggle.test.json');
 
-
 describe('FormToggle Unit Tests', () => {
-  let sandbox: sinon.SinonSandbox;
+  let sandbox: sinon.sandbox
 
   beforeAll(() => {
     sandbox = sinon.sandbox.create();

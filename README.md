@@ -46,10 +46,6 @@ render() {
 }
 ```
 
-## Documentation
-Full documentation will provide in some days:<br/>
-<a href="https://github.com/hilkenan/formgen-react/wiki">Documentation</a>
-
 ## Configuration
 The above ./test.json file could look like this:
 
@@ -80,6 +76,12 @@ The above ./test.json file could look like this:
     }]
  }
 ```
+
+
+## Documentation
+Full documentation will provide in some days:<br/>
+<a href="https://github.com/hilkenan/formgen-react/wiki">Documentation<a>
+
 The JSON has to fit the Schema Definition:<br/>
 [Form Schema](src/schemas/jfrom-schema.json)<br/>
 You need also the following global Schemas:<br/>

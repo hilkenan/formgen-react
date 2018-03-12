@@ -2,13 +2,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import { IDropdownOption, IPersonaProps } from 'office-ui-fabric-react';
-import { CustomActions } from 'src/objects/CustomActions.types';
-import { DataBinder } from 'src/objects/DataBinder.types';
-import { BinderType } from 'src/Enums';
-import { Control } from 'src/objects/Control';
-import Form from 'src/form/Form';
+import { CustomActions } from './objects/CustomActions.types';
+import { DataBinder } from './objects/DataBinder.types';
+import { BinderType } from './Enums';
+import { Control } from './objects/Control';
+import { Form } from './form/Form';
 var jsonForm = require('./samples/test.json');
-
 
 const customAction:CustomActions[] = [{
  typeName: "TestCustom1",

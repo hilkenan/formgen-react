@@ -311,5 +311,3 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
     return true;
   }
 }
-
-export default Form

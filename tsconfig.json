@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "outDir": "build/dist",
-    "module": "esnext",
+    "outDir": "dist",
+    "module": "commonjs",
     "target": "es5",
     "lib": ["es6", "dom"],
     "sourceMap": true,
@@ -12,15 +11,20 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "experimentalDecorators" : true,    
-    "forceConsistentCasingInFileNames": false,
+    "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "declaration": true,
+    "preserveConstEnums": true
   },
-
+  "include": [
+      "src/**/*.ts",
+      "index.tsx"
+    ],
   "exclude": [
     "node_modules",
     "build",

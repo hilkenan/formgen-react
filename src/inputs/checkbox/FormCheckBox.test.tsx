@@ -3,9 +3,9 @@ import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
 
-import Form from '../../form/Form';
-import { FormCheckBox } from './FormCheckBox';
 import { PrimaryButton } from 'office-ui-fabric-react';
+import { Form } from '../../..';
+import { FormCheckBox } from './FormCheckBox';
 
 var jsonForm = require('./FormCheckBox.test.json');
 

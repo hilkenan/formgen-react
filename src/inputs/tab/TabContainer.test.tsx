@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
 
-import { Form } from '../../form/Form';
+import { Form } from '../../..';
 var jsonForm = require('./TabContainer.test.json');
 
 describe('TabContainer Unit Tests', () => {

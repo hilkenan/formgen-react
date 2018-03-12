@@ -3,10 +3,10 @@ import * as React from 'react';
 //import * as ReactDom from 'react-dom';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
-import { Form } from '../../form/Form';
 import { DataBinder } from '../../objects/DataBinder.types';
 import { BinderType } from '../../Enums';
 import { Control } from '../../objects/Control';
+import { Form } from '../../..';
 import { FormCascader } from './FormCascader';
 var jsonForm = require('./FormCascader.test.json');
 

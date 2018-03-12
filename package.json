@@ -1,11 +1,12 @@
 {
   "author": "hilkenan",
   "name": "formgen-react",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Formula generator with JSON for react. UI Fabric controls are used for rendering",
   "license": "MIT",
   "homepage": "https://github.com/hilkenan/formgen-react",
-  "main": "Form",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",  
   "module": "es",
   "keywords": [
     "react",
@@ -21,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/hilkenan/formgen-react.git"
+    "url": "git://github.com/hilkenan/formgen-react"
   },
   "readme": "README.md",
   "bugs": {
@@ -55,7 +56,9 @@
     "start": "react-scripts-ts start && watch-css",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "run": "ts-node ./src/index.tsx",
+    "prepublishOnly": "tsc -p ./ --outDir dist/"    
   },
   "jest": {
     "collectCoverageFrom": [

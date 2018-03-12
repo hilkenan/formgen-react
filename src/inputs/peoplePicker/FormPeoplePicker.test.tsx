@@ -2,7 +2,7 @@
 import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
-import { Form } from '../../form/Form';
+import { Form } from '../../..';
 import { BinderType } from '../../Enums';
 import { DataBinder } from '../../objects/DataBinder.types';
 import { Control } from '../../objects/Control';
