@@ -16,6 +16,7 @@
 .env.test.local
 .env.production.local
 /src/styles/main.css
+/src/styles/FormInfoCallout.css
 /src/styles/FormDatePicker.css
 
 npm-debug.log*

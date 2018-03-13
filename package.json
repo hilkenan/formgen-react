@@ -65,6 +65,7 @@
       "src/**/*.{ts,tsx}",
       "!src/**/*.types.ts",
       "!src/index.tsx",
+      "!src/index.ts",
       "!src/registerServiceWorker.ts"
     ],
     "coverageReporters": [

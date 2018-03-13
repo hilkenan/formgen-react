@@ -23,7 +23,7 @@
   },
   "include": [
       "src/**/*.ts",
-      "index.tsx"
+      "index.ts"
     ],
   "exclude": [
     "node_modules",
