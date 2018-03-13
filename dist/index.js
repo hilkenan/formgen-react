@@ -1,5 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var DynamicControl_types_1 = require("./objects/DynamicControl.types");
+exports.DynamicControl = DynamicControl_types_1.DynamicControl;
+var CustomValidator_types_1 = require("./objects/CustomValidator.types");
+exports.CustomValidator = CustomValidator_types_1.CustomValidator;
+var DataBinder_types_1 = require("./objects/DataBinder.types");
+exports.DataBinder = DataBinder_types_1.DataBinder;
+var CustomActions_types_1 = require("./objects/CustomActions.types");
+exports.CustomActions = CustomActions_types_1.CustomActions;
 var ObjectFabric_1 = require("./objects/ObjectFabric");
 exports.ObjectFabric = ObjectFabric_1.ObjectFabric;
 var JFormData_1 = require("./objects/JFormData");
@@ -9,8 +17,10 @@ exports.TranslatedProperty = Enums_1.TranslatedProperty;
 exports.ValidatorTypes = Enums_1.ValidatorTypes;
 var Control_1 = require("./objects/Control");
 exports.Control = Control_1.Control;
-var Row_1 = require("./objects/Row");
-exports.Row = Row_1.Row;
 var Form_1 = require("./form/Form");
 exports.Form = Form_1.Form;
+var Row_1 = require("./objects/Row");
+exports.Row = Row_1.Row;
+var Column_1 = require("./objects/Column");
+exports.Column = Column_1.Column;
 //# sourceMappingURL=index.js.map
