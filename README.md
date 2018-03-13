@@ -7,8 +7,9 @@
 [![codecov](https://codecov.io/gh/hilkenan/formgen-react/branch/master/graph/badge.svg)](https://codecov.io/gh/hilkenan/formgen-react)
 [![Downloads](http://img.shields.io/npm/dm/formgen-react.svg)](https://npmjs.org/package/formgen-react)
 
-
 Responsive form generator with JSON for react. UI Fabric and other controls are used for rendering the 24 control types.
+
+<b>For all Downloaders until Version 0.2.0: Sorry for the unstable Version!! Please update at least to 0.2.0 to get a working version. If you have Problem email me at: andreas.hilken@did-c.com, or add an issu</b>
 
 ## Features
 - Validation
@@ -22,14 +23,18 @@ The Basic Code for the validation for the formula comes from the experiments fro
 <a href="https://github.com/OfficeDev/office-ui-fabric-react/tree/master/packages/experiments/src/components/Form">UI Fabric Form Experiments</a>
 
 ## Installation
-
 The package can be installed via NPM:
-
 ```
 npm install formgen-react --save
 ```
+
+## Documentation
+Full documentation will provide in some days:<br/>
+<a href="https://github.com/hilkenan/formgen-react/wiki">Documentation<a>
+
+
+## Configuration
 The example below shows how to use the form generator with a simple json definition. This JSON need to map to the JSON schema:
-	
 ```ts
 import * as React from 'react';
 import Form from 'formgen-react';
@@ -45,10 +50,7 @@ render() {
   }
 }
 ```
-
-## Configuration
 The above ./test.json file could look like this:
-
 ```JSON
 {
      "$schema": "../schemas/jfrom-schema.json",
@@ -76,12 +78,6 @@ The above ./test.json file could look like this:
     }]
  }
 ```
-
-
-## Documentation
-Full documentation will provide in some days:<br/>
-<a href="https://github.com/hilkenan/formgen-react/wiki">Documentation<a>
-
 The JSON has to fit the Schema Definition:<br/>
 [Form Schema](src/schemas/jfrom-schema.json)<br/>
 You need also the following global Schemas:<br/>
