@@ -1,0 +1,11 @@
+{
+    "locale": "de",
+    "messages": {
+      "suggestionsHeaderText": "Vorgeschlagene Personen",
+      "mostRecentlyUsedHeaderText": "Vorgeschlagene Kontakte",
+      "noResultsFoundText": "Keine Personen gefunden",
+      "loadingText": "Lädt",
+      "suggestionsAvailableAlertText": "Vorschläge verfügbar",
+      "suggestionsContainerAriaLabel": "Vorgeschlagene Kontakte"
+    }
+}

@@ -16,7 +16,7 @@ import { GenericFormInput } from '../formBaseInput/FormBaseInput';
 import { Control } from '../objects/Control';
 import { Row } from '../objects/Row';
 import { addLocaleData } from 'react-intl';
-import '../polyfills';
+import './polyfills.js';
 import Rendering from './Rendering';
 
 global.Intl = require('intl');
