@@ -28,7 +28,7 @@
 		}
 	},
 	 "required": [
-		"id"
+		"id", "rows"
 	],
 	 "additionalProperties": false,
 	 "definitions": {
