@@ -6,7 +6,7 @@ import { JFormData } from '../objects/JFormData';
 import { BaseComponent } from 'office-ui-fabric-react/lib/Utilities';
 import '../styles/main.css';
 import { IFormState, IFormProps, IFormContext } from './Form.types';
-import './polyfills';
+import './polyfills.js';
 export declare var FormLanguage: string;
 /**
  * The main Form Control that renders the Control Tree

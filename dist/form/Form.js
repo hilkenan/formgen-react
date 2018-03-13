@@ -37,7 +37,7 @@ var Utilities_1 = require("office-ui-fabric-react/lib/Utilities");
 require("../styles/main.css");
 var Enums_1 = require("../Enums");
 var react_intl_1 = require("react-intl");
-require("./polyfills");
+require("./polyfills.js");
 var Rendering_1 = require("./Rendering");
 global.Intl = require('intl');
 var frLocaleData = require('react-intl/locale-data/fr');
