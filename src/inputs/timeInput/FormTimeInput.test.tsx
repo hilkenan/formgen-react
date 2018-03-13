@@ -1,11 +1,12 @@
 /* tslint:disable:no-any jsx-no-lambda no-string-literal */
 import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
+import { Form } from '../../form/Form';
 import * as sinon from 'sinon';
-import { Form } from '../../..';
 import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import { FormTimeInput } from './FormTimeInput';
+
 var jsonForm = require('./FormTimeInput.test.json');
 
 describe('FormTimeInput Unit Tests', () => {

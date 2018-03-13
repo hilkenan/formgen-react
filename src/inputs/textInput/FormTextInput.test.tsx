@@ -3,7 +3,7 @@ import * as React from 'react';
 //import * as ReactDom from 'react-dom';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
-import { Form } from '../../..';
+import { Form } from '../../form/Form';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import { FormTextInput } from './FormTextInput';
 import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';

@@ -1,8 +1,8 @@
 /* tslint:disable:no-any jsx-no-lambda no-string-literal */
 import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
+import { Form } from '../../form/Form';
 import * as sinon from 'sinon';
-import { Form } from '../../..';
 import * as moment from 'moment';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import { FormDateTimePicker } from './FormDateTimePicker';

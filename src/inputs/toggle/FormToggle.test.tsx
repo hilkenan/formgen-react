@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
 
 import { PrimaryButton } from 'office-ui-fabric-react';
-import { Form } from '../../..';
+import { Form } from '../../form/Form';
 import { FormToggle } from './FormToggle';
 import * as sinon from 'sinon';
 

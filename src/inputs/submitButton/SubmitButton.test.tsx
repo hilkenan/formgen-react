@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
 
-import { Form } from '../../..';
+import { Form } from '../../form/Form';
 import { FormTextInput } from '../textInput/FormTextInput';
 import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
 var jsonForm = require('./SubmitButton.test.json');

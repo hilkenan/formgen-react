@@ -2,8 +2,7 @@
 import * as React from 'react';
 import * as ReactTestUtils from 'react-dom/test-utils';
 import * as sinon from 'sinon';
-// import { FormDropdown } from './FormDropdown';
-import { Form } from '../../..';
+import { Form } from '../../form/Form';
 import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import { FormChoiceGroup } from './FormChoiceGroup';
