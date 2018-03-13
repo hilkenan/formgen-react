@@ -58,7 +58,7 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "run": "ts-node ./src/index.tsx",
-    "prepublishOnly": "tsc -p ./ --outDir dist/"    
+    "prepublishOnly": "tsc -p ./ --outDir dist/ && node-sass-chokidar src/styles -o dist/styles"    
   },
   "jest": {
     "collectCoverageFrom": [
