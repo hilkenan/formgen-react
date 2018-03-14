@@ -32,6 +32,7 @@ export class FormMaskedTextInput extends FormBaseInput<any, IFormBaseInputProps,
           value={ this.state.currentValue }
           {...this.ConfigProperties}      
           ref={(input) => this.innerControl = input }
+          id={ this.props.inputKey }                      
           key={ this.props.inputKey }
           name={ this.props.inputKey }
           label=""

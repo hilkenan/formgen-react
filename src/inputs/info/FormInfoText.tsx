@@ -24,6 +24,7 @@ export class FormInfoText extends FormBaseInput<ILabelProps, IFormBaseInputProps
     return (<Label
             {...this.ConfigProperties}      
             ref={(input) => this.innerControl = input }
+            id={ this.props.inputKey }                        
             key={ this.props.inputKey }>
               <div dangerouslySetInnerHTML={{__html: this.TranslatedTitle}} />                        
             </Label>);

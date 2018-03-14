@@ -31,6 +31,7 @@ export class FormToggle extends FormBaseInput<IToggleProps, IFormBaseInputProps,
           {...this.ConfigProperties}
           // These props cannot be overridden
           ref={(input) => this.innerControl = input }      
+          id={ this.props.inputKey }                                  
           key={ this.props.inputKey }  
           label=""
           onChanged={ this._onChange }

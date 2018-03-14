@@ -28,11 +28,11 @@ export class SubmitButton extends FormBaseInput<ISubmitButtonProps, IFormBaseInp
     
     return (
       <PrimaryButton
+        {...this.ConfigProperties}       
         ref={(input) => this.innerControl = input }              
         key={ this.props.inputKey }      
         type='submit'
-        disabled={ !this.formContext.isFormValid() }
-        {...this.ConfigProperties} >
+        disabled={ !this.formContext.isFormValid() }>
         { this.props.control.Title ? this.TranslatedTitle : submitText }
       </PrimaryButton>
     );

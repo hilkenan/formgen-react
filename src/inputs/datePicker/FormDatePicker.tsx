@@ -40,7 +40,7 @@ export class FormDatePicker extends FormBaseInput<IFormDatePickerProps, IFormBas
           <DatePicker   
               {...this.ConfigProperties}
               // These props cannot be overridden
-              ref={(input) => this.innerControl = input }     
+              ref={(input) => this.innerControl = input }   
               strings={Helper.getDayPickerStrings() } 
               firstDayOfWeek={ firstDayOfWeek }
               formatDate={ this._onFormatDateTo }

@@ -31,6 +31,7 @@ export class FormRating extends FormBaseInput<IRatingProps, IFormBaseInputProps,
           rating={ this.state.currentValue ? this.state.currentValue as number : undefined }            
           {...this.ConfigProperties}
           // These props cannot be overridden      
+          id={ this.props.inputKey }                        
           key={ this.props.inputKey }  
           label=""
           onChanged={ this._onChange }

@@ -30,6 +30,7 @@ export class FormTextInput extends FormBaseInput<ITextFieldProps, IFormBaseInput
             value={ this.state.currentValue }
             {...this.ConfigProperties}      
             ref={(input) => this.innerControl = input }
+            id={ this.props.inputKey }
             key={ this.props.inputKey }
             name={ this.props.inputKey }
             label=""

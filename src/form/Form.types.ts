@@ -47,9 +47,6 @@ export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
   /** Event on Cancel the Form */
   onCancelForm?(): void;
 
-  /** Event on Cancel the Form */
-  onCustomForm?(actionName: string): void;
-
   /** Event on Updated the Form */
   onUpdated?(key: string, value: any): void;
 
