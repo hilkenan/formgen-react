@@ -36,6 +36,9 @@ export interface IFormBaseInputState {
   dataStores?: DataStoreEntry[];
 }
 
+/**
+ * An data Store Entry object.
+ */
 export class DataStoreEntry {
   key: string;
   data: any[];

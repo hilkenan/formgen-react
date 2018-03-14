@@ -24,6 +24,9 @@ import { Tab } from '../inputs/tab/Tab';
 import { TabContainer } from '../inputs/tab/TabContainer';
 import { ControlTypes } from "../Enums";
 
+/**
+* Class the prepare the matching from the ControlTypes enum to the real control types.
+*/  
 export class FormInputs {
     /**
     * Ge tall defined standart controls as Dynamic Control array

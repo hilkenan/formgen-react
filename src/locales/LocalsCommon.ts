@@ -1,5 +1,8 @@
 import { defineMessages } from 'react-intl';
 
+/**
+ * Common Translaiton const with default value in english.
+ */
 export const LocalsCommon = defineMessages({ 
   pleaseSelect: { 
     id: "pleaseSelect", 

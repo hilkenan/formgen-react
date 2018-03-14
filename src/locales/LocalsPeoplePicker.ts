@@ -1,5 +1,8 @@
 import { defineMessages } from 'react-intl';
 
+/**
+ * People Picker Translaiton const with default value in english.
+ */
 export const LocalsPeoplePicker = defineMessages({ 
     suggestionsHeaderText: { 
         id: "suggestionsHeaderText", 

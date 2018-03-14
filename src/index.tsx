@@ -19,7 +19,7 @@ const customAction:CustomActions[] = [{
 
 const binders:DataBinder[] = [{
   typeName:"testform.dropDonw1_options",
-  binderType: BinderType.Async,
+  binderType: BinderType.Sync,
   binderFunction: {
     retrieveData(controlConfig: Control, lang:string):Promise<any[]> {
       return new Promise<any[]>(resolve => {

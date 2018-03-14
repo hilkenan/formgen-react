@@ -11,6 +11,9 @@ import { IDataBinder, IDataBinderAsync, IDataBinderFilterAsync } from '../object
 import { LocalsCommon } from '../locales/LocalsCommon';
 import { Helper } from '../Helper';
 
+/**
+ * Default Debaunce of 250 Ticks.
+ */
 export const DEFAULT_DEBOUNCE = 250;
 
 /**
@@ -99,6 +102,10 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
 
     /**
      * Store the options to the state
+     * @param dataKey The databinder key to use
+     * @param data The Array with the Data.
+     * @param waitText The Wait Text for async loading
+     * @param isAsync True if async loading.
      */
     @autobind
     private storeOptions(dataKey: string, data: any[], waitText: string, isAsync: boolean): void {
@@ -137,6 +144,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   
   /**
   * Check the proprties and warn if the default are used.
+  * @param props The property Object to check.
   */
   protected validateProps(props?: any): void {
     if (props) {
@@ -163,6 +171,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   * If Async loading the return true
   * @param dataStoreKey The Key from the datastore
   * @param loadedFunction The funtion to call after data is loaded
+  * @param waitText The Waiting Text for async loading controls.
   */
  public loadDataFromStore(dataStoreKey:string, loadedFunction:DataLoadedFunction, waitText: string): boolean {
     let dataBinderAsync:Promise<any[]> = this.dataStore[dataStoreKey] as Promise<any[]>;
@@ -202,38 +211,29 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   */ 
   protected ConfigProperties:T;
 
-  /**
-  * Translation for the Title
-  */ 
+  /** Translation for the Title */ 
   public TranslatedTitle?:string;
 
-  /**
-  * The cofigured class name or ''
-  */ 
+  /** The cofigured class name or '' */ 
   public ControlClassName:string;
 
-  /**
-  * True if the Required validator is set.
-  */ 
+  /** True if the Required validator is set. */ 
   public IsRequired:boolean;
 
-  /**
-  * Translaiton for the Info
-  */ 
+  /** Translaiton for the Info */ 
   public TranslatedInfo?:string;
 
-  /**
-  * Loaded data for this Control.
-  */ 
+  /** Loaded data for this Control. */ 
   protected dataStore:{ [key: string]: any[] | Promise<any[]> } = {}
 
-  /**
-  * The Asynchronous Filter Methods.
-  */ 
+  /** The Asynchronous Filter Methods. */ 
   protected retrievFilterData: { [key: string]: IDataBinderFilterAsync } = {}
 
 
-  public componentWillMount(): void {
+  /**
+  * Load the Databinder. Sync and Async are loaded. AsyncFilter is loade when user type an filter.
+  */ 
+ public componentWillMount(): void {
     this.formContext.mountInput(this);
     if (this.props.dataBinder) {
       for(let binder of this.props.dataBinder) {
@@ -259,6 +259,9 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
     }  
   }
 
+  /**
+   * Unmount the current control.
+   */
   public componentWillUnmount(): void {
     this.debouncedSubmitValue.flush();
     this.formContext.unmountInput(this);
@@ -291,6 +294,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
 
   /**
    * Set the error state of this input
+   * @param errorMessage Message to set to the state.
    */
   public setError(errorMessage?: string): void {
     this.setState((prevState: S) => {
@@ -313,6 +317,8 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
 
   /**
    * Set the current value of this input and validate it
+   * @param value The value to set
+   * @param validate True if the value should be validated.
    */
   public setValue(value: any, validate?: boolean): void {
     this.setState((prevState: S): S => {

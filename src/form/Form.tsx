@@ -36,6 +36,7 @@ export var FormLanguage = "";
  * The main Form Control that renders the Control Tree
  */
 export class Form extends BaseComponent<IFormProps, IFormState> {
+
   /**
    * This is needed because React 15's context does not work well with typescript
    */
@@ -61,9 +62,14 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
    */
   private _mountedInputs: GenericFormInput[];
 
-  /** Flag which marks whether or not the form has attempted to have been submitted */
+  /** 
+   * Flag which marks whether or not the form has attempted to have been submitted 
+   */
   private _pristine: boolean;
 
+  /** 
+   * Load the correct langauge, UI Fabric theme and the rendering engine.
+   */
   constructor(props: IFormProps) {
     super(props);
     if (this.props.Language) {
@@ -93,6 +99,9 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
     }
   }
 
+  /** 
+   * Call the formDidMount event and take over the mounted controls
+   */  
   componentDidMount() {
     if (this.props.formDidMount) {
       this.props.formDidMount(this._mountedInputs);
@@ -130,8 +139,12 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
       submitValue: this._submitValue
     };
   }
-
-  private _findeControlFromKey(inputKey:string) {
+    
+  /**
+   * Finde with the full control id the Control in the tree.
+   * @param inputKey The full control id to finde the corresponding control
+   */
+  private _findeControlFromKey(inputKey:string): Control {
       let control:Control | undefined;
       let controlStruct = inputKey.split(".");
 
@@ -144,6 +157,7 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
    * Validate an individual input and set its error state
    * Returns the validation result
    * @param input The input to validate
+   * @param showValidation Set to true if the error message shoul be set
    */
   private _validateComponent(input: GenericFormInput, showValidation?: boolean): IFormValidationResult {    
     if (!input.doValidate && input.props.validators) {
@@ -266,6 +280,11 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
     } 
   }
 
+  /**
+   * Set the validation result, if Valid the control Value and if defined call the onUpdated Method
+   * @param input The input that has rais an update
+   * @param validate True if the input should validated.
+   */ 
   @autobind
   private _submitValue(input: GenericFormInput, validate?: boolean): void {
     let validationResult: IFormValidationResult = this._validateComponent(input, validate);
@@ -301,6 +320,10 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
     }
   }
 
+  /**
+   * Check if the form is valid. If all validations are ok then reutrn true.
+   * @param validationResults All validation results from the control tree. 
+   */
   @autobind
   private _isFormValid(validationResults: { [key: string]: IFormValidationResult } = this.state.validationResults): boolean {
     for (let key in validationResults) {

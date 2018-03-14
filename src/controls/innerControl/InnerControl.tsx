@@ -6,7 +6,7 @@ import { LabelPositions } from '../../Enums';
 import { InfoCallout } from '../callout/InfoCallout';
 
 /**
-* Inner Control. Use show the correct inner part of an control
+* Inner Control. Use show the correct inner part of an control. Renders the Label, the child properties and the Info Callout.
 */ 
 export class InnerControl extends React.Component<IInnerControl> {
     render() {

@@ -15,6 +15,10 @@ import { FormInputs } from './FormInputs';
  * Rendering Engine for the Form
  */  
 class Rendering {
+
+    /**
+     * Initialize all arrays with the params and load the control mapping.
+     */  
     constructor(getCurrentFormData:() => any, 
         customControls?: DynamicControl[], 
         customValidators?: CustomValidator[], 
@@ -37,17 +41,21 @@ class Rendering {
         this.getCurrentFormData = getCurrentFormData;
     }
         
-    private getCurrentFormData:() => any;
-    public controls: DynamicControl[] = [];
-    public customValidators: CustomValidator[] = [];
-    public customActions: CustomActions[] = [];
-    public dataBinders: DataBinder[] = [];
-    
     public cancelEvent?(): void;
+
+    private getCurrentFormData:() => any;
+
+    public controls: DynamicControl[] = [];
+    
+    public customValidators: CustomValidator[] = [];
+    
+    public customActions: CustomActions[] = [];
+    
+    public dataBinders: DataBinder[] = [];
 
     /**
     * Call the Custom Action Event with the Form Data
-    * @param The Custom Action to call with the form data.
+    * @param customAction Custom Action to call with the form data.
     */      
     public callCustomEvent(customAction?:CustomActions) {
         if (customAction)
@@ -56,6 +64,9 @@ class Rendering {
 
     /**
     * Build the Controls rendered control
+    * @param rootKey The root id (form id + . + all control ids in the tree)
+    * @param controls The Control definition to load the control types with.
+    * @param labelWith Defined Label with form the parent column
     */      
     public buildControlElements(rootKey: string, controls?: Control[], labelWith?: number) : JSX.Element[] {
         let ctrlElements:JSX.Element[] = [];
@@ -68,6 +79,8 @@ class Rendering {
 
     /**
     * Build the Column Controls as Divs with all Sub elements
+    * @param rootKey The root id (form id + . + all control ids in the tree)
+    * @param columns The columns definition to load
     */  
     private buildColElements(rootKey: string, columns: Column[]) : JSX.Element[] {
         let colElements:JSX.Element[] = [];
@@ -86,6 +99,8 @@ class Rendering {
 
     /**
     * Build the Rows Controls as Divs with all Sub elements
+    * @param rootKey The root id (form id + . + all control ids in the tree)
+    * @param rows The rows to load to the tree 
     */  
     public buildRowWlements(rootKey: string, rows?: Row[]) : JSX.Element[] {
         let rowElements:JSX.Element[] = [];
@@ -100,6 +115,7 @@ class Rendering {
     
     /**
     * Renders an Error div.
+    * @param errorMessage The Error Message to show in the div.
     */      
     public static renderError(errorMessage:string): JSX.Element {
         return (

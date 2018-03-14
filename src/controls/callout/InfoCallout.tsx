@@ -7,7 +7,7 @@ import { IInfoCalloutProps, IInfoCalloutState } from './InfoCallout.types';
 
 /**
  * Class for the Info Callout (icon with mouse over info)
- */
+  */
 export class InfoCallout extends React.Component<IInfoCalloutProps, IInfoCalloutState> {
     private infoCalloutElement: HTMLElement | null;
     
