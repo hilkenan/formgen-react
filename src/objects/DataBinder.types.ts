@@ -27,7 +27,6 @@ export interface IDataBinderAsync {
     retrieveData(controlConfig: Control, lang:string):Promise<any[]>
 }
 
-
 /**
  * The Type of an Async Databinding Class  with a Filter string that return the Type of any as array as Promise
  */

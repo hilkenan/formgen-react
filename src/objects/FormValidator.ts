@@ -3,6 +3,9 @@ import { ValidatorTypes } from "../Enums";
 import { ValidatorTypeConverter } from "./jsonConverters/ValidatorTypeConverter";
 import { Translate, TransConverter } from "./jsonConverters/TransConverter";
 
+/**
+ * Form Validator Representation for an validator json object.
+ */
 @JsonObject
 export class FormValidator {
     @JsonProperty("message", String, true) 

@@ -22,6 +22,3 @@ export class ObjectTranslate {
     @JsonProperty("properties", [Property], true)
     Properties:Property[] = [];      
 }
-
-
-

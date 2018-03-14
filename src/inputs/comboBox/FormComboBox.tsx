@@ -53,6 +53,12 @@ export class FormComboBox extends FormBaseInput<IComboBoxProps, IFormBaseInputPr
         </InnerControl>);
     }
 
+    /**
+     * Stores the selected option from the combobox.
+     * @param option the selected option of the choice group
+     * @param index The index of the selected item 
+     * @param value The Value use. Used when enter new data is allowed.
+     */
     @autobind
     private _onChanged(option?: IComboBoxOption, index?: number, value?: string): void {
         let inputValue = option == undefined ? value : option.key;

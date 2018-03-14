@@ -45,6 +45,11 @@ export class FormCheckBox extends FormBaseInput<ICheckboxProps, IFormBaseInputPr
       </InnerControl>);
  }
 
+/**
+ * Stores the state of the checkbox to the state.
+ * @param event The Check event 
+ * @param isChecked the state of the checkbox
+ */
   @autobind
   private _onChange(event: React.FormEvent<HTMLElement>, isChecked: boolean): void {
     this.setValue(isChecked);

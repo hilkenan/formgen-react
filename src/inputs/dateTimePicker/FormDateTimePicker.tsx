@@ -49,6 +49,11 @@ export class FormDateTimePicker extends FormBaseInput<IFormDateTimePickerProps, 
     this._validateDateTimePickerProps(this.ConfigProperties);
   }
 
+  /**
+   * Fill the value with amount of needed n 0. Eg. 5 with 2 size will be 05
+   * @param num The number
+   * @param size Maximal Size of string.
+   */
   private _pad(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;
@@ -112,16 +117,28 @@ export class FormDateTimePicker extends FormBaseInput<IFormDateTimePickerProps, 
       </InnerControl>);
   }
 
+  /**
+   * Stores the selected hour
+   * @param hour the selected hour
+   */
   @autobind
   private onHourChange(hour) {
     this.setState({ hour });
   }
 
+  /**
+   * Stores the selected minute
+   * @param minute the selected minute
+   */
   @autobind
   private onMinuteChange(minute) {
     this.setState({ minute });
   }
 
+  /**
+   * Stores the selected time as utc with the date
+   * @param time the selected time
+   */
   @autobind
   private onTimeChange(time) {
     const [hour, minute] = time.split(':');
@@ -132,11 +149,17 @@ export class FormDateTimePicker extends FormBaseInput<IFormDateTimePickerProps, 
     this.setValue(momentDate.toJSON());  
   }
 
+  /**
+   * Set the focus state to the state.
+   */
   @autobind
   private onFocusChange(focused) {
     this.setState({ focused });
   }
 
+  /**
+   * Handles the focus change of the time picker
+   */
   @autobind
   private handleFocusedChange() {
     const { focused } = this.state;
@@ -145,6 +168,7 @@ export class FormDateTimePicker extends FormBaseInput<IFormDateTimePickerProps, 
 
   /**
    * Return for the UI Formated To Date and store it to the state.
+   * @param date the selected date
    */
   @autobind
   private _onFormatDateTo(date: Date): string {
@@ -153,6 +177,10 @@ export class FormDateTimePicker extends FormBaseInput<IFormDateTimePickerProps, 
     return moment(date).format(dateFormat);
   }
 
+  /**
+   * Stores the selected date as utc with the time
+   * @param date the selected date
+   */
   @autobind
   private _onDateChanged(date: Date): void {
     let momentDate = moment(date).set("m", parseInt(this.state.minute));
@@ -160,6 +188,10 @@ export class FormDateTimePicker extends FormBaseInput<IFormDateTimePickerProps, 
     this.setValue(momentDate.toJSON());
   }
 
+ /**
+  * Validate the properties from the config. warn at console
+  * @param props The property object to validate 
+  */
   private _validateDateTimePickerProps(props?: any): void {
     this.validateProps(props);
    if (props) {

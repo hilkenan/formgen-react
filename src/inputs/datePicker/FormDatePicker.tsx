@@ -56,6 +56,7 @@ export class FormDatePicker extends FormBaseInput<IFormDatePickerProps, IFormBas
 
   /**
    * Return for the UI Formated To Date and store it to the state.
+   * @param date The date to formate
    */
   @autobind
   private _onFormatDateTo(date: Date): string {
@@ -64,11 +65,19 @@ export class FormDatePicker extends FormBaseInput<IFormDatePickerProps, IFormBas
     return moment(date).format(dateFormat);
   }
 
+  /**
+   * Stores the selected date as utc
+   * @param date the selected date
+   */
   @autobind
   private _onDateChanged(date: Date): void {
     this.setValue(moment(date).toJSON());
   }
 
+  /**
+   * Validate the properties from the config. warn at console
+   * @param props The property object to validate 
+   */
   private _validateDatePickerProps(props?: IDatePickerProps): void {
     this.validateProps(props);
    if (props) {

@@ -13,6 +13,10 @@ let locale = require('browser-locale')()
  * Helper Class with static variables for the Form 
  */    
 export class Helper {
+    /**
+     * Return even the Language set at the form 
+     * or when not set the language from the users browser.
+     */    
     public static getLanguage() {
         if (FormLanguage != undefined && FormLanguage != "") return FormLanguage;
         return locale.split('-')[0];
@@ -27,6 +31,7 @@ export class Helper {
 
     /**
      * Replace the Row and Element Markes in the Input Key
+     * @param inputKey Clean the input key from the Element and Row identifier 
      */    
     public static cleanUpKey(inputKey:string) {
         inputKey = inputKey.replace(new RegExp("/E", 'g'), "");
@@ -35,6 +40,8 @@ export class Helper {
 
     /**
      * Translate an object with properties. structure of the key is the structure for the object. Delimited with .
+     * @param orgObject Orignal Object to translate. 
+     * @param translations Translations for the object.
      */    
     public static getTranslatedObject(orgObject?: any, translations?: ObjectTranslate): any {
         if (translations && orgObject) {
@@ -58,6 +65,9 @@ export class Helper {
 
     /**
      * Get from the given translatable Property the Translated String or default.
+     * @param property Translate the property
+     * @param object The Object with the property to translate
+     * @param transBag Translation Bag with all translations
      */    
     public static getTranslatedPropertyFromObject(property:string, object:any, transBag:Translate[]): string{
         let defaultName = object[property];
@@ -71,6 +81,7 @@ export class Helper {
     
     /**
      * Calculate the possible Css Number from the UI Fabric React responsive framework min 1 max 12
+     * @param countElements Count of Elements that is used. 12 is the maximum of elements that can be used.
      */    
     public static calculateCssClassColNb(countElements: number) {
         let cssNr:number = 12 / countElements;
@@ -85,6 +96,7 @@ export class Helper {
 
     /**
      * Get the translator object to translate the string from given Component.
+     * @param control The name of the control string that has to be return an translator. The are stored at the locals/translation folder
      */    
     public static getTranslator(control:string) {
         let messages = null;
@@ -134,6 +146,8 @@ export class Helper {
 
     /**
      * Removes the Suffix from the string
+     * @param string The string to remove an suffix
+     * @param suffix The suffix to remove
      */    
     public static removeSuffix(string: string, suffix: string): string {
         if (!Helper.hasSuffix(string, suffix)) {
@@ -144,6 +158,8 @@ export class Helper {
 
     /**
      * Check if hafe the suffix.
+     * @param string The string to check an suffix
+     * @param suffix The suffix to check
      */    
     public static hasSuffix(string: string, suffix: string): Boolean {
         if (!suffix) return false;
@@ -153,7 +169,8 @@ export class Helper {
     
     /**
      * Get even the wait text from the state or Pleace wait text.
-     * @param state State object.
+     * @param entry The Data store entry.
+     * @param defaultText The default Text for the placeholder
      */    
     public static getPlaceHolderText(entry: DataStoreEntry, defaultText: string): string {
         let placeHolder = "";

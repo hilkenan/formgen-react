@@ -1,7 +1,5 @@
 import { JsonObject, JsonProperty } from "json2typescript";
 
-
-
 /**
  * Data Class for the Action Links in Info Callouts
  */

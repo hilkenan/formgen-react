@@ -52,11 +52,20 @@ export class FormChoiceGroup extends FormBaseInput<IChoiceGroupProps, IFormBaseI
         </InnerControl>);
     }
 
+    /**
+     * Stores the state of the checkbox to the state.
+     * @param ev The Check event 
+     * @param option the selected option of the choice group
+     */
     @autobind
     private _onChange(ev?: React.FormEvent<HTMLElement | HTMLInputElement>, option?: IChoiceGroupOption): void {
         this.setValue(option ? option.key : undefined, true);
     }
 
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate 
+     */
     private _validateChoiceGroupProps(props?: IChoiceGroupProps): void {
         this.validateProps(props);
         if (props) {

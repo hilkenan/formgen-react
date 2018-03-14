@@ -54,11 +54,19 @@ export class FormDropdown extends FormBaseInput<IDropdownProps, IFormBaseInputPr
         </InnerControl>);
     }
 
+    /**
+     * Stores the selected value of the dropdown to the state.
+     * @param option the selected option to store the kay as value.
+     */
     @autobind
     private _onChanged(option: IDropdownOption): void {
         this.setValue(option.key);
     }
 
+  /**
+   * Validate the properties from the config. warn at console
+   * @param props The property object to validate 
+   */
     private _validateDropdownProps(props?: IDropdownProps): void {
         this.validateProps(props);
         if (props) {
