@@ -8,6 +8,7 @@ import { PrimaryButton } from 'office-ui-fabric-react';
 import { FormTimeInput } from './FormTimeInput';
 
 var jsonForm = require('./FormTimeInput.test.json');
+var jsonForm1 = require('./FormTimeInput1.test.json');
 
 describe('FormTimeInput Unit Tests', () => {
   describe('Renders for combinations of props', () => {
@@ -33,6 +34,22 @@ describe('FormTimeInput Unit Tests', () => {
       let outValue = result["rows"]["0"]["columns"][0]["controls"][0]["value"];
       expect(outValue).toEqual(39600);
     });
+
+    it('With initial value empty', () => {
+      let result: any;
+      renderedForm = ReactTestUtils.renderIntoDocument(
+        <Form jsonFormData={ jsonForm1 }  onSubmitForm={ (formData: any) => { result = formData; } } 
+        />
+      ) as Form;
+
+      renderedInput = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'input') as HTMLInputElement;
+      
+      let form: HTMLFormElement = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'form') as HTMLFormElement;
+      ReactTestUtils.Simulate.submit(form);
+      let outValue = result["rows"]["0"]["columns"][0]["controls"][0]["value"];
+      expect(outValue).toEqual(undefined);
+    });
+
   });
 
   describe('TimeInput update tests', () => {

@@ -66,10 +66,10 @@ describe('FormSpinButton Unit Tests', () => {
       let box = ReactTestUtils.findRenderedDOMComponentWithClass(spin, 'ms-spinButton-input') as HTMLButtonElement;
       ReactTestUtils.Simulate.keyDown(box, {key: "Up", keyCode: 38, which: 38});
       clock.tick(DEFAULT_DEBOUNCE);
-      expect(box.getAttribute("value")).toEqual("2");
+      expect(box.getAttribute("value")).toEqual("2 h");
       ReactTestUtils.Simulate.keyDown(box, {key: "Down", keyCode: 40, which: 40});
       clock.tick(DEFAULT_DEBOUNCE);
-      expect(box.getAttribute("value")).toEqual("1");
+      expect(box.getAttribute("value")).toEqual("1 h");
     });
   });
 

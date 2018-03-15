@@ -84,9 +84,6 @@ export class FormDatePicker extends FormBaseInput<IFormDatePickerProps, IFormBas
       if (props.onSelectDate) {
         console.warn(`FormDatePicker: 'onSelectDate' prop was specified and will be ignored`);
       }
-      if (props.firstDayOfWeek) {
-        console.warn(`FormDatePicker: 'firstDayOfWeek' prop was specified and will be ignored`);
-      }
       if (props.formatDate) {
         console.warn(`FormDatePicker: 'formatDate' prop was specified and will be ignored`);
       }

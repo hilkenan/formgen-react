@@ -30,11 +30,19 @@
       				"label": "test",
       				"onChange": "test",
 					"placeholder": "ss:mm:ss",
-        			"mask": "11:11:11"
+					"mask": "11:11:11",
+					"errorMessage": "test",
+					"onBeforeChange": "test",
+					"onBlur": "test"
 				},
 				"config_trans": {
 					"properties": [{
 						"key": "placeholder",
+						"object_trans": {
+							"en": "hh:mm:ss"
+						}
+					},{
+						"key": "placeholder.test",
 						"object_trans": {
 							"en": "hh:mm:ss"
 						}

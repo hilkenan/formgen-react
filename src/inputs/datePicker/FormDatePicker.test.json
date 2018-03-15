@@ -13,7 +13,13 @@
                 "value": "2018-03-11T00:00:00.000Z",
                 "control_type": [ "DatePicker" ],
                 "info": "Info Test",
-                "label_position": [ "Left"]
+                "label_position": [ "Left"],
+                "config": {
+                    "onSelectDate": "test",
+                    "firstDayOfWeek": 0,
+                    "formatDate": "test",
+                    "strings": "test"
+                }
             },
             {
                 "id": "submit",
