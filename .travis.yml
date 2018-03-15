@@ -10,6 +10,6 @@ install:
 script:
   - npm run build-css
   - npm run build
-  - npm test -- --coverage  --runInBand
+  - npm test -- --coverage  --runInBand --no-cache 
 after_success:
   - codecov -t 8a045ae0-f9d2-4bf2-8b21-b6c1da2a161c
