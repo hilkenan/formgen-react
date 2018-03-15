@@ -1,0 +1,10 @@
+{
+  "locale": "es",
+  "messages": {
+    "pleaseSelect": "Seleccione",
+    "required": "Obligatorio",
+    "loadData": "Cargar datos ...",
+    "buttonSend": "enviar",
+    "buttonCancel": "cancelar"
+  }
+}

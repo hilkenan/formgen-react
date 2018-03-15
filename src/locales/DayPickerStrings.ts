@@ -227,3 +227,59 @@ DayPickerStrings["DE"] = {
     isRequiredErrorMessage: 'Entrata obbligatoria',
     invalidInputErrorMessage: 'Formato della data errato.'
   };
+
+  DayPickerStrings["ES"] = {
+    months: [
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'October',
+      'Noviembre',
+      'Diciembre'
+    ],
+  
+    shortMonths: [
+      'Ene',
+      'Feb',
+      'Mar',
+      'Abr',
+      'May',
+      'Jun',
+      'Jul',
+      'Ago',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dic'
+    ],
+  
+    days: [
+      'Domingo',
+      'Lunes',
+      'Martes',
+      'Miércoles',
+      'Jueves',
+      'Viernes',
+      'Sábado'
+    ],
+  
+    shortDays: [
+      'D',
+      'L',
+      'M',
+      'M',
+      'J',
+      'V',
+      'S'
+    ],
+  
+    goToToday: 'Hoy',
+    isRequiredErrorMessage: 'Entrada obligatoria',
+    invalidInputErrorMessage: 'Formato de fecha incorrecta.'
+  };
