@@ -7,6 +7,7 @@ import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import { FormChoiceGroup } from './FormChoiceGroup';
 var jsonForm = require('./FormChoiceGroup.test.json');
+var jsonForm1 = require('./FormChoiceGroup1.test.json');
 
 describe('FormChoiceGroup Unit Tests', () => {
   describe('Renders for all combinations of props', () => {
@@ -73,16 +74,20 @@ describe('FormChoiceGroup Unit Tests', () => {
 
     it('Validators run properly', () => {
       let renderedForm = ReactTestUtils.renderIntoDocument(
-        <Form jsonFormData={ jsonForm } onSubmitForm={ undefined } />
+        <Form jsonFormData={ jsonForm1 } onSubmitForm={ undefined } />
       ) as Form;
 
       let formField = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormChoiceGroup);
       formField.setValue("1", true);
       clock.tick(DEFAULT_DEBOUNCE);
       expect(formField.state.currentError).toEqual("min 2");
-
+      
       let submitButton: PrimaryButton = ReactTestUtils.findRenderedComponentWithType(renderedForm, PrimaryButton);
       expect(submitButton.props.disabled).toBeTruthy();
+
+      formField.setValue("2", true);
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(formField.state.currentError).toEqual(undefined);
     });
   }); 
 });

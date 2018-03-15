@@ -16,15 +16,15 @@
                 ],
                 "title": "ChoiceGroup",
                 "config": {
+                    "selectedKey": "test",
                     "options": [
                         { "key": "1", "text": "Option 1" },
                         { "key": "2", "text": "Option 2" },
                         { "key": "3", "text": "Option 3" }]
                 },
-                "value": "1",
                 "control_type": [ "ChoiceGroup" ],
                 "label_position": [ "Left"]
-            },
+            },            
             {
                 "id": "submit",
                 "control_type": ["SubmitButton"]

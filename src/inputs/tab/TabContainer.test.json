@@ -10,12 +10,24 @@
 				"subcontrols": [{
 					"id": "tab1",
 					"control_type": ["Tab"],
-					"title": "Tab 1"
+					"title": "Tab 1",
+					"subrows": [{
+						"columns": [{
+							"controls": [{
+								"id": "test2",
+								"control_type": [ "Textbox"]
+							}]
+						}]
+					}]
 				},
 				{
 					"id": "tab2",
 					"control_type": ["Tab"],
-					"title": "Tab 2"
+					"title": "Tab 2",
+					"subcontrols": [{
+						"id": "test1",
+						"control_type": [ "Textbox"]
+					}]
 				}]
 			}]
         }]
