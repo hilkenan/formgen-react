@@ -68,6 +68,8 @@ describe('Simple form validators test', () => {
     expect(Validators.required(customMessage)(null)).toEqual(customMessage);
     expect(Validators.required(customMessage)(undefined)).toEqual(customMessage);
     expect(Validators.required(customMessage)('')).toEqual(customMessage);
+    let arrayObject:string[] = [];
+    expect(Validators.required(customMessage)(arrayObject)).toEqual(customMessage);
 
     expect(Validators.required(customMessage)(0)).toBeFalsy();
     expect(Validators.required(customMessage)('HelloWorld')).toBeFalsy();
