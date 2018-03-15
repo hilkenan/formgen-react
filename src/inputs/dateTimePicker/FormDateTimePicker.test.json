@@ -10,6 +10,19 @@
                         "validator_type": [ "Required" ]
                     }],
                 "title": "Datepicker",
+		"config": {
+    		      "onSelectDate": "test",
+		      "firstDayOfWeek": "test",
+		      "formatDate": "test",
+		      "strings": "test",
+		      "focused": "test",
+		      "onFocusChange": "test",
+		      "onHourChange": "test",
+		      "onMinuteChange": "test",
+		      "onTimeChange": "test",
+		      "language": "test",
+		      "time": "test"	
+		},
                 "value": "2018-03-11T15:30:30.000Z",
                 "control_type": [ "DateTimePicker" ],
                 "info": "Info Test",
