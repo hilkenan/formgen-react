@@ -1,17 +1,13 @@
 {
     "id": "testform",
-	 "title": "Test",
+	"title": "Test",
 	"rows": [{
 		"columns": [{
 			"controls": [{
 				"id": "control1",
 				"control_type": ["Time"],
 				"title": "Time",
-				"value": 39600,
-				"config": {
-					"hideSeconds": true,
-					"maxSeconds": 36000
-				}
+				"value": 32400
 			},
             {
                 "id": "submit",

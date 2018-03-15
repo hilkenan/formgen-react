@@ -79,7 +79,6 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
       this.TranslatedTitle = Helper.getTranslatedProperty(TranslatedProperty.Title,this.props.control);
       this.TranslatedInfo = Helper.getTranslatedProperty(TranslatedProperty.Info,this.props.control);
       this.ControlClassName = this.props.control.CssClass ? this.props.control.CssClass : "";
-      this.IsRequired = this.props.control.FormValidators && this.props.control.FormValidators.find(v => v.ValidatorType == ValidatorTypes.Required) != undefined;
   }
 
   /**
@@ -88,6 +87,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
    * @param nextProps The props that the component is receiving
    */
   public componentWillReceiveProps(nextProps: P): void {
+    console.log("Req:" + this.IsRequired())
     if (nextProps.control.Value !== this.props.control.Value && this.props.control.Value === this.state.currentValue) {
       // If the props have changed and the previous props are equal to the current value, then we want to update the internal state value
       this.setState((prevState: S) => {
@@ -201,7 +201,9 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   public ControlClassName:string;
 
   /** True if the Required validator is set. */ 
-  public IsRequired:boolean;
+  public IsRequired(): boolean {
+    return this.props.control.FormValidators && this.props.control.FormValidators.find(v => v.ValidatorType == ValidatorTypes.Required) != undefined;
+  }
 
   /** Translaiton for the Info */ 
   public TranslatedInfo?:string;

@@ -46,19 +46,24 @@ describe('FormTimeInput Unit Tests', () => {
 
     it('With initial value empty', () => {
       let result: any;
+      let updateStub: sinon.SinonStub = sinon.stub();
       renderedForm = ReactTestUtils.renderIntoDocument(
-        <Form jsonFormData={ jsonForm1 }  onSubmitForm={ (formData: any) => { result = formData; } } 
-        />
+        <Form jsonFormData={ jsonForm1 } onUpdated={ updateStub } 
+          onSubmitForm={ (formData: any) => { result = formData; } } />
       ) as Form;
-
-      let textInput: FormTimeInput = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormTimeInput);
-      textInput.setValue('', true);
+      
+      let renderedInput = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'input') as HTMLInputElement;
+      expect(renderedInput.value).toEqual("09:00:00");
+      renderedInput.value = '';
+      ReactTestUtils.Simulate.blur(renderedInput);
       clock.tick(DEFAULT_DEBOUNCE);
-    
+      expect(updateStub.callCount).toEqual(1);
+
       let form: HTMLFormElement = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'form') as HTMLFormElement;
       ReactTestUtils.Simulate.submit(form);
+
       let outValue = result["rows"]["0"]["columns"][0]["controls"][0]["value"];
-      expect(outValue).toEqual('');
+      expect(outValue).toEqual(undefined);
     });
 
   });

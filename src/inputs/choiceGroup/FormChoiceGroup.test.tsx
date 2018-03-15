@@ -50,7 +50,7 @@ describe('FormChoiceGroup Unit Tests', () => {
      
         let datePicker:FormChoiceGroup = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormChoiceGroup);
         let picker:FormChoiceGroup = new FormChoiceGroup(datePicker.props, datePicker.context);
-        expect(picker.IsRequired).toBeTruthy();
+        expect(picker.IsRequired()).toBeTruthy();
           
         datePicker.setValue("2");
         expect(updateStub.callCount).toEqual(1);

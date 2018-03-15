@@ -52,17 +52,19 @@ export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputP
   @autobind
   private validateTime(event: SyntheticEvent<string>) {
     let value:string = event.target["value"];
-    if (value == "" && this.IsRequired) {
+    let required:boolean = this.IsRequired();
+    console.log("Test2 " + value + ":" + required)
+    if (value == "" && required) {
       this.setControlToInValid(value);
       return false;
     }
 
-    if (value == "" && !this.IsRequired) {
-        this.setState({
+    if (value == "" && !required) {
+      this.setState({
           currentText: value,
-          currentValue: undefined,
           isValid: true,
         })
+        this.setValue(undefined, true);        
         return true;
     }
 
