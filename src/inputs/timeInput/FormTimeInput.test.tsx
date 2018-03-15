@@ -51,14 +51,24 @@ describe('FormTimeInput Unit Tests', () => {
         />
       ) as Form;
 
-      let textInput: FormTimeInput = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormTimeInput);
-      textInput.setValue('', true);
+      let renderedInput = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'input') as HTMLInputElement;
+      ReactTestUtils.Simulate.focus(renderedInput);
+      renderedInput.value = "";
+      ReactTestUtils.Simulate.blur(renderedInput);
       clock.tick(DEFAULT_DEBOUNCE);
     
       let form: HTMLFormElement = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'form') as HTMLFormElement;
       ReactTestUtils.Simulate.submit(form);
       let outValue = result["rows"]["0"]["columns"][0]["controls"][0]["value"];
-      expect(outValue).toEqual('');
+      expect(outValue).toEqual(39600);
+
+      ReactTestUtils.Simulate.focus(renderedInput);
+      renderedInput.value = "InvalidValue";
+      ReactTestUtils.Simulate.blur(renderedInput);
+      clock.tick(DEFAULT_DEBOUNCE);
+      ReactTestUtils.Simulate.focus(renderedInput);
+      renderedInput.value = "23:00";
+      ReactTestUtils.Simulate.blur(renderedInput);
     });
 
   });
