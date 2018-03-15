@@ -13,8 +13,10 @@ var Cascader = require('rc-cascader/lib/Cascader')
 /**
  * Cascading Dropdown input for Form. Use rc-cascader
  */
+/* istanbul ignore next */
 export class FormCascader extends FormBaseInput<any, IFormBaseInputProps, IFormBaseInputState> {
     private optionsDataStore = this.props.inputKey + "_options"
+    /* istanbul ignore next */
     constructor(props: IFormBaseInputProps, context: IFormContext) {
         super(props, context);
         this.state = {
@@ -23,7 +25,7 @@ export class FormCascader extends FormBaseInput<any, IFormBaseInputProps, IFormB
             currentError: undefined,
         };
         this.validateProps(this.ConfigProperties);
-    }/* istanbul ignore next */ 
+    } 
 
     /**
      * Render a Cascading Drop Down from rs-cascader
