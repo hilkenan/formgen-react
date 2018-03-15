@@ -69,7 +69,7 @@
       "!src/registerServiceWorker.ts"
     ],
     "collectCoverage": true,
-    "mapCoverage": true    
+    "mapCoverage": true,    
     "coverageReporters": [
       "lcov",
       "text"
