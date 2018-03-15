@@ -24,6 +24,11 @@
                 },
                 "value": "12:30:30",
 				"config": {
+      				"ref": "test",
+      				"id": "test",
+      				"name": "test",
+      				"label": "test",
+      				"onChange": "test",
 					"placeholder": "ss:mm:ss",
         			"mask": "11:11:11"
 				},

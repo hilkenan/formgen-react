@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry } from './FormBaseInput.types';
 export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
-import { TranslatedProperty, LabelPositions, ValidatorTypes, BinderType } from '../Enums';
+import { TranslatedProperty, ValidatorTypes, BinderType } from '../Enums';
 import { IFormContext, IFormValidationResult } from '../form/Form.types';
 import { autobind } from '@uifabric/utilities';
 import { IDataBinder, IDataBinderAsync, IDataBinderFilterAsync } from '../objects/DataBinder.types';
@@ -80,8 +80,6 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
       this.TranslatedInfo = Helper.getTranslatedProperty(TranslatedProperty.Info,this.props.control);
       this.ControlClassName = this.props.control.CssClass ? this.props.control.CssClass : "";
       this.IsRequired = this.props.control.FormValidators && this.props.control.FormValidators.find(v => v.ValidatorType == ValidatorTypes.Required) != undefined;
-
-      this._validateProps(props);
   }
 
   /**
@@ -90,7 +88,6 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
    * @param nextProps The props that the component is receiving
    */
   public componentWillReceiveProps(nextProps: P): void {
-    this._validateProps(nextProps);
     if (nextProps.control.Value !== this.props.control.Value && this.props.control.Value === this.state.currentValue) {
       // If the props have changed and the previous props are equal to the current value, then we want to update the internal state value
       this.setState((prevState: S) => {
@@ -189,20 +186,6 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
       loadedFunction(dataStoreKey, dataBinder, waitText, false);
     }
     return false;
-  }
-
-  /**
-  * Calculate the Class Name for Control
-  */
-  protected getClassNameControl() {
-    let countElement = 11;
-    if (this.props.control.Info)
-        countElement--
-    if (this.props.control.Title && this.props.control.LabelPosition != LabelPositions.Top)
-        countElement=countElement -3
-    
-    let additionalClassName:string = this.props.control.CssClass ? this.props.control.CssClass : ""
-    return "ms-Grid-col ms-sm" + countElement + " " +  additionalClassName;
   }
 
   /**
@@ -330,15 +313,5 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
         this.debouncedSubmitValue(this, validate);
       }
     );
-  }
-
-  /**
-   * Validate incoming props
-   * @param props Props to validate
-   */
-  private _validateProps(props: P): void {
-    if (!props.inputKey) {
-      throw new Error('FormBaseInput: name must defined on all form inputs');
-    }
   }
 }

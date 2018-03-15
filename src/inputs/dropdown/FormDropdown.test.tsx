@@ -5,8 +5,12 @@ import { Form } from '../../form/Form';
 import * as sinon from 'sinon';
 import { FormDropdown } from './FormDropdown';
 import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
-import { PrimaryButton } from 'office-ui-fabric-react';
+import { PrimaryButton, IDropdownOption } from 'office-ui-fabric-react';
+import { Control } from '../../objects/Control';
+import { BinderType } from '../../Enums';
+import { DataBinder } from '../../objects/DataBinder.types';
 var jsonForm = require('./FormDropdown.test.json');
+var jsonForm1 = require('./FormDropdown1.test.json');
 
 describe('FormDropdown Unit Tests', () => {
   describe('Renders for all combinations of props', () => {
@@ -41,6 +45,37 @@ describe('FormDropdown Unit Tests', () => {
     afterEach(() => {
       clock.restore();
     });
+
+    it('Dropdown is leading async', () => {
+      const binders:DataBinder[] = [{
+        typeName:"testform.dropdown_options",
+        binderType: BinderType.Async,    
+        binderFunction: {
+          retrieveData(controlConfig: Control, lang:string):Promise<any[]> {
+            return new Promise<any[]>(resolve => {
+              let dropDonwEntries:IDropdownOption[] = [{
+                key: 1,
+                text: "Test 1"
+              },
+              {
+                key: 2,
+                text: "Test2"
+              }];
+              resolve(dropDonwEntries);
+            });
+          }
+        }  
+      }]
+      let updateStub: sinon.SinonStub = sinon.stub();
+      let renderedForm = ReactTestUtils.renderIntoDocument(
+          <Form jsonFormData={ jsonForm1 } dataBinders={ binders } onUpdated={ updateStub } />
+      ) as Form;
+  
+      let dropDown:HTMLSpanElement = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, "ms-Dropdown-title") as HTMLSpanElement
+      expect(dropDown.childNodes.length).toEqual(1);
+      expect(dropDown.childNodes[0].textContent).toEqual("Load data...");
+      
+  });    
 
     it('Dropdown is leading and trailing debounced', () => {
         let updateStub: sinon.SinonStub = sinon.stub();
