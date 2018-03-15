@@ -1,8 +1,8 @@
 import * as React from 'react';
 import 'rc-cascader/assets/index.css';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
-/* istanbul ignore next */ import { IFormContext } from '../../form/Form.types';
-/* istanbul ignore next */ import { autobind } from '@uifabric/utilities';
+import { IFormContext } from '../../form/Form.types';
+import { autobind } from '@uifabric/utilities';
 import { CascadingOption } from './FormCascader.types';
 import { InnerControl } from "../../controls/innerControl/InnerControl";
 import { TextField } from "office-ui-fabric-react/lib";
@@ -10,9 +10,11 @@ import { Helper } from '../../Helper';
 import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
 var Cascader = require('rc-cascader/lib/Cascader')
 
+/**
+ * Cascading Dropdown input for Form. Use rc-cascader
+ */
 export class FormCascader extends FormBaseInput<any, IFormBaseInputProps, IFormBaseInputState> {
     private optionsDataStore = this.props.inputKey + "_options"
-    /* istanbul ignore next */
     constructor(props: IFormBaseInputProps, context: IFormContext) {
         super(props, context);
         this.state = {
