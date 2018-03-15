@@ -1,0 +1,11 @@
+{
+    "locale": "it",
+    "messages": {
+      "suggestionsHeaderText": "Persone suggerite",
+      "mostRecentlyUsedHeaderText": "Contatti suggeriti",
+      "noResultsFoundText": "Nessuna persona trovata",
+      "loadingText": "Caricamento",
+      "suggestionsAvailableAlertText": "suggerimenti disponibili",
+      "suggestionsContainerAriaLabel": "Contatti suggeriti"
+    }
+}
