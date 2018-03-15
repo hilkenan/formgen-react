@@ -42,11 +42,19 @@ export class FormMaskedTextInput extends FormBaseInput<any, IFormBaseInputProps,
       </InnerControl>);
   }
   
+  /**
+   * Stores the set value of the textbox to the state.
+   * @param event The event from the change with the new value.
+   */  
   @autobind
   private _onChange(event: SyntheticEvent<any>): void {
     this.setValue(event.currentTarget.value, true);
   }
 
+  /**
+   * Validate the properties from the config. warn at console
+   * @param props The property object to validate 
+   */
   private _validateTextFieldProps(props?: any): void {
     this.validateProps(props);
     if (props) {

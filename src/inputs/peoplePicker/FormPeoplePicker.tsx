@@ -10,7 +10,7 @@ import { IFormPeoplePickerState, IFormPeoplePickerProps } from './FormPeoplePick
 import { LocalsPeoplePicker } from '../../locales/LocalsPeoplePicker';
 
 /**
- * DatePicker input for Form
+ * People picker control. Let choose one ore more Persons.
  */
 export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFormBaseInputProps, IFormPeoplePickerState> {
   private peopleListFilterFunction = this.props.inputKey + "_filteredPeoples";
@@ -28,6 +28,9 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
     this.pickerSuggestionsProps = this._getTranslatedTexts();
   }
 
+  /**
+   * Translate all the UI text in the correct langauge.
+   */
   private _getTranslatedTexts(): IBasePickerSuggestionsProps {
     let ppFormater = Helper.getTranslator("peoplepicker").formatMessage;
     const suggestionProps: IBasePickerSuggestionsProps = {
@@ -107,7 +110,7 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
     return persona.primaryText as string;
   }
   
-    @autobind
+  @autobind
   private _validateInput(input: string) {
     if (input.indexOf('@') !== -1) {
       return ValidationState.valid;

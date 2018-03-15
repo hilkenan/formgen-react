@@ -63,10 +63,10 @@ export class FormDropdown extends FormBaseInput<IDropdownProps, IFormBaseInputPr
         this.setValue(option.key);
     }
 
-  /**
-   * Validate the properties from the config. warn at console
-   * @param props The property object to validate 
-   */
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate 
+     */
     private _validateDropdownProps(props?: IDropdownProps): void {
         this.validateProps(props);
         if (props) {
