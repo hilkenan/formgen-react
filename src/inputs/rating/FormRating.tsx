@@ -22,7 +22,7 @@ export class FormRating extends FormBaseInput<IRatingProps, IFormBaseInputProps,
   }
 
   /**
-   * Render a Toggle
+   * Render a Rating control
    */
   public render(): JSX.Element {
     return (
@@ -40,6 +40,10 @@ export class FormRating extends FormBaseInput<IRatingProps, IFormBaseInputProps,
       </InnerControl>);
  }
 
+  /**
+   * Stores the selected value of the rating to the state.
+   * @param rating the number to store
+   */
   @autobind
   private _onChange(rating: number): void {
     this.setValue(rating, true);

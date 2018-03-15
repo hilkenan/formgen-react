@@ -61,7 +61,10 @@ describe('FormTextInput Unit Tests', () => {
         <Form jsonFormData={ jsonForm } onSubmitForm={ undefined } onUpdated={ updateStub }  dataBinders={ binders } />
       ) as Form;
 
-      let formField: FormCascader = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormCascader);
+      let formField:FormCascader = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormCascader);
+      let cascader:FormCascader = new FormCascader(formField.props, formField.context);
+      expect(cascader.IsRequired).toBeFalsy();
+
       const out = [{"label":"Super langer ultra test","value":"fj","children":[{"label":"Test 1","value":"fuzhou","children":[{"label":"diabled","value":"mawei"}]},{"label":"Test 2","value":"quanzhou"}]},{"label":"Test 1","value":"fuzhou","children":[{"label":"diabled","value":"mawei"}]},{"label":"diabled","value":"mawei"}]
       expect(formField.state.currentValue).toEqual(out);
 

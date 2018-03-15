@@ -70,6 +70,10 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
       </InnerControl>);
   }
 
+  /**
+   * Event when user want remove an person from the sugestion list.
+   * @param item The Person that should removed
+   */
   @autobind
   private _onRemoveSuggestion(item: IPersonaProps): void {
     const { peopleList, mostRecentlyUsed: mruState } = this.state;
@@ -87,6 +91,10 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
     }
   }
 
+  /**
+   * Returns an array of person with the most recend used persons
+   * @param currentPersonas The Persons that allready are choosed
+   */
   @autobind
   private _returnMostRecentlyUsed(currentPersonas: IPersonaProps[]): IPersonaProps[] | IPersonaProps[] {
     let { mostRecentlyUsed } = this.state;
@@ -94,10 +102,20 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
     return mostRecentlyUsed;
   }
 
+  /**
+   * Remove dupplicate persons
+   * @param personas The Person array with the persons to check,
+   * @param possibleDupes Array of Persons with potential dupplicates
+   */
   private _removeDuplicates(personas: IPersonaProps[], possibleDupes: IPersonaProps[]) {
     return personas.filter(persona => !this._listContainsPersona(persona, possibleDupes));
   }
 
+  /**
+   * Check if a person exist in the list.
+   * @param persona The Person to check
+   * @param personas Array of Persons to search in
+   */
   private _listContainsPersona(persona: IPersonaProps, personas: IPersonaProps[]) {
     if (!personas || !personas.length || personas.length === 0) {
       return false;
@@ -105,11 +123,19 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
     return personas.filter(item => item.primaryText === persona.primaryText).length > 0;
   }
 
+  /**
+   * Resolve the Dipslay name of an Person 
+   * @param persona The Person to resolve
+   */
   @autobind
   private _getTextFromItem(persona: IPersonaProps): string {
     return persona.primaryText as string;
   }
   
+  /**
+   * Validate any input string. If an (@) is in the string then its a valid email.
+   * @param input String to validate
+   */
   @autobind
   private _validateInput(input: string) {
     if (input.indexOf('@') !== -1) {
@@ -121,13 +147,18 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
     }
   }
 
+  /**
+   * Event when a user enter a filter criteria. Call the databinding store with the filter to search for persons.
+   * @param filterText Entered Filtertext.
+   * @param currentPersonas The current set persons (for remove the dupplicates)
+   * @param limitResults Maximal amount of numbers to return
+   */
   @autobind
   private _onFilterChanged(filterText: string, currentPersonas: IPersonaProps[], limitResults?: number) : PromiseLike<IPersonaProps[]> {
     return new Promise<IPersonaProps[]>((resolve, reject) => {
       if (filterText && this.retrievFilterData[this.peopleListFilterFunction]) {
-        this.retrievFilterData[this.peopleListFilterFunction].retrieveData(this.props.control, Helper.getLanguage(), filterText).then((filteredPersonas) => {
+        this.retrievFilterData[this.peopleListFilterFunction].retrieveData(this.props.control, Helper.getLanguage(), filterText, limitResults).then((filteredPersonas) => {
           filteredPersonas = this._removeDuplicates(filteredPersonas, currentPersonas);
-          filteredPersonas = limitResults ? filteredPersonas.splice(0, limitResults) : filteredPersonas;
           this.setState({mostRecentlyUsed: filteredPersonas});
           resolve(filteredPersonas)
         })
@@ -137,6 +168,10 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
     });
   }
 
+  /**
+   * Event when the selection has changed. Store the array of persons.
+   * @param items Array of personas to store
+   */
   @autobind
   private _onItemsChange(items: any[]) {
     let alloMulti = this.ConfigProperties.allowMultiple != undefined ? this.ConfigProperties.allowMultiple : true;

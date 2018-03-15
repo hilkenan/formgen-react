@@ -47,7 +47,10 @@ describe('FormChoiceGroup Unit Tests', () => {
             <Form jsonFormData={ jsonForm } onUpdated={ updateStub } />
         ) as Form;
      
-        let datePicker: FormChoiceGroup = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormChoiceGroup);
+        let datePicker:FormChoiceGroup = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormChoiceGroup);
+        let picker:FormChoiceGroup = new FormChoiceGroup(datePicker.props, datePicker.context);
+        expect(picker.IsRequired).toBeTruthy();
+          
         datePicker.setValue("2");
         expect(updateStub.callCount).toEqual(1);
         datePicker.setValue("3");

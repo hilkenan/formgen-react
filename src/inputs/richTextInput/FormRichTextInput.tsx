@@ -40,14 +40,21 @@ export class FormRichTextInput extends FormBaseInput<ComponentProps, IFormBaseIn
       </InnerControl>);
   }
 
-  //(content: string, delta: Quill.Delta, source: Quill.Sources, editor: UnprivilegedEditor) => void;
+  /**
+   * Stores the html content to the state.
+   * @param value html value to store
+   */
   @autobind
   private _onChange(value: string): void {
     if (value == "<p></p>" || value == "<p><br></p>") value = undefined;
     this.setValue(value, true);
   }
 
-  private _validateTextFieldProps(props?: ComponentProps): void {
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate 
+     */
+    private _validateTextFieldProps(props?: ComponentProps): void {
     this.validateProps(props);
     if (props) {
       if (props.onBlur) {

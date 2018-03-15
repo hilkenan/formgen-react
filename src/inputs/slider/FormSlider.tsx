@@ -41,8 +41,13 @@ export class FormSlider extends FormBaseInput<ISliderProps, IFormBaseInputProps,
           { this.state.currentError && Rendering.renderError(this.state.currentError) }        
       </InnerControl>);
   }
+
+  /**
+   * Stores the selected value of the slider to the state.
+   * @param value the number to store
+   */
   @autobind
-  private _onChange(rating: number): void {
-    this.setValue(rating, true);
+  private _onChange(value: number): void {
+    this.setValue(value, true);
   }
 }

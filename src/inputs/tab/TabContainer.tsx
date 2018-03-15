@@ -24,6 +24,9 @@ export class TabContainer extends FormBaseInput<IPivotProps, IFormBaseInputProps
         this.validateProps(this.ConfigProperties);
     }
     
+    /**
+     * Goes at when mounted to each child (pivotitem) and find in this al components and register them in the context.
+     */
     public componentDidMount(): void {
         if (this.props.children) {
             for(let node of this.props.children as PivotItem[]) {
@@ -31,6 +34,11 @@ export class TabContainer extends FormBaseInput<IPivotProps, IFormBaseInputProps
             }
         }
     }
+
+    /**
+     * Goes trough each node and find in this al components and register them in the context.
+     * @param children React node
+     */
     private findeComponents(children: React.ReactNode) {
         if (children) {
             for(let gen of children as GenericFormInput[]) {
@@ -63,6 +71,9 @@ export class TabContainer extends FormBaseInput<IPivotProps, IFormBaseInputProps
         return pivots;
     }
 
+    /**
+     * Renders the Pivot with the configured Pivot items.
+     */
     render() {
         return (<Pivot {...this.ConfigProperties}
                     key={ Helper.cleanUpKey(this.props.inputKey) }

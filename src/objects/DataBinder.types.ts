@@ -31,5 +31,5 @@ export interface IDataBinderAsync {
  * The Type of an Async Databinding Class  with a Filter string that return the Type of any as array as Promise
  */
 export interface IDataBinderFilterAsync {
-    retrieveData(controlConfig: Control, lang:string, filter: string ):Promise<any[]>
+    retrieveData(controlConfig: Control, lang:string, filter: string, limitResults?: number):Promise<any[]>
 }

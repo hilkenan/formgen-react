@@ -10,7 +10,7 @@ import Rendering from '../../form/Rendering';
 import { IFormTimeState, IFormTimeProps } from './FormTimeInput.types';
 
 /**
- * TextBox input for the Form.
+ * Masked time input. Stores the entered time as seconds from 00:00. Maximal to 24:00
  */
 export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputProps, IFormTimeState> {
   private hideSeconds: boolean;
@@ -47,6 +47,7 @@ export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputP
   
   /**
    * Validate the Input string.
+   * @param event The Even where to start the validation.
    */
   @autobind
   private validateTime(event: SyntheticEvent<string>) {
@@ -82,6 +83,7 @@ export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputP
 
   /**
    * Convert the time string in seconds
+   * @param value The time to convert
    */    
   private _getSecondsFromTime(value:string): number  {
     return moment.duration(value).asSeconds();
@@ -89,6 +91,8 @@ export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputP
   
   /**
    * Convert the number in seconds to an time string
+   * @param value The time to convert
+   * @param hideSeconds True if no seconds are shown
    */    
   private _getTimeFromSeconds(value:number, hideSeconds: boolean): string {
     if (value == 86400) return hideSeconds ? "24:00" : "24:00:00";
@@ -99,6 +103,8 @@ export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputP
 
   /**
    * Convert the number in seconds to an time string
+   * @param value The time to check if valid
+   * @param hideSeconds True if no seconds to check.
    */    
   private _isTimeStringValid(value:string, hideSeconds: boolean) {
     let timeParts = value.split(":");
@@ -123,6 +129,7 @@ export class FormTimeInput extends FormBaseInput<IFormTimeProps, IFormBaseInputP
 
   /**
    * Set the Control to Invalid
+   * @param value the value to invalidate.
    */
   @autobind
   private setControlToInValid(value: string) {

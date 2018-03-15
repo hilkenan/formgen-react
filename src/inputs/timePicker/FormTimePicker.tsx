@@ -11,7 +11,7 @@ import { Helper } from '../../Helper';
 import { IFormTimePickerState } from './FormTimePicker.types';
 
 /**
- * TextBox input for the Form.
+ * Time Picker Controls render an react-times control (classic or material theme)
  */
 export class FormTimePicker extends FormBaseInput<any, IFormBaseInputProps, IFormTimePickerState> {
   constructor(props: IFormBaseInputProps, context: IFormContext) {
@@ -37,7 +37,7 @@ export class FormTimePicker extends FormBaseInput<any, IFormBaseInputProps, IFor
   }
 
   /**
-   * Render a Fabric TextBox
+   * Render a Fabric react-times tiempicker
    */
   public render(): JSX.Element {
     return (
@@ -59,16 +59,28 @@ export class FormTimePicker extends FormBaseInput<any, IFormBaseInputProps, IFor
       </InnerControl>);
   }
   
+  /**
+   * Stores the selected hour to the hour state.
+   * @param hour the number hours to store
+   */  
   @autobind
   onHourChange(hour) {
     this.setState({ hour });
   }
 
+  /**
+   * Stores the selected minut to the minut state.
+   * @param minute the number minut to store
+   */  
   @autobind
   onMinuteChange(minute) {
     this.setState({ minute });
   }
 
+  /**
+   * Stores the selected time to the value
+   * @param time the time in format hh:mm
+   */  
   @autobind
   onTimeChange(time) {
     const [hour, minute] = time.split(':');
@@ -76,17 +88,28 @@ export class FormTimePicker extends FormBaseInput<any, IFormBaseInputProps, IFor
     this.setValue( hour + ":" + minute, true)
   }
 
+  /**
+   * Event when the focus has chanced
+   * @param focused the current focus value
+   */  
   @autobind
   onFocusChange(focused) {
     this.setState({ focused });
   }
 
+  /**
+   * Handels an focus change
+   */  
   @autobind
   handleFocusedChange() {
     const { focused } = this.state;
     this.setState({ focused: !focused });
   }
 
+  /**
+   * Validate the properties from the config. warn at console
+   * @param props The property object to validate 
+   */  
   private _validateTimePickerProps(props?: any): void {
     this.validateProps(props);
     if (props) {

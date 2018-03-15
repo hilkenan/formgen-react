@@ -42,6 +42,10 @@ export class FormToggle extends FormBaseInput<IToggleProps, IFormBaseInputProps,
       </InnerControl>);
  }
  
+  /**
+   * Stores the selected value of the toggle to the state.
+   * @param isChecked True if on
+   */
   @autobind
   private _onChange(isChecked: boolean): void {
     this.setValue(isChecked);

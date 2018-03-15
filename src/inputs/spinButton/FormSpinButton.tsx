@@ -51,6 +51,7 @@ export class FormSpinButton extends FormBaseInput<IFormSpinButtonProps, IFormBas
 
   /**
    * Event for Validating
+   * @param value Numberic value with suffix to store
    */
   @autobind
   private onValidate(value: string) {
@@ -65,6 +66,7 @@ export class FormSpinButton extends FormBaseInput<IFormSpinButtonProps, IFormBas
 
   /**
    * Event for Inkrementing
+   * @param value Numberic value with suffix to store
    */
   @autobind
   private onIncrement(value: string) {
@@ -76,6 +78,7 @@ export class FormSpinButton extends FormBaseInput<IFormSpinButtonProps, IFormBas
 
   /**
    * Event for Dekrementing
+   * @param value Numberic value with suffix to store
    */
   @autobind
   private onDecrement(value: string) {

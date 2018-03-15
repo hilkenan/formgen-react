@@ -40,11 +40,19 @@ export class FormTextInput extends FormBaseInput<ITextFieldProps, IFormBaseInput
       </InnerControl>);
   }
 
+  /**
+   * Stores the text of the textfield to the state.
+   * @param value string to store
+   */  
   @autobind
   private _onChange(value: string): void {
     this.setValue(value, true);
   }
 
+  /**
+   * Validate the properties from the config. warn at console
+   * @param props The property object to validate 
+   */  
   private _validateTextFieldProps(props?: ITextFieldProps): void {
     this.validateProps(props);
     if (props) {
