@@ -23,7 +23,7 @@ export class FormCascader extends FormBaseInput<any, IFormBaseInputProps, IFormB
             currentError: undefined,
         };
         this.validateProps(this.ConfigProperties);
-    }
+    }/* istanbul ignore next */ 
 
     /**
      * Render a Cascading Drop Down from rs-cascader
