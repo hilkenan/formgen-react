@@ -87,7 +87,6 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
    * @param nextProps The props that the component is receiving
    */
   public componentWillReceiveProps(nextProps: P): void {
-    console.log("Req:" + this.IsRequired())
     if (nextProps.control.Value !== this.props.control.Value && this.props.control.Value === this.state.currentValue) {
       // If the props have changed and the previous props are equal to the current value, then we want to update the internal state value
       this.setState((prevState: S) => {
