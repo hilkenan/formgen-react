@@ -12,6 +12,15 @@ var jsonForm1 = require('./FormTimeInput1.test.json');
 
 describe('FormTimeInput Unit Tests', () => {
   describe('Renders for combinations of props', () => {
+    let clock: sinon.SinonFakeTimers;
+    beforeEach(() => {
+      clock = sinon.useFakeTimers(Date.now());
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+ 
     let renderedForm: Form;
     let renderedInput: HTMLInputElement;
 
@@ -42,12 +51,14 @@ describe('FormTimeInput Unit Tests', () => {
         />
       ) as Form;
 
-      renderedInput = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'input') as HTMLInputElement;
-      
+      let textInput: FormTimeInput = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormTimeInput);
+      textInput.setValue('', true);
+      clock.tick(DEFAULT_DEBOUNCE);
+    
       let form: HTMLFormElement = ReactTestUtils.findRenderedDOMComponentWithTag(renderedForm, 'form') as HTMLFormElement;
       ReactTestUtils.Simulate.submit(form);
       let outValue = result["rows"]["0"]["columns"][0]["controls"][0]["value"];
-      expect(outValue).toEqual(undefined);
+      expect(outValue).toEqual('');
     });
 
   });
