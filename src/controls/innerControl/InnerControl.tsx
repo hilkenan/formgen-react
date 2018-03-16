@@ -13,6 +13,7 @@ export class InnerControl extends React.Component<IInnerControl> {
         let additionalClassName:string = this.props.BaseControl.ControlClassName;
         let styles = this.props.BaseControl.props.control.Styles ? this.props.BaseControl.props.control.Styles as CSSProperties : undefined;
 
+let required:boolean = this.props.BaseControl.IsRequired();
         let hasInfo = this.props.BaseControl.props.control.Info != undefined;
         let labelCss = "";
         let contrCss = "";
@@ -55,7 +56,7 @@ export class InnerControl extends React.Component<IInnerControl> {
                     <div className={ "ms-Grid " +  additionalClassName } style={ styles } >
                         <div className="ms-Grid-row">
                             <div className="ms-Grid-col ms-sm12">
-                                <Label required={ this.props.BaseControl.IsRequired() }>{ this.props.BaseControl.TranslatedTitle }</Label>
+                                <Label required={ required }>{ this.props.BaseControl.TranslatedTitle }</Label>
                             </div>
                         </div>
                         <div className="ms-Grid-row">
@@ -81,7 +82,7 @@ export class InnerControl extends React.Component<IInnerControl> {
                             { this.props.children }
                             </div>
                             <div className={ "ms-Grid-col " + labelCss }>
-                                <Label required={ this.props.BaseControl.IsRequired() }>{ this.props.BaseControl.TranslatedTitle }</Label>
+                                <Label required={ required }>{ this.props.BaseControl.TranslatedTitle }</Label>
                             </div>
                             { hasInfo && (
                             <div className={ "ms-Grid-col " + infoCss}>
@@ -99,7 +100,7 @@ export class InnerControl extends React.Component<IInnerControl> {
                     <div className={ "ms-Grid " +  additionalClassName } style={ styles } >
                         <div className="ms-Grid-row">
                         <div className={ "ms-Grid-col " + labelCss }>
-                                <Label required={ this.props.BaseControl.IsRequired() }>{ this.props.BaseControl.TranslatedTitle }</Label>
+                                <Label required={ required }>{ this.props.BaseControl.TranslatedTitle }</Label>
                             </div>                        
                             <div className={ "ms-Grid-col " + contrCss }>
                             { this.props.children }
