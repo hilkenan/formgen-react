@@ -127,6 +127,11 @@ describe('FormTimeInput Unit Tests', () => {
         renderedInput.value = "";
         ReactTestUtils.Simulate.blur(renderedInput);
         expect(textInput.state.isValid).toBeFalsy();
+
+        renderedInput.value = '23:59:59';
+        ReactTestUtils.Simulate.blur(renderedInput);      
+        clock.tick(DEFAULT_DEBOUNCE);
+        expect(textInput.state.isValid).toBeFalsy();
     });
   });
 

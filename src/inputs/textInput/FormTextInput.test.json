@@ -17,6 +17,11 @@
                 "value": "test",
                 "control_type": [ "Textbox" ],
                 "info": "Info Test",
+                "config": {
+                    "errorMessage": "test",
+                    "onBeforeChange": "test",
+                    "props.onBlur": "test"
+                },
                 "label_position": [ "Left"]
             },
             {
