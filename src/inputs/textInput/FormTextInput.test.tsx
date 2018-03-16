@@ -7,7 +7,16 @@ import { Form } from '../../form/Form';
 import { PrimaryButton } from 'office-ui-fabric-react';
 import { FormTextInput } from './FormTextInput';
 import { DEFAULT_DEBOUNCE } from '../../formBaseInput/FormBaseInput';
+import { CustomValidator } from '../../objects/CustomValidator.types';
 var jsonForm = require('./FormTextInput.test.json');
+var jsonForm1 = require('./FormTextInput1.test.json');
+
+
+function scryRenderedDOMComponentsWithId(tree, id) {
+  return ReactTestUtils.findAllInRenderedTree(tree, function(inst) {
+    return ReactTestUtils.isDOMComponent(inst) && inst.id === id;
+  });
+}
 
 describe('FormTextInput Unit Tests', () => {
   let renderedForm: Form;
@@ -96,6 +105,37 @@ describe('FormTextInput Unit Tests', () => {
       expect(updateStub.callCount).toEqual(0);
       clock.tick(DEFAULT_DEBOUNCE);
       expect(updateStub.callCount).toEqual(1);
+    });
+
+    it('TextInput Custom Validation', () => {
+      let result: any;
+      let updateStub: sinon.SinonStub = sinon.stub();
+
+      const customValidators:CustomValidator[] = [{
+        typeName:"CustomTest",
+        validatorType: (value:string) => {
+          if (value !="test")
+            return "wrong";
+          else
+            return '';
+        }
+      }];
+
+      renderedForm = ReactTestUtils.renderIntoDocument(
+        <Form jsonFormData={ jsonForm1 } customValidators={ customValidators } onSubmitForm={ (formData: any) => { result = formData; } } />
+      ) as Form;
+
+      let formField: FormTextInput = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormTextInput);
+      let input = scryRenderedDOMComponentsWithId(renderedForm, "testform.text");
+      input[0].value = 'invalid';
+      ReactTestUtils.Simulate.change(input[0]);      
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(formField.state.currentError).toEqual("wrong")
+
+      input[0].value = 'test';
+      ReactTestUtils.Simulate.change(input[0]);      
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(formField.state.currentError).toEqual(undefined);
     });
  });
 });

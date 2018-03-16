@@ -1,5 +1,6 @@
 {
-	 "id": "testform",
+    "$schema": "../../schemas/jfrom-schema.json",
+    "id": "testform",
 	 "title": "Test",
 	"rows": [{
 		"columns": [{

@@ -70,6 +70,31 @@ describe('FormTimeInput Unit Tests', () => {
       clock.tick(DEFAULT_DEBOUNCE);
       let textInput: FormTimeInput = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormTimeInput);
       expect(textInput.state.isValid).toBeFalsy();
+
+      renderedInput.value = '10:00:00';
+      ReactTestUtils.Simulate.blur(renderedInput);      
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(textInput.state.isValid).toBeTruthy();
+
+      renderedInput.value = '24:03:03';
+      ReactTestUtils.Simulate.blur(renderedInput);      
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(textInput.state.isValid).toBeFalsy();
+
+      renderedInput.value = '-1:00:00';
+      ReactTestUtils.Simulate.blur(renderedInput);      
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(textInput.state.isValid).toBeFalsy();
+
+      renderedInput.value = '01:65:00';
+      ReactTestUtils.Simulate.blur(renderedInput);      
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(textInput.state.isValid).toBeFalsy();
+
+      renderedInput.value = '01:00:65';
+      ReactTestUtils.Simulate.blur(renderedInput);      
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(textInput.state.isValid).toBeFalsy();
     });
 
   });

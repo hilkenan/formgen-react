@@ -7,6 +7,7 @@ import { DataBinder } from './objects/DataBinder.types';
 import { BinderType } from './Enums';
 import { Control } from './objects/Control';
 import { Form } from './form/Form';
+import { CustomValidator } from './objects/CustomValidator.types';
 var jsonForm = require('./samples/test.json');
 
 const customAction:CustomActions[] = [{
@@ -16,6 +17,17 @@ const customAction:CustomActions[] = [{
       console.log(JSON.stringify(formData));
  }
 }]
+
+const customValidators:CustomValidator[] = [{
+  typeName:"CustomTest",
+  validatorType: (value:string) => {
+    if (value !="test")
+      return "wrong";
+    else
+      return '';
+  }
+}];
+
 
 const binders:DataBinder[] = [{
   typeName:"testform.dropDonw1_options",
@@ -114,6 +126,7 @@ ReactDOM.render(
       onSubmitForm={ (formData:any) => console.log("submit click: " + JSON.stringify(formData)) }
       dataBinders={ binders }
       jsonFormData={jsonForm} 
+      customValidators={ customValidators }
       showErrorsWhenPristine={false} 
       customActions={ customAction }  />,
   document.getElementById('form') as HTMLElement
