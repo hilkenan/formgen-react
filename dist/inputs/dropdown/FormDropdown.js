@@ -62,9 +62,17 @@ var FormDropdown = /** @class */ (function (_super) {
                 // These props cannot be overridden
                 placeHolder: placeHolder, options: (optionsEntry && optionsEntry.data) ? optionsEntry.data : this.ConfigProperties.options, ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, onChanged: this._onChanged, errorMessage: this.getErrorMessage(), label: "", selectedKey: this.state.currentValue }))));
     };
+    /**
+     * Stores the selected value of the dropdown to the state.
+     * @param option the selected option to store the kay as value.
+     */
     FormDropdown.prototype._onChanged = function (option) {
         this.setValue(option.key);
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormDropdown.prototype._validateDropdownProps = function (props) {
         this.validateProps(props);
         if (props) {

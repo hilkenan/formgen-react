@@ -53,6 +53,9 @@ exports.FormLanguage = "";
  */
 var Form = /** @class */ (function (_super) {
     __extends(Form, _super);
+    /**
+     * Load the correct langauge, UI Fabric theme and the rendering engine.
+     */
     function Form(props) {
         var _this = _super.call(this, props) || this;
         if (_this.props.Language) {
@@ -74,6 +77,9 @@ var Form = /** @class */ (function (_super) {
         }
         return _this;
     }
+    /**
+     * Call the formDidMount event and take over the mounted controls
+     */
     Form.prototype.componentDidMount = function () {
         if (this.props.formDidMount) {
             this.props.formDidMount(this._mountedInputs);
@@ -101,6 +107,10 @@ var Form = /** @class */ (function (_super) {
             submitValue: this._submitValue
         };
     };
+    /**
+     * Finde with the full control id the Control in the tree.
+     * @param inputKey The full control id to finde the corresponding control
+     */
     Form.prototype._findeControlFromKey = function (inputKey) {
         var control;
         var controlStruct = inputKey.split(".");
@@ -112,6 +122,7 @@ var Form = /** @class */ (function (_super) {
      * Validate an individual input and set its error state
      * Returns the validation result
      * @param input The input to validate
+     * @param showValidation Set to true if the error message shoul be set
      */
     Form.prototype._validateComponent = function (input, showValidation) {
         if (!input.doValidate && input.props.validators) {
@@ -229,6 +240,11 @@ var Form = /** @class */ (function (_super) {
             this._mountInput(input);
         }
     };
+    /**
+     * Set the validation result, if Valid the control Value and if defined call the onUpdated Method
+     * @param input The input that has rais an update
+     * @param validate True if the input should validated.
+     */
     Form.prototype._submitValue = function (input, validate) {
         var validationResult = this._validateComponent(input, validate);
         this.setState(function (prevState) {
@@ -259,6 +275,10 @@ var Form = /** @class */ (function (_super) {
             });
         }
     };
+    /**
+     * Check if the form is valid. If all validations are ok then reutrn true.
+     * @param validationResults All validation results from the control tree.
+     */
     Form.prototype._isFormValid = function (validationResults) {
         if (validationResults === void 0) { validationResults = this.state.validationResults; }
         for (var key in validationResults) {

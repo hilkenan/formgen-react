@@ -34,7 +34,7 @@ require("react-times/css/material/default.css");
 require("react-times/css/classic/default.css");
 var Helper_1 = require("../../Helper");
 /**
- * TextBox input for the Form.
+ * Time Picker Controls render an react-times control (classic or material theme)
  */
 var FormTimePicker = /** @class */ (function (_super) {
     __extends(FormTimePicker, _super);
@@ -61,7 +61,7 @@ var FormTimePicker = /** @class */ (function (_super) {
         var _a, _b;
     }
     /**
-     * Render a Fabric TextBox
+     * Render a Fabric react-times tiempicker
      */
     FormTimePicker.prototype.render = function () {
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
@@ -69,24 +69,47 @@ var FormTimePicker = /** @class */ (function (_super) {
                 React.createElement(TimePicker_1.default, __assign({ theme: "classic" }, this.ConfigProperties, { focused: this.state.focused, onFocusChange: this.onFocusChange, onHourChange: this.onHourChange, onMinuteChange: this.onMinuteChange, onTimeChange: this.onTimeChange, language: Helper_1.Helper.getLanguage(), time: this.state.hour && this.state.minute ? this.state.hour + ":" + this.state.minute : null })),
                 this.state.currentError && Rendering_1.default.renderError(this.state.currentError))));
     };
+    /**
+     * Stores the selected hour to the hour state.
+     * @param hour the number hours to store
+     */
     FormTimePicker.prototype.onHourChange = function (hour) {
         this.setState({ hour: hour });
     };
+    /**
+     * Stores the selected minut to the minut state.
+     * @param minute the number minut to store
+     */
     FormTimePicker.prototype.onMinuteChange = function (minute) {
         this.setState({ minute: minute });
     };
+    /**
+     * Stores the selected time to the value
+     * @param time the time in format hh:mm
+     */
     FormTimePicker.prototype.onTimeChange = function (time) {
         var _a = time.split(':'), hour = _a[0], minute = _a[1];
         this.setState({ hour: hour, minute: minute });
         this.setValue(hour + ":" + minute, true);
     };
+    /**
+     * Event when the focus has chanced
+     * @param focused the current focus value
+     */
     FormTimePicker.prototype.onFocusChange = function (focused) {
         this.setState({ focused: focused });
     };
+    /**
+     * Handels an focus change
+     */
     FormTimePicker.prototype.handleFocusedChange = function () {
         var focused = this.state.focused;
         this.setState({ focused: !focused });
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormTimePicker.prototype._validateTimePickerProps = function (props) {
         this.validateProps(props);
         if (props) {

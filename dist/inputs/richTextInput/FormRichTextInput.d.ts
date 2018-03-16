@@ -12,6 +12,14 @@ export declare class FormRichTextInput extends FormBaseInput<ComponentProps, IFo
      * Render a Fabric TextBox
      */
     render(): JSX.Element;
+    /**
+     * Stores the html content to the state.
+     * @param value html value to store
+     */
     private _onChange(value);
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     private _validateTextFieldProps(props?);
 }

@@ -67,23 +67,29 @@ var FormDatePicker = /** @class */ (function (_super) {
     };
     /**
      * Return for the UI Formated To Date and store it to the state.
+     * @param date The date to formate
      */
     FormDatePicker.prototype._onFormatDateTo = function (date) {
         moment.locale(Helper_1.Helper.getLanguage());
         var dateFormat = this.ConfigProperties.shortDateFormat == true ? "L" : "LL";
         return moment(date).format(dateFormat);
     };
+    /**
+     * Stores the selected date as utc
+     * @param date the selected date
+     */
     FormDatePicker.prototype._onDateChanged = function (date) {
         this.setValue(moment(date).toJSON());
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormDatePicker.prototype._validateDatePickerProps = function (props) {
         this.validateProps(props);
         if (props) {
             if (props.onSelectDate) {
                 console.warn("FormDatePicker: 'onSelectDate' prop was specified and will be ignored");
-            }
-            if (props.firstDayOfWeek) {
-                console.warn("FormDatePicker: 'firstDayOfWeek' prop was specified and will be ignored");
             }
             if (props.formatDate) {
                 console.warn("FormDatePicker: 'formatDate' prop was specified and will be ignored");

@@ -1,3 +1,6 @@
+/**
+ * Common Translaiton const with default value in english.
+ */
 export declare const LocalsCommon: {
     pleaseSelect: {
         id: string;

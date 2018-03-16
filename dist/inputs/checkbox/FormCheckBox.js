@@ -57,6 +57,11 @@ var FormCheckBox = /** @class */ (function (_super) {
             this.state.currentValue && this.state.currentValue == true &&
                 this.props.children));
     };
+    /**
+     * Stores the state of the checkbox to the state.
+     * @param event The Check event
+     * @param isChecked the state of the checkbox
+     */
     FormCheckBox.prototype._onChange = function (event, isChecked) {
         this.setValue(isChecked);
     };

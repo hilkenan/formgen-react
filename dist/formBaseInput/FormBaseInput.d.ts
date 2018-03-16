@@ -6,6 +6,9 @@ export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
 import { IFormContext, IFormValidationResult } from '../form/Form.types';
 import { IDataBinderFilterAsync } from '../objects/DataBinder.types';
+/**
+ * Default Debaunce of 250 Ticks.
+ */
 export declare const DEFAULT_DEBOUNCE = 250;
 /**
  * Type alias for any simple form input
@@ -48,6 +51,10 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     componentWillReceiveProps(nextProps: P): void;
     /**
      * Store the options to the state
+     * @param dataKey The databinder key to use
+     * @param data The Array with the Data.
+     * @param waitText The Wait Text for async loading
+     * @param isAsync True if async loading.
      */
     private storeOptions(dataKey, data, waitText, isAsync);
     /**
@@ -56,6 +63,7 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     protected getErrorMessage(): string;
     /**
     * Check the proprties and warn if the default are used.
+    * @param props The property Object to check.
     */
     protected validateProps(props?: any): void;
     /**
@@ -63,46 +71,37 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     * If Async loading the return true
     * @param dataStoreKey The Key from the datastore
     * @param loadedFunction The funtion to call after data is loaded
+    * @param waitText The Waiting Text for async loading controls.
     */
     loadDataFromStore(dataStoreKey: string, loadedFunction: DataLoadedFunction, waitText: string): boolean;
-    /**
-    * Calculate the Class Name for Control
-    */
-    protected getClassNameControl(): string;
     /**
     * Property for the Control. In case of UI Fabric Controls the UI Fabric Interface class can be used. This Config will overgiven to the
     * Inner Control
     */
     protected ConfigProperties: T;
-    /**
-    * Translation for the Title
-    */
+    /** Translation for the Title */
     TranslatedTitle?: string;
-    /**
-    * The cofigured class name or ''
-    */
+    /** The cofigured class name or '' */
     ControlClassName: string;
-    /**
-    * True if the Required validator is set.
-    */
-    IsRequired: boolean;
-    /**
-    * Translaiton for the Info
-    */
+    /** True if the Required validator is set. */
+    IsRequired(): boolean;
+    /** Translaiton for the Info */
     TranslatedInfo?: string;
-    /**
-    * Loaded data for this Control.
-    */
+    /** Loaded data for this Control. */
     protected dataStore: {
         [key: string]: any[] | Promise<any[]>;
     };
-    /**
-    * The Asynchronous Filter Methods.
-    */
+    /** The Asynchronous Filter Methods. */
     protected retrievFilterData: {
         [key: string]: IDataBinderFilterAsync;
     };
+    /**
+    * Load the Databinder. Sync and Async are loaded. AsyncFilter is loade when user type an filter.
+    */
     componentWillMount(): void;
+    /**
+     * Unmount the current control.
+     */
     componentWillUnmount(): void;
     /**
      * Validate the input. By default, this function will run through all the validators and ensure they pass
@@ -110,6 +109,7 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     doValidate(): IFormValidationResult;
     /**
      * Set the error state of this input
+     * @param errorMessage Message to set to the state.
      */
     setError(errorMessage?: string): void;
     /**
@@ -118,11 +118,8 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     clearError(): void;
     /**
      * Set the current value of this input and validate it
+     * @param value The value to set
+     * @param validate True if the value should be validated.
      */
     setValue(value: any, validate?: boolean): void;
-    /**
-     * Validate incoming props
-     * @param props Props to validate
-     */
-    private _validateProps(props);
 }

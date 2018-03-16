@@ -15,7 +15,7 @@ var office_ui_fabric_react_1 = require("office-ui-fabric-react");
 var Enums_1 = require("../../Enums");
 var InfoCallout_1 = require("../callout/InfoCallout");
 /**
-* Inner Control. Use show the correct inner part of an control
+* Inner Control. Use show the correct inner part of an control. Renders the Label, the child properties and the Info Callout.
 */
 var InnerControl = /** @class */ (function (_super) {
     __extends(InnerControl, _super);
@@ -25,6 +25,7 @@ var InnerControl = /** @class */ (function (_super) {
     InnerControl.prototype.render = function () {
         var additionalClassName = this.props.BaseControl.ControlClassName;
         var styles = this.props.BaseControl.props.control.Styles ? this.props.BaseControl.props.control.Styles : undefined;
+        var required = this.props.BaseControl.IsRequired();
         var hasInfo = this.props.BaseControl.props.control.Info != undefined;
         var labelCss = "";
         var contrCss = "";
@@ -62,7 +63,7 @@ var InnerControl = /** @class */ (function (_super) {
                     return (React.createElement("div", { className: "ms-Grid " + additionalClassName, style: styles },
                         React.createElement("div", { className: "ms-Grid-row" },
                             React.createElement("div", { className: "ms-Grid-col ms-sm12" },
-                                React.createElement(office_ui_fabric_react_1.Label, { required: this.props.BaseControl.IsRequired }, this.props.BaseControl.TranslatedTitle))),
+                                React.createElement(office_ui_fabric_react_1.Label, { required: required }, this.props.BaseControl.TranslatedTitle))),
                         React.createElement("div", { className: "ms-Grid-row" },
                             React.createElement("div", { className: "ms-Grid-col ms-sm11" }, this.props.children),
                             hasInfo && (React.createElement("div", { className: "ms-Grid-col ms-sm1" },
@@ -72,14 +73,14 @@ var InnerControl = /** @class */ (function (_super) {
                         React.createElement("div", { className: "ms-Grid-row" },
                             React.createElement("div", { className: "ms-Grid-col " + contrCss }, this.props.children),
                             React.createElement("div", { className: "ms-Grid-col " + labelCss },
-                                React.createElement(office_ui_fabric_react_1.Label, { required: this.props.BaseControl.IsRequired }, this.props.BaseControl.TranslatedTitle)),
+                                React.createElement(office_ui_fabric_react_1.Label, { required: required }, this.props.BaseControl.TranslatedTitle)),
                             hasInfo && (React.createElement("div", { className: "ms-Grid-col " + infoCss },
                                 React.createElement(InfoCallout_1.InfoCallout, { Key: this.props.BaseControl.props.control.ID + "Info", HeaderText: this.props.BaseControl.TranslatedTitle }, this.props.BaseControl.TranslatedInfo))))));
                 case Enums_1.LabelPositions.Left:
                     return (React.createElement("div", { className: "ms-Grid " + additionalClassName, style: styles },
                         React.createElement("div", { className: "ms-Grid-row" },
                             React.createElement("div", { className: "ms-Grid-col " + labelCss },
-                                React.createElement(office_ui_fabric_react_1.Label, { required: this.props.BaseControl.IsRequired }, this.props.BaseControl.TranslatedTitle)),
+                                React.createElement(office_ui_fabric_react_1.Label, { required: required }, this.props.BaseControl.TranslatedTitle)),
                             React.createElement("div", { className: "ms-Grid-col " + contrCss }, this.props.children),
                             hasInfo && (React.createElement("div", { className: "ms-Grid-col " + infoCss },
                                 React.createElement(InfoCallout_1.InfoCallout, { ActionLink: this.props.BaseControl.props.control.InfoAction, Key: this.props.BaseControl.props.control.ID + "Info", HeaderText: this.props.BaseControl.TranslatedTitle }, this.props.BaseControl.TranslatedInfo))))));

@@ -54,8 +54,12 @@ var FormSlider = /** @class */ (function (_super) {
             React.createElement(office_ui_fabric_react_1.Slider, __assign({ value: this.state.currentValue }, this.ConfigProperties, { label: '', ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey, step: this.stepValue, onChange: this._onChange })),
             this.state.currentError && Rendering_1.default.renderError(this.state.currentError)));
     };
-    FormSlider.prototype._onChange = function (rating) {
-        this.setValue(rating, true);
+    /**
+     * Stores the selected value of the slider to the state.
+     * @param value the number to store
+     */
+    FormSlider.prototype._onChange = function (value) {
+        this.setValue(value, true);
     };
     __decorate([
         Utilities_1.autobind

@@ -11,6 +11,14 @@ export declare class FormTextInput extends FormBaseInput<ITextFieldProps, IFormB
      * Render a Fabric TextBox
      */
     render(): JSX.Element;
+    /**
+     * Stores the text of the textfield to the state.
+     * @param value string to store
+     */
     private _onChange(value);
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     private _validateTextFieldProps(props?);
 }

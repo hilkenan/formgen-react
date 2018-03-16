@@ -63,6 +63,12 @@ var FormComboBox = /** @class */ (function (_super) {
                 //Its mutually exclusive, but not works correct without set value and selectedKey
                 selectedKey: this.state.currentValue }))));
     };
+    /**
+     * Stores the selected option from the combobox.
+     * @param option the selected option of the choice group
+     * @param index The index of the selected item
+     * @param value The Value use. Used when enter new data is allowed.
+     */
     FormComboBox.prototype._onChanged = function (option, index, value) {
         var inputValue = option == undefined ? value : option.key;
         this.setValue(inputValue, true);

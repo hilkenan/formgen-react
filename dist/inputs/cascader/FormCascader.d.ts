@@ -3,7 +3,7 @@ import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBase
 import { IFormContext } from '../../form/Form.types';
 import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
 /**
- * Cascading Dropdown input for Form
+ * Cascading Dropdown input for Form. Use rc-cascader
  */
 export declare class FormCascader extends FormBaseInput<any, IFormBaseInputProps, IFormBaseInputState> {
     private optionsDataStore;
@@ -14,6 +14,8 @@ export declare class FormCascader extends FormBaseInput<any, IFormBaseInputProps
     render(): JSX.Element;
     /**
      * Store the selected Value as JSON in the form state.
+     * @param value Value string to store
+     * @param selectedOptions the Selected options with the full data
      */
     private _onChange(value, selectedOptions);
     /**

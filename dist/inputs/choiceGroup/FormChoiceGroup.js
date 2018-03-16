@@ -62,9 +62,18 @@ var FormChoiceGroup = /** @class */ (function (_super) {
                 options: optionsEntry && optionsEntry.data ? optionsEntry.data : this.ConfigProperties.options, ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, onChange: this._onChange, label: "", selectedKey: this.state.currentValue })),
             this.state.currentError && Rendering_1.default.renderError(this.state.currentError)));
     };
+    /**
+     * Stores the state of the checkbox to the state.
+     * @param ev The Check event
+     * @param option the selected option of the choice group
+     */
     FormChoiceGroup.prototype._onChange = function (ev, option) {
         this.setValue(option ? option.key : undefined, true);
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormChoiceGroup.prototype._validateChoiceGroupProps = function (props) {
         this.validateProps(props);
         if (props) {

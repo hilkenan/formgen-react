@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_intl_1 = require("react-intl");
+/**
+ * People Picker Translaiton const with default value in english.
+ */
 exports.LocalsPeoplePicker = react_intl_1.defineMessages({
     suggestionsHeaderText: {
         id: "suggestionsHeaderText",

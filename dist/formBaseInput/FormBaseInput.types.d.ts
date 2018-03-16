@@ -28,6 +28,9 @@ export interface IFormBaseInputState {
     currentError?: string;
     dataStores?: DataStoreEntry[];
 }
+/**
+ * An data Store Entry object.
+ */
 export declare class DataStoreEntry {
     key: string;
     data: any[];

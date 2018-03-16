@@ -23,7 +23,7 @@ require("../../styles/FormInfoCallout.css");
 var styling_1 = require("@uifabric/styling");
 /**
  * Class for the Info Callout (icon with mouse over info)
- */
+  */
 var InfoCallout = /** @class */ (function (_super) {
     __extends(InfoCallout, _super);
     function InfoCallout(props) {

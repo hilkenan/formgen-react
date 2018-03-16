@@ -12,6 +12,14 @@ export declare class FormDropdown extends FormBaseInput<IDropdownProps, IFormBas
      * Render a Fabric Dropdown
      */
     render(): JSX.Element;
+    /**
+     * Stores the selected value of the dropdown to the state.
+     * @param option the selected option to store the kay as value.
+     */
     private _onChanged(option);
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     private _validateDropdownProps(props?);
 }

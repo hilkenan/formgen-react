@@ -11,5 +11,9 @@ export declare class FormToggle extends FormBaseInput<IToggleProps, IFormBaseInp
      * Render a Toggle
      */
     render(): JSX.Element;
+    /**
+     * Stores the selected value of the toggle to the state.
+     * @param isChecked True if on
+     */
     private _onChange(isChecked);
 }

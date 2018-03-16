@@ -43,7 +43,7 @@ var SubmitButton = /** @class */ (function (_super) {
     SubmitButton.prototype.render = function () {
         var _this = this;
         var submitText = this.commonFormater.formatMessage(LocalsCommon_1.LocalsCommon.buttonSend);
-        return (React.createElement(Button_1.PrimaryButton, __assign({ ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey, type: 'submit', disabled: !this.formContext.isFormValid() }, this.ConfigProperties), this.props.control.Title ? this.TranslatedTitle : submitText));
+        return (React.createElement(Button_1.PrimaryButton, __assign({}, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey, type: 'submit', disabled: !this.formContext.isFormValid() }), this.props.control.Title ? this.TranslatedTitle : submitText));
     };
     return SubmitButton;
 }(FormBaseInput_1.FormBaseInput));

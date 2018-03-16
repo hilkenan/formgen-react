@@ -12,6 +12,10 @@ var locale = require('browser-locale')();
 var Helper = /** @class */ (function () {
     function Helper() {
     }
+    /**
+     * Return even the Language set at the form
+     * or when not set the language from the users browser.
+     */
     Helper.getLanguage = function () {
         if (Form_1.FormLanguage != undefined && Form_1.FormLanguage != "")
             return Form_1.FormLanguage;
@@ -25,6 +29,7 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Replace the Row and Element Markes in the Input Key
+     * @param inputKey Clean the input key from the Element and Row identifier
      */
     Helper.cleanUpKey = function (inputKey) {
         inputKey = inputKey.replace(new RegExp("/E", 'g'), "");
@@ -32,6 +37,8 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Translate an object with properties. structure of the key is the structure for the object. Delimited with .
+     * @param orgObject Orignal Object to translate.
+     * @param translations Translations for the object.
      */
     Helper.getTranslatedObject = function (orgObject, translations) {
         if (translations && orgObject) {
@@ -55,6 +62,9 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Get from the given translatable Property the Translated String or default.
+     * @param property Translate the property
+     * @param object The Object with the property to translate
+     * @param transBag Translation Bag with all translations
      */
     Helper.getTranslatedPropertyFromObject = function (property, object, transBag) {
         var defaultName = object[property];
@@ -67,6 +77,7 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Calculate the possible Css Number from the UI Fabric React responsive framework min 1 max 12
+     * @param countElements Count of Elements that is used. 12 is the maximum of elements that can be used.
      */
     Helper.calculateCssClassColNb = function (countElements) {
         var cssNr = 12 / countElements;
@@ -79,6 +90,7 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Get the translator object to translate the string from given Component.
+     * @param control The name of the control string that has to be return an translator. The are stored at the locals/translation folder
      */
     Helper.getTranslator = function (control) {
         var messages = null;
@@ -124,6 +136,8 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Removes the Suffix from the string
+     * @param string The string to remove an suffix
+     * @param suffix The suffix to remove
      */
     Helper.removeSuffix = function (string, suffix) {
         if (!Helper.hasSuffix(string, suffix)) {
@@ -133,6 +147,8 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Check if hafe the suffix.
+     * @param string The string to check an suffix
+     * @param suffix The suffix to check
      */
     Helper.hasSuffix = function (string, suffix) {
         if (!suffix)
@@ -142,7 +158,8 @@ var Helper = /** @class */ (function () {
     };
     /**
      * Get even the wait text from the state or Pleace wait text.
-     * @param state State object.
+     * @param entry The Data store entry.
+     * @param defaultText The default Text for the placeholder
      */
     Helper.getPlaceHolderText = function (entry, defaultText) {
         var placeHolder = "";

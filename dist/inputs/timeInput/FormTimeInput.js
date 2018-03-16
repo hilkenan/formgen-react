@@ -24,7 +24,7 @@ var Utilities_1 = require("office-ui-fabric-react/lib/Utilities");
 var InnerControl_1 = require("../../controls/innerControl/InnerControl");
 var Rendering_1 = require("../../form/Rendering");
 /**
- * TextBox input for the Form.
+ * Masked time input. Stores the entered time as seconds from 00:00. Maximal to 24:00
  */
 var FormTimeInput = /** @class */ (function (_super) {
     __extends(FormTimeInput, _super);
@@ -49,19 +49,21 @@ var FormTimeInput = /** @class */ (function (_super) {
     };
     /**
      * Validate the Input string.
+     * @param event The Even where to start the validation.
      */
     FormTimeInput.prototype.validateTime = function (event) {
         var value = event.target["value"];
-        if (value == "" && this.IsRequired) {
+        var required = this.IsRequired();
+        if (value == "" && required) {
             this.setControlToInValid(value);
             return false;
         }
-        if (value == "" && !this.IsRequired) {
+        if (value == "" && !required) {
             this.setState({
                 currentText: value,
-                currentValue: undefined,
                 isValid: true,
             });
+            this.setValue(undefined, true);
             return true;
         }
         if (!this._isTimeStringValid(value, this.hideSeconds)) {
@@ -79,12 +81,15 @@ var FormTimeInput = /** @class */ (function (_super) {
     };
     /**
      * Convert the time string in seconds
+     * @param value The time to convert
      */
     FormTimeInput.prototype._getSecondsFromTime = function (value) {
         return moment.duration(value).asSeconds();
     };
     /**
      * Convert the number in seconds to an time string
+     * @param value The time to convert
+     * @param hideSeconds True if no seconds are shown
      */
     FormTimeInput.prototype._getTimeFromSeconds = function (value, hideSeconds) {
         if (value == 86400)
@@ -95,6 +100,8 @@ var FormTimeInput = /** @class */ (function (_super) {
     };
     /**
      * Convert the number in seconds to an time string
+     * @param value The time to check if valid
+     * @param hideSeconds True if no seconds to check.
      */
     FormTimeInput.prototype._isTimeStringValid = function (value, hideSeconds) {
         var timeParts = value.split(":");
@@ -113,6 +120,7 @@ var FormTimeInput = /** @class */ (function (_super) {
     };
     /**
      * Set the Control to Invalid
+     * @param value the value to invalidate.
      */
     FormTimeInput.prototype.setControlToInValid = function (value) {
         var control = document.getElementsByName(this.props.inputKey);

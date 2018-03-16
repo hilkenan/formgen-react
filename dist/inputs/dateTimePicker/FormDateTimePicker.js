@@ -70,6 +70,11 @@ var FormDateTimePicker = /** @class */ (function (_super) {
         _this._validateDateTimePickerProps(_this.ConfigProperties);
         return _this;
     }
+    /**
+     * Fill the value with amount of needed n 0. Eg. 5 with 2 size will be 05
+     * @param num The number
+     * @param size Maximal Size of string.
+     */
     FormDateTimePicker.prototype._pad = function (num, size) {
         var s = num + "";
         while (s.length < size)
@@ -98,12 +103,24 @@ var FormDateTimePicker = /** @class */ (function (_super) {
                 React.createElement("div", { className: "ms-Grid-row" },
                     React.createElement("div", { className: "ms-Grid-col" }, this.state.currentError && Rendering_1.default.renderError(this.state.currentError))))));
     };
+    /**
+     * Stores the selected hour
+     * @param hour the selected hour
+     */
     FormDateTimePicker.prototype.onHourChange = function (hour) {
         this.setState({ hour: hour });
     };
+    /**
+     * Stores the selected minute
+     * @param minute the selected minute
+     */
     FormDateTimePicker.prototype.onMinuteChange = function (minute) {
         this.setState({ minute: minute });
     };
+    /**
+     * Stores the selected time as utc with the date
+     * @param time the selected time
+     */
     FormDateTimePicker.prototype.onTimeChange = function (time) {
         var _a = time.split(':'), hour = _a[0], minute = _a[1];
         this.setState({ hour: hour, minute: minute });
@@ -112,26 +129,41 @@ var FormDateTimePicker = /** @class */ (function (_super) {
         momentDate.set("h", parseInt(this.state.hour));
         this.setValue(momentDate.toJSON());
     };
+    /**
+     * Set the focus state to the state.
+     */
     FormDateTimePicker.prototype.onFocusChange = function (focused) {
         this.setState({ focused: focused });
     };
+    /**
+     * Handles the focus change of the time picker
+     */
     FormDateTimePicker.prototype.handleFocusedChange = function () {
         var focused = this.state.focused;
         this.setState({ focused: !focused });
     };
     /**
      * Return for the UI Formated To Date and store it to the state.
+     * @param date the selected date
      */
     FormDateTimePicker.prototype._onFormatDateTo = function (date) {
         moment.locale(Helper_1.Helper.getLanguage());
         var dateFormat = this.ConfigProperties.shortDateFormat == true ? "L" : "LL";
         return moment(date).format(dateFormat);
     };
+    /**
+     * Stores the selected date as utc with the time
+     * @param date the selected date
+     */
     FormDateTimePicker.prototype._onDateChanged = function (date) {
         var momentDate = moment(date).set("m", parseInt(this.state.minute));
         momentDate.set("h", parseInt(this.state.hour));
         this.setValue(momentDate.toJSON());
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormDateTimePicker.prototype._validateDateTimePickerProps = function (props) {
         this.validateProps(props);
         if (props) {

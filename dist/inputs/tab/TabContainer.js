@@ -40,6 +40,9 @@ var TabContainer = /** @class */ (function (_super) {
         _this.validateProps(_this.ConfigProperties);
         return _this;
     }
+    /**
+     * Goes at when mounted to each child (pivotitem) and find in this al components and register them in the context.
+     */
     TabContainer.prototype.componentDidMount = function () {
         if (this.props.children) {
             for (var _i = 0, _a = this.props.children; _i < _a.length; _i++) {
@@ -48,6 +51,10 @@ var TabContainer = /** @class */ (function (_super) {
             }
         }
     };
+    /**
+     * Goes trough each node and find in this al components and register them in the context.
+     * @param children React node
+     */
     TabContainer.prototype.findeComponents = function (children) {
         if (children) {
             for (var _i = 0, _a = children; _i < _a.length; _i++) {
@@ -81,6 +88,9 @@ var TabContainer = /** @class */ (function (_super) {
         }
         return pivots;
     };
+    /**
+     * Renders the Pivot with the configured Pivot items.
+     */
     TabContainer.prototype.render = function () {
         var _this = this;
         return (React.createElement(Pivot_1.Pivot, __assign({}, this.ConfigProperties, { key: Helper_1.Helper.cleanUpKey(this.props.inputKey), ref: function (input) { return _this.innerControl = input; } }), this.getPivotItems()));

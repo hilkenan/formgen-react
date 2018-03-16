@@ -28,20 +28,33 @@ export declare class Form extends BaseComponent<IFormProps, IFormState> {
      * All registered inputs the form is aware of
      */
     private _mountedInputs;
-    /** Flag which marks whether or not the form has attempted to have been submitted */
+    /**
+     * Flag which marks whether or not the form has attempted to have been submitted
+     */
     private _pristine;
+    /**
+     * Load the correct langauge, UI Fabric theme and the rendering engine.
+     */
     constructor(props: IFormProps);
+    /**
+     * Call the formDidMount event and take over the mounted controls
+     */
     componentDidMount(): void;
     render(): JSX.Element;
     /**
      * Get the context for child components to use
      */
     getChildContext(): IFormContext;
+    /**
+     * Finde with the full control id the Control in the tree.
+     * @param inputKey The full control id to finde the corresponding control
+     */
     private _findeControlFromKey(inputKey);
     /**
      * Validate an individual input and set its error state
      * Returns the validation result
      * @param input The input to validate
+     * @param showValidation Set to true if the error message shoul be set
      */
     private _validateComponent(input, showValidation?);
     /**
@@ -73,11 +86,20 @@ export declare class Form extends BaseComponent<IFormProps, IFormState> {
      * @param input The input to register
      */
     private _mountInput(input);
+    /**
+     * Set the validation result, if Valid the control Value and if defined call the onUpdated Method
+     * @param input The input that has rais an update
+     * @param validate True if the input should validated.
+     */
     private _submitValue(input, validate?);
     /**
      * Unregister an input with the form
      * @param input The input to unregister
      */
     private _unmountInput(input);
+    /**
+     * Check if the form is valid. If all validations are ok then reutrn true.
+     * @param validationResults All validation results from the control tree.
+     */
     private _isFormValid(validationResults?);
 }

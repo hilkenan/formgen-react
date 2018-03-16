@@ -11,5 +11,10 @@ export declare class FormCheckBox extends FormBaseInput<ICheckboxProps, IFormBas
      * Render a checkbox
      */
     render(): JSX.Element;
+    /**
+     * Stores the state of the checkbox to the state.
+     * @param event The Check event
+     * @param isChecked the state of the checkbox
+     */
     private _onChange(event, isChecked);
 }

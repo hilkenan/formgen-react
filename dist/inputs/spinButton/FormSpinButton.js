@@ -59,6 +59,7 @@ var FormSpinButton = /** @class */ (function (_super) {
     };
     /**
      * Event for Validating
+     * @param value Numberic value with suffix to store
      */
     FormSpinButton.prototype.onValidate = function (value) {
         value = Helper_1.Helper.removeSuffix(value, this.sufixToUse);
@@ -71,6 +72,7 @@ var FormSpinButton = /** @class */ (function (_super) {
     };
     /**
      * Event for Inkrementing
+     * @param value Numberic value with suffix to store
      */
     FormSpinButton.prototype.onIncrement = function (value) {
         value = Helper_1.Helper.removeSuffix(value, this.sufixToUse);
@@ -80,6 +82,7 @@ var FormSpinButton = /** @class */ (function (_super) {
     };
     /**
      * Event for Dekrementing
+     * @param value Numberic value with suffix to store
      */
     FormSpinButton.prototype.onDecrement = function (value) {
         value = Helper_1.Helper.removeSuffix(value, this.sufixToUse);

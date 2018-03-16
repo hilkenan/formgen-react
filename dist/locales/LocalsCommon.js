@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_intl_1 = require("react-intl");
+/**
+ * Common Translaiton const with default value in english.
+ */
 exports.LocalsCommon = react_intl_1.defineMessages({
     pleaseSelect: {
         id: "pleaseSelect",

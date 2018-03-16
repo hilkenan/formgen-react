@@ -12,5 +12,9 @@ export declare class FormSlider extends FormBaseInput<ISliderProps, IFormBaseInp
      * Render a Fabric Slider
      */
     render(): JSX.Element;
-    private _onChange(rating);
+    /**
+     * Stores the selected value of the slider to the state.
+     * @param value the number to store
+     */
+    private _onChange(value);
 }

@@ -55,12 +55,19 @@ var FormRichTextInput = /** @class */ (function (_super) {
             React.createElement(ReactQuill, __assign({ defaultValue: this.state.currentValue }, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey, onChange: this._onChange })),
             this.state.currentError && Rendering_1.default.renderError(this.state.currentError)));
     };
-    //(content: string, delta: Quill.Delta, source: Quill.Sources, editor: UnprivilegedEditor) => void;
+    /**
+     * Stores the html content to the state.
+     * @param value html value to store
+     */
     FormRichTextInput.prototype._onChange = function (value) {
         if (value == "<p></p>" || value == "<p><br></p>")
             value = undefined;
         this.setValue(value, true);
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormRichTextInput.prototype._validateTextFieldProps = function (props) {
         this.validateProps(props);
         if (props) {

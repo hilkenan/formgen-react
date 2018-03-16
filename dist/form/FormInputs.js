@@ -24,6 +24,9 @@ var FormInfoText_1 = require("../inputs/info/FormInfoText");
 var Tab_1 = require("../inputs/tab/Tab");
 var TabContainer_1 = require("../inputs/tab/TabContainer");
 var Enums_1 = require("../Enums");
+/**
+* Class the prepare the matching from the ControlTypes enum to the real control types.
+*/
 var FormInputs = /** @class */ (function () {
     function FormInputs() {
     }

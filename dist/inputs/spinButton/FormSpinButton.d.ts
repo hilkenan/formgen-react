@@ -15,14 +15,17 @@ export declare class FormSpinButton extends FormBaseInput<IFormSpinButtonProps, 
     render(): JSX.Element;
     /**
      * Event for Validating
+     * @param value Numberic value with suffix to store
      */
     private onValidate(value);
     /**
      * Event for Inkrementing
+     * @param value Numberic value with suffix to store
      */
     private onIncrement(value);
     /**
      * Event for Dekrementing
+     * @param value Numberic value with suffix to store
      */
     private onDecrement(value);
 }

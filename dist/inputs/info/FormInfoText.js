@@ -40,7 +40,7 @@ var FormInfoText = /** @class */ (function (_super) {
      */
     FormInfoText.prototype.render = function () {
         var _this = this;
-        return (React.createElement(office_ui_fabric_react_1.Label, __assign({}, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey }),
+        return (React.createElement(office_ui_fabric_react_1.Label, __assign({}, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, key: this.props.inputKey }),
             React.createElement("div", { dangerouslySetInnerHTML: { __html: this.TranslatedTitle } })));
     };
     return FormInfoText;

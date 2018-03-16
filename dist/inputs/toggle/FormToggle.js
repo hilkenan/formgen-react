@@ -52,10 +52,14 @@ var FormToggle = /** @class */ (function (_super) {
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
             React.createElement(office_ui_fabric_react_1.Toggle, __assign({ defaultChecked: this.state.currentValue ? this.state.currentValue : undefined }, this.ConfigProperties, { 
                 // These props cannot be overridden
-                ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey, label: "", onChanged: this._onChange })),
+                ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, key: this.props.inputKey, label: "", onChanged: this._onChange })),
             this.state.currentValue && this.state.currentValue == true &&
                 this.props.children));
     };
+    /**
+     * Stores the selected value of the toggle to the state.
+     * @param isChecked True if on
+     */
     FormToggle.prototype._onChange = function (isChecked) {
         this.setValue(isChecked);
     };

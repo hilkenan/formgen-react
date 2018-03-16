@@ -22,6 +22,9 @@ var Enums_1 = require("../Enums");
 var utilities_1 = require("@uifabric/utilities");
 var LocalsCommon_1 = require("../locales/LocalsCommon");
 var Helper_1 = require("../Helper");
+/**
+ * Default Debaunce of 250 Ticks.
+ */
 exports.DEFAULT_DEBOUNCE = 250;
 /**
  * The base class that all simple form inputs should inherit from
@@ -40,13 +43,9 @@ var FormBaseInput = /** @class */ (function (_super) {
     function FormBaseInput(props, context, leadingDebounce) {
         var _this = _super.call(this, props, context) || this;
         _this.commonFormater = Helper_1.Helper.getTranslator("common");
-        /**
-        * Loaded data for this Control.
-        */
+        /** Loaded data for this Control. */
         _this.dataStore = {};
-        /**
-        * The Asynchronous Filter Methods.
-        */
+        /** The Asynchronous Filter Methods. */
         _this.retrievFilterData = {};
         _this.formContext = context;
         _this.debouncedSubmitValue = _this._async.debounce(_this.formContext.submitValue, ((_this.props.debounceInterval !== null && _this.props.debounceInterval !== undefined) ?
@@ -61,8 +60,6 @@ var FormBaseInput = /** @class */ (function (_super) {
         _this.TranslatedTitle = Helper_1.Helper.getTranslatedProperty(Enums_1.TranslatedProperty.Title, _this.props.control);
         _this.TranslatedInfo = Helper_1.Helper.getTranslatedProperty(Enums_1.TranslatedProperty.Info, _this.props.control);
         _this.ControlClassName = _this.props.control.CssClass ? _this.props.control.CssClass : "";
-        _this.IsRequired = _this.props.control.FormValidators && _this.props.control.FormValidators.find(function (v) { return v.ValidatorType == Enums_1.ValidatorTypes.Required; }) != undefined;
-        _this._validateProps(props);
         return _this;
     }
     /**
@@ -71,7 +68,6 @@ var FormBaseInput = /** @class */ (function (_super) {
      * @param nextProps The props that the component is receiving
      */
     FormBaseInput.prototype.componentWillReceiveProps = function (nextProps) {
-        this._validateProps(nextProps);
         if (nextProps.control.Value !== this.props.control.Value && this.props.control.Value === this.state.currentValue) {
             // If the props have changed and the previous props are equal to the current value, then we want to update the internal state value
             this.setState(function (prevState) {
@@ -82,6 +78,10 @@ var FormBaseInput = /** @class */ (function (_super) {
     };
     /**
      * Store the options to the state
+     * @param dataKey The databinder key to use
+     * @param data The Array with the Data.
+     * @param waitText The Wait Text for async loading
+     * @param isAsync True if async loading.
      */
     FormBaseInput.prototype.storeOptions = function (dataKey, data, waitText, isAsync) {
         var options = this.state.dataStores;
@@ -115,6 +115,7 @@ var FormBaseInput = /** @class */ (function (_super) {
     };
     /**
     * Check the proprties and warn if the default are used.
+    * @param props The property Object to check.
     */
     FormBaseInput.prototype.validateProps = function (props) {
         if (props) {
@@ -140,6 +141,7 @@ var FormBaseInput = /** @class */ (function (_super) {
     * If Async loading the return true
     * @param dataStoreKey The Key from the datastore
     * @param loadedFunction The funtion to call after data is loaded
+    * @param waitText The Waiting Text for async loading controls.
     */
     FormBaseInput.prototype.loadDataFromStore = function (dataStoreKey, loadedFunction, waitText) {
         var dataBinderAsync = this.dataStore[dataStoreKey];
@@ -157,18 +159,13 @@ var FormBaseInput = /** @class */ (function (_super) {
         }
         return false;
     };
-    /**
-    * Calculate the Class Name for Control
-    */
-    FormBaseInput.prototype.getClassNameControl = function () {
-        var countElement = 11;
-        if (this.props.control.Info)
-            countElement--;
-        if (this.props.control.Title && this.props.control.LabelPosition != Enums_1.LabelPositions.Top)
-            countElement = countElement - 3;
-        var additionalClassName = this.props.control.CssClass ? this.props.control.CssClass : "";
-        return "ms-Grid-col ms-sm" + countElement + " " + additionalClassName;
+    /** True if the Required validator is set. */
+    FormBaseInput.prototype.IsRequired = function () {
+        return this.props.control.FormValidators && this.props.control.FormValidators.find(function (v) { return v.ValidatorType == Enums_1.ValidatorTypes.Required; }) != undefined;
     };
+    /**
+    * Load the Databinder. Sync and Async are loaded. AsyncFilter is loade when user type an filter.
+    */
     FormBaseInput.prototype.componentWillMount = function () {
         this.formContext.mountInput(this);
         if (this.props.dataBinder) {
@@ -195,6 +192,9 @@ var FormBaseInput = /** @class */ (function (_super) {
             }
         }
     };
+    /**
+     * Unmount the current control.
+     */
     FormBaseInput.prototype.componentWillUnmount = function () {
         this.debouncedSubmitValue.flush();
         this.formContext.unmountInput(this);
@@ -221,6 +221,7 @@ var FormBaseInput = /** @class */ (function (_super) {
     };
     /**
      * Set the error state of this input
+     * @param errorMessage Message to set to the state.
      */
     FormBaseInput.prototype.setError = function (errorMessage) {
         this.setState(function (prevState) {
@@ -241,6 +242,8 @@ var FormBaseInput = /** @class */ (function (_super) {
     };
     /**
      * Set the current value of this input and validate it
+     * @param value The value to set
+     * @param validate True if the value should be validated.
      */
     FormBaseInput.prototype.setValue = function (value, validate) {
         var _this = this;
@@ -251,15 +254,6 @@ var FormBaseInput = /** @class */ (function (_super) {
         }, function () {
             _this.debouncedSubmitValue(_this, validate);
         });
-    };
-    /**
-     * Validate incoming props
-     * @param props Props to validate
-     */
-    FormBaseInput.prototype._validateProps = function (props) {
-        if (!props.inputKey) {
-            throw new Error('FormBaseInput: name must defined on all form inputs');
-        }
     };
     FormBaseInput.contextTypes = {
         isFormValid: PropTypes.func.isRequired,

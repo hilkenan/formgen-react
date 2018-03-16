@@ -33,7 +33,7 @@ var lib_1 = require("office-ui-fabric-react/lib");
 var Helper_1 = require("../../Helper");
 var Cascader = require('rc-cascader/lib/Cascader');
 /**
- * Cascading Dropdown input for Form
+ * Cascading Dropdown input for Form. Use rc-cascader
  */
 var FormCascader = /** @class */ (function (_super) {
     __extends(FormCascader, _super);
@@ -61,6 +61,8 @@ var FormCascader = /** @class */ (function (_super) {
     };
     /**
      * Store the selected Value as JSON in the form state.
+     * @param value Value string to store
+     * @param selectedOptions the Selected options with the full data
      */
     FormCascader.prototype._onChange = function (value, selectedOptions) {
         this.setValue(selectedOptions);

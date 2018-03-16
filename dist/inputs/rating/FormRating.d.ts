@@ -8,8 +8,12 @@ import { IRatingProps } from 'office-ui-fabric-react';
 export declare class FormRating extends FormBaseInput<IRatingProps, IFormBaseInputProps, IFormBaseInputState> {
     constructor(props: IFormBaseInputProps, context: IFormContext);
     /**
-     * Render a Toggle
+     * Render a Rating control
      */
     render(): JSX.Element;
+    /**
+     * Stores the selected value of the rating to the state.
+     * @param rating the number to store
+     */
     private _onChange(rating);
 }

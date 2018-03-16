@@ -50,11 +50,19 @@ var FormTextInput = /** @class */ (function (_super) {
     FormTextInput.prototype.render = function () {
         var _this = this;
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
-            React.createElement(TextField_1.TextField, __assign({ value: this.state.currentValue }, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey, name: this.props.inputKey, label: "", onBeforeChange: this._onChange, errorMessage: this.state.currentError }))));
+            React.createElement(TextField_1.TextField, __assign({ value: this.state.currentValue }, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, key: this.props.inputKey, name: this.props.inputKey, label: "", onBeforeChange: this._onChange, errorMessage: this.state.currentError }))));
     };
+    /**
+     * Stores the text of the textfield to the state.
+     * @param value string to store
+     */
     FormTextInput.prototype._onChange = function (value) {
         this.setValue(value, true);
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormTextInput.prototype._validateTextFieldProps = function (props) {
         this.validateProps(props);
         if (props) {

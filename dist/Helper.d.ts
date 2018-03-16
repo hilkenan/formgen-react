@@ -8,6 +8,10 @@ import { DataStoreEntry } from "./formBaseInput/FormBaseInput.types";
  * Helper Class with static variables for the Form
  */
 export declare class Helper {
+    /**
+     * Return even the Language set at the form
+     * or when not set the language from the users browser.
+     */
     static getLanguage(): any;
     /**
      * Day Picker strings in the correct language
@@ -15,22 +19,30 @@ export declare class Helper {
     static getDayPickerStrings(): IDatePickerStrings | undefined;
     /**
      * Replace the Row and Element Markes in the Input Key
+     * @param inputKey Clean the input key from the Element and Row identifier
      */
     static cleanUpKey(inputKey: string): string;
     /**
      * Translate an object with properties. structure of the key is the structure for the object. Delimited with .
+     * @param orgObject Orignal Object to translate.
+     * @param translations Translations for the object.
      */
     static getTranslatedObject(orgObject?: any, translations?: ObjectTranslate): any;
     /**
      * Get from the given translatable Property the Translated String or default.
+     * @param property Translate the property
+     * @param object The Object with the property to translate
+     * @param transBag Translation Bag with all translations
      */
     static getTranslatedPropertyFromObject(property: string, object: any, transBag: Translate[]): string;
     /**
      * Calculate the possible Css Number from the UI Fabric React responsive framework min 1 max 12
+     * @param countElements Count of Elements that is used. 12 is the maximum of elements that can be used.
      */
     static calculateCssClassColNb(countElements: number): number;
     /**
      * Get the translator object to translate the string from given Component.
+     * @param control The name of the control string that has to be return an translator. The are stored at the locals/translation folder
      */
     static getTranslator(control: string): ReactIntl.InjectedIntl;
     /**
@@ -48,15 +60,20 @@ export declare class Helper {
     static getTranslatedMessage(property: TranslatedProperty, object: any, usemissing?: boolean): string;
     /**
      * Removes the Suffix from the string
+     * @param string The string to remove an suffix
+     * @param suffix The suffix to remove
      */
     static removeSuffix(string: string, suffix: string): string;
     /**
      * Check if hafe the suffix.
+     * @param string The string to check an suffix
+     * @param suffix The suffix to check
      */
     static hasSuffix(string: string, suffix: string): Boolean;
     /**
      * Get even the wait text from the state or Pleace wait text.
-     * @param state State object.
+     * @param entry The Data store entry.
+     * @param defaultText The default Text for the placeholder
      */
     static getPlaceHolderText(entry: DataStoreEntry, defaultText: string): string;
 }

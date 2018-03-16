@@ -36,8 +36,6 @@ export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
     onInvalidSubmitForm?(formData: any): void;
     /** Event on Cancel the Form */
     onCancelForm?(): void;
-    /** Event on Cancel the Form */
-    onCustomForm?(actionName: string): void;
     /** Event on Updated the Form */
     onUpdated?(key: string, value: any): void;
     /** Should the form show errors when it is pristine? */
@@ -49,37 +47,23 @@ export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
  * Validation result for a simple form input. All calls to validate return this type
  */
 export declare type IFormValidationResult = {
-    /**
-     * Is the field valid?
-     */
+    /** Is the field valid? */
     isValid: boolean;
-    /**
-     * Optional error message
-     */
+    /** Optional error message */
     errorMessage?: string;
-    /**
-     * The validated input
-     */
+    /** The validated input */
     component: GenericFormInput;
 };
 /**
  * The child context for form inputs to use
  */
 export declare type IFormContext = {
-    /**
-     * Is the form valid currently?
-     */
+    /** Is the form valid currently? */
     isFormValid: () => boolean;
-    /**
-     * Register the input with SimpleForm. Should be called during componentWillMount
-     */
+    /** Register the input with SimpleForm. Should be called during componentWillMount */
     mountInput: (input: GenericFormInput) => void;
-    /**
-     * Unregister the input with SimpleForm. Should be called during componentWillUnmount
-     */
+    /** Unregister the input with SimpleForm. Should be called during componentWillUnmount */
     unmountInput: (input: GenericFormInput) => void;
-    /**
-     * Validate the passed in field, set its error state, and call the onUpdate handler if there is one
-     */
+    /** Validate the passed in field, set its error state, and call the onUpdate handler if there is one */
     submitValue: (input: GenericFormInput, validate?: boolean) => void;
 };

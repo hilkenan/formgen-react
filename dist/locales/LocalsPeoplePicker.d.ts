@@ -1,3 +1,6 @@
+/**
+ * People Picker Translaiton const with default value in english.
+ */
 export declare const LocalsPeoplePicker: {
     suggestionsHeaderText: {
         id: string;

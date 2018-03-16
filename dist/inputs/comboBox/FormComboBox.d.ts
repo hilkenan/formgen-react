@@ -12,5 +12,11 @@ export declare class FormComboBox extends FormBaseInput<IComboBoxProps, IFormBas
      * Render a Fabric Dropdown
      */
     render(): JSX.Element;
+    /**
+     * Stores the selected option from the combobox.
+     * @param option the selected option of the choice group
+     * @param index The index of the selected item
+     * @param value The Value use. Used when enter new data is allowed.
+     */
     private _onChanged(option?, index?, value?);
 }

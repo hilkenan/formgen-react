@@ -8,6 +8,9 @@ var FormInputs_1 = require("./FormInputs");
  * Rendering Engine for the Form
  */
 var Rendering = /** @class */ (function () {
+    /**
+     * Initialize all arrays with the params and load the control mapping.
+     */
     function Rendering(getCurrentFormData, customControls, customValidators, customActions, dataBinders, cancelEvent) {
         this.controls = [];
         this.customValidators = [];
@@ -29,7 +32,7 @@ var Rendering = /** @class */ (function () {
     }
     /**
     * Call the Custom Action Event with the Form Data
-    * @param The Custom Action to call with the form data.
+    * @param customAction Custom Action to call with the form data.
     */
     Rendering.prototype.callCustomEvent = function (customAction) {
         if (customAction)
@@ -37,6 +40,9 @@ var Rendering = /** @class */ (function () {
     };
     /**
     * Build the Controls rendered control
+    * @param rootKey The root id (form id + . + all control ids in the tree)
+    * @param controls The Control definition to load the control types with.
+    * @param labelWith Defined Label with form the parent column
     */
     Rendering.prototype.buildControlElements = function (rootKey, controls, labelWith) {
         var ctrlElements = [];
@@ -50,6 +56,8 @@ var Rendering = /** @class */ (function () {
     };
     /**
     * Build the Column Controls as Divs with all Sub elements
+    * @param rootKey The root id (form id + . + all control ids in the tree)
+    * @param columns The columns definition to load
     */
     Rendering.prototype.buildColElements = function (rootKey, columns) {
         var colElements = [];
@@ -65,6 +73,8 @@ var Rendering = /** @class */ (function () {
     };
     /**
     * Build the Rows Controls as Divs with all Sub elements
+    * @param rootKey The root id (form id + . + all control ids in the tree)
+    * @param rows The rows to load to the tree
     */
     Rendering.prototype.buildRowWlements = function (rootKey, rows) {
         var rowElements = [];
@@ -80,6 +90,7 @@ var Rendering = /** @class */ (function () {
     };
     /**
     * Renders an Error div.
+    * @param errorMessage The Error Message to show in the div.
     */
     Rendering.renderError = function (errorMessage) {
         return (React.createElement("div", { className: office_ui_fabric_react_1.css('forminputError') },

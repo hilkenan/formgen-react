@@ -46,15 +46,19 @@ var FormRating = /** @class */ (function (_super) {
         return _this;
     }
     /**
-     * Render a Toggle
+     * Render a Rating control
      */
     FormRating.prototype.render = function () {
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
             React.createElement(office_ui_fabric_react_1.Rating, __assign({ rating: this.state.currentValue ? this.state.currentValue : undefined }, this.ConfigProperties, { 
                 // These props cannot be overridden      
-                key: this.props.inputKey, label: "", onChanged: this._onChange })),
+                id: this.props.inputKey, key: this.props.inputKey, label: "", onChanged: this._onChange })),
             this.state.currentError && Rendering_1.default.renderError(this.state.currentError)));
     };
+    /**
+     * Stores the selected value of the rating to the state.
+     * @param rating the number to store
+     */
     FormRating.prototype._onChange = function (rating) {
         this.setValue(rating, true);
     };

@@ -12,6 +12,15 @@ export declare class FormChoiceGroup extends FormBaseInput<IChoiceGroupProps, IF
      * Render a Fabric Dropdown
      */
     render(): JSX.Element;
+    /**
+     * Stores the state of the checkbox to the state.
+     * @param ev The Check event
+     * @param option the selected option of the choice group
+     */
     private _onChange(ev?, option?);
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     private _validateChoiceGroupProps(props?);
 }

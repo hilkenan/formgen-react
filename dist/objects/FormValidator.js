@@ -10,6 +10,9 @@ var json2typescript_1 = require("json2typescript");
 var Enums_1 = require("../Enums");
 var ValidatorTypeConverter_1 = require("./jsonConverters/ValidatorTypeConverter");
 var TransConverter_1 = require("./jsonConverters/TransConverter");
+/**
+ * Form Validator Representation for an validator json object.
+ */
 var FormValidator = /** @class */ (function () {
     function FormValidator() {
         this.Message = "";

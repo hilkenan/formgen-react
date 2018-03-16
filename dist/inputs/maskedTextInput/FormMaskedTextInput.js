@@ -52,12 +52,20 @@ var FormMaskedTextInput = /** @class */ (function (_super) {
     FormMaskedTextInput.prototype.render = function () {
         var _this = this;
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
-            React.createElement(MaskedInput, __assign({ value: this.state.currentValue }, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, key: this.props.inputKey, name: this.props.inputKey, label: "", onChange: this._onChange })),
+            React.createElement(MaskedInput, __assign({ value: this.state.currentValue }, this.ConfigProperties, { ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, key: this.props.inputKey, name: this.props.inputKey, label: "", onChange: this._onChange })),
             this.state.currentError && Rendering_1.default.renderError(this.state.currentError)));
     };
+    /**
+     * Stores the set value of the textbox to the state.
+     * @param event The event from the change with the new value.
+     */
     FormMaskedTextInput.prototype._onChange = function (event) {
         this.setValue(event.currentTarget.value, true);
     };
+    /**
+     * Validate the properties from the config. warn at console
+     * @param props The property object to validate
+     */
     FormMaskedTextInput.prototype._validateTextFieldProps = function (props) {
         this.validateProps(props);
         if (props) {
