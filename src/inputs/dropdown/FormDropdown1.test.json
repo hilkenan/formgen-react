@@ -16,7 +16,6 @@
                 ],
                 "title": "DropDown",
                 "databinders": [ "options" ],
-                "value": "1",
                 "control_type": [ "DropDown" ],
                 "info": "Info Test",
                 "label_position": [ "Left"]

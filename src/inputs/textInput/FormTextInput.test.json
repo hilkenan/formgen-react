@@ -20,7 +20,7 @@
                 "config": {
                     "errorMessage": "test",
                     "onBeforeChange": "test",
-                    "props.onBlur": "test"
+                    "onBlur": "test"
                 },
                 "label_position": [ "Left"]
             },
