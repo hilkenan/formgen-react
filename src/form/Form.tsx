@@ -81,6 +81,7 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
       props.customValidators, 
       props.customActions,  
       props.dataBinders,
+      props.formInputs,
       props.onCancelForm);
     this.formData = ObjectFabric.getForm(props.jsonFormData);
 

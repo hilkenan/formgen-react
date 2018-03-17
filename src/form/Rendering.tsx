@@ -24,9 +24,10 @@ class Rendering {
         customValidators?: CustomValidator[], 
         customActions?: CustomActions[], 
         dataBinders?: DataBinder[],
+        formInputs?: FormInputs,
         cancelEvent?:() => void) {
         
-        this.controls = FormInputs.getStandartControls();
+        this.controls = formInputs ? formInputs.getStandartControls() : (new FormInputs).getStandartControls();
         if (customControls)
             this.controls.push(...customControls)
         if (customValidators)
