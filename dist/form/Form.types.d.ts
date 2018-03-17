@@ -4,6 +4,7 @@ import { GenericFormInput } from '../formBaseInput/FormBaseInput';
 import { CustomValidator } from '../objects/CustomValidator.types';
 import { CustomActions } from '../objects/CustomActions.types';
 import { DataBinder } from '../objects/DataBinder.types';
+import { FormInputs } from './FormInputs';
 /**
  * The state for Form
  */
@@ -42,6 +43,8 @@ export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
     showErrorsWhenPristine?: boolean;
     /** The Language to use for the Form. If not set then User Language is used. */
     Language?: string;
+    /** Form inputs can be delivered from a inherinting form genreator. */
+    formInputs?: FormInputs;
 }
 /**
  * Validation result for a simple form input. All calls to validate return this type

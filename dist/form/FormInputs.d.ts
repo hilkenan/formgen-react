@@ -4,7 +4,11 @@ import { DynamicControl } from "../objects/DynamicControl.types";
 */
 export declare class FormInputs {
     /**
+    * Array with all registered Controls to that can be used in the form.
+    */
+    protected controls: DynamicControl[];
+    /**
     * Ge tall defined standart controls as Dynamic Control array
     */
-    static getStandartControls(): DynamicControl[];
+    getStandartControls(): DynamicControl[];
 }

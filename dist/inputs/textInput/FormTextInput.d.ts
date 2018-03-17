@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ITextFieldProps } from 'office-ui-fabric-react/lib/TextField';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
 import { IFormContext } from '../../form/Form.types';

@@ -1,9 +1,11 @@
+/// <reference types="react" />
 import { DynamicControl } from '../objects/DynamicControl.types';
 import { Control } from '../objects/Control';
 import { Row } from '../objects/Row';
 import { DataBinder } from '../objects/DataBinder.types';
 import { CustomValidator } from '../objects/CustomValidator.types';
 import { CustomActions } from '../objects/CustomActions.types';
+import { FormInputs } from './FormInputs';
 /**
  * Rendering Engine for the Form
  */
@@ -11,7 +13,7 @@ declare class Rendering {
     /**
      * Initialize all arrays with the params and load the control mapping.
      */
-    constructor(getCurrentFormData: () => any, customControls?: DynamicControl[], customValidators?: CustomValidator[], customActions?: CustomActions[], dataBinders?: DataBinder[], cancelEvent?: () => void);
+    constructor(getCurrentFormData: () => any, customControls?: DynamicControl[], customValidators?: CustomValidator[], customActions?: CustomActions[], dataBinders?: DataBinder[], formInputs?: FormInputs, cancelEvent?: () => void);
     cancelEvent?(): void;
     private getCurrentFormData;
     controls: DynamicControl[];

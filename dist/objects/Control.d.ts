@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ObjectTranslate } from './ObjectTranslate';
 import { Row } from './Row';
 import { ControlTypes, LabelPositions } from '../Enums';

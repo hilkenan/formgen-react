@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { IPivotProps } from 'office-ui-fabric-react/lib/components/Pivot';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
 import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';

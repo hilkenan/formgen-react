@@ -11,12 +11,12 @@ var Rendering = /** @class */ (function () {
     /**
      * Initialize all arrays with the params and load the control mapping.
      */
-    function Rendering(getCurrentFormData, customControls, customValidators, customActions, dataBinders, cancelEvent) {
+    function Rendering(getCurrentFormData, customControls, customValidators, customActions, dataBinders, formInputs, cancelEvent) {
         this.controls = [];
         this.customValidators = [];
         this.customActions = [];
         this.dataBinders = [];
-        this.controls = FormInputs_1.FormInputs.getStandartControls();
+        this.controls = formInputs ? formInputs.getStandartControls() : (new FormInputs_1.FormInputs).getStandartControls();
         if (customControls)
             (_a = this.controls).push.apply(_a, customControls);
         if (customValidators)

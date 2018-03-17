@@ -61,7 +61,7 @@ var Form = /** @class */ (function (_super) {
         if (_this.props.Language) {
             exports.FormLanguage = _this.props.Language;
         }
-        _this._rendering = new Rendering_1.default(function () { return ObjectFabric_1.ObjectFabric.getJsonFromForm(_this.formData); }, props.customControls, props.customValidators, props.customActions, props.dataBinders, props.onCancelForm);
+        _this._rendering = new Rendering_1.default(function () { return ObjectFabric_1.ObjectFabric.getJsonFromForm(_this.formData); }, props.customControls, props.customValidators, props.customActions, props.dataBinders, props.formInputs, props.onCancelForm);
         _this.formData = ObjectFabric_1.ObjectFabric.getForm(props.jsonFormData);
         _this._mountedInputs = [];
         _this._pristine = true;
