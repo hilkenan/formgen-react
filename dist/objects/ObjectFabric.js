@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var json2typescript_1 = require("json2typescript");
-var JFormData_1 = require("./JFormData");
 var Control_1 = require("./Control");
 var Row_1 = require("./Row");
 /**
@@ -14,9 +13,9 @@ var ObjectFabric = /** @class */ (function () {
     * Get a FormData object
     * @param json The Json object.
     */
-    ObjectFabric.getForm = function (json) {
+    ObjectFabric.getForm = function (json, formType) {
         var jsonConvert = new json2typescript_1.JsonConvert();
-        return jsonConvert.deserializeObject(json, JFormData_1.JFormData);
+        return jsonConvert.deserializeObject(json, formType);
     };
     /**
     * Get the Json from a FormData object

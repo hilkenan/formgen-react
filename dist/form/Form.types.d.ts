@@ -5,6 +5,7 @@ import { CustomValidator } from '../objects/CustomValidator.types';
 import { CustomActions } from '../objects/CustomActions.types';
 import { DataBinder } from '../objects/DataBinder.types';
 import { FormInputs } from './FormInputs';
+import { JFormData } from '..';
 /**
  * The state for Form
  */
@@ -17,7 +18,7 @@ export interface IFormState {
 /**
  * The props for Form
  */
-export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
+export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes<HTMLFormElement> {
     componentRef?: (component: any) => void;
     /** The Form Layout and controls in Json format. Is converted to JFormData*/
     jsonFormData: any;
@@ -45,6 +46,8 @@ export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
     Language?: string;
     /** Form inputs can be delivered from a inherinting form genreator. */
     formInputs?: FormInputs;
+    /** The form type object to use. Default is JFormData */
+    formType?: new () => T;
 }
 /**
  * Validation result for a simple form input. All calls to validate return this type

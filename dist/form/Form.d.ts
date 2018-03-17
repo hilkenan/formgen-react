@@ -11,7 +11,7 @@ export declare var FormLanguage: string;
 /**
  * The main Form Control that renders the Control Tree
  */
-export declare class Form extends BaseComponent<IFormProps, IFormState> {
+export declare class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> {
     /**
      * This is needed because React 15's context does not work well with typescript
      */
@@ -35,7 +35,7 @@ export declare class Form extends BaseComponent<IFormProps, IFormState> {
     /**
      * Load the correct langauge, UI Fabric theme and the rendering engine.
      */
-    constructor(props: IFormProps);
+    constructor(props: IFormProps<T>);
     /**
      * Call the formDidMount event and take over the mounted controls
      */
@@ -102,4 +102,6 @@ export declare class Form extends BaseComponent<IFormProps, IFormState> {
      * @param validationResults All validation results from the control tree.
      */
     private _isFormValid(validationResults?);
+}
+export declare class Form extends GenericForm<JFormData> {
 }
