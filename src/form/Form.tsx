@@ -35,7 +35,7 @@ export var FormLanguage = "";
 /**
  * The main Form Control that renders the Control Tree
  */
-export class Form extends BaseComponent<IFormProps, IFormState> {
+export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> {
 
   /**
    * This is needed because React 15's context does not work well with typescript
@@ -70,7 +70,7 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
   /** 
    * Load the correct langauge, UI Fabric theme and the rendering engine.
    */
-  constructor(props: IFormProps) {
+  constructor(props: IFormProps<T>) {
     super(props);
     if (this.props.Language) {
       FormLanguage = this.props.Language;
@@ -83,7 +83,7 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
       props.dataBinders,
       props.formInputs,
       props.onCancelForm);
-    this.formData = ObjectFabric.getForm(props.jsonFormData);
+    this.formData = ObjectFabric.getForm(props.jsonFormData, props.formType ? props.formType : JFormData);
 
     this._mountedInputs = [];
     this._pristine = true;
@@ -335,3 +335,5 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
     return true;
   }
 }
+
+export class Form extends GenericForm<JFormData> {}

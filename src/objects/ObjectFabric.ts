@@ -11,9 +11,9 @@ export class ObjectFabric {
     * Get a FormData object
     * @param json The Json object.
     */  
-    static getForm(json: any): JFormData {
+    static getForm<T extends JFormData>(json: any, formType: new () => T): T {
         let jsonConvert: JsonConvert = new JsonConvert();
-        return jsonConvert.deserializeObject(json, JFormData);
+        return jsonConvert.deserializeObject(json, formType);
     }
 
     /**
