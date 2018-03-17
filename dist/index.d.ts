@@ -9,5 +9,6 @@ export { IFormState, IFormProps, IFormContext, IFormValidationResult } from './f
 export { GenericFormInput } from './formBaseInput/FormBaseInput';
 export { Control } from './objects/Control';
 export { Form } from './form/Form';
+export { GenericForm } from './form/Form';
 export { Row } from './objects/Row';
 export { Column } from './objects/Column';
