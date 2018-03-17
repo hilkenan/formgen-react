@@ -55,7 +55,7 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
   /**
    The Converted jsonFormData as Object Model to render it.
    */
-  public formData:JFormData
+  public formData:T;
 
   /**
    * All registered inputs the form is aware of
@@ -76,7 +76,7 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
       FormLanguage = this.props.Language;
     }
 
-    this._rendering = new Rendering(() => ObjectFabric.getJsonFromForm(this.formData),  
+    this._rendering = new Rendering(() => ObjectFabric.getJsonFromForm<T>(this.formData),  
       props.customControls, 
       props.customValidators, 
       props.customActions,  
@@ -219,7 +219,7 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
     let validationResults = this._validateForm();
     let formIsValid: boolean = this._isFormValid(validationResults);
 
-    let jsonData = ObjectFabric.getJsonFromForm(this.formData);
+    let jsonData = ObjectFabric.getJsonFromForm<T>(this.formData);
     if (formIsValid && this.props.onSubmitForm) {
       this.props.onSubmitForm(jsonData);
     } else if (this.props.onInvalidSubmitForm) {

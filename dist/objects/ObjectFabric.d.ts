@@ -9,12 +9,12 @@ export declare class ObjectFabric {
     * Get a FormData object
     * @param json The Json object.
     */
-    static getForm<T extends JFormData>(json: any, formType: new () => T): T;
+    static getForm<T extends JFormData>(json: any, formType: new () => T): any;
     /**
     * Get the Json from a FormData object
     * @param form The Form Control tree.
     */
-    static getJsonFromForm(form: JFormData): any;
+    static getJsonFromForm<T extends JFormData>(form: T): any;
     /**
     * Get a Row object
     * @param json The json object the get the row from.

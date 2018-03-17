@@ -23,7 +23,7 @@ export declare class GenericForm<T extends JFormData> extends BaseComponent<IFor
     /**
      The Converted jsonFormData as Object Model to render it.
      */
-    formData: JFormData;
+    formData: T;
     /**
      * All registered inputs the form is aware of
      */
