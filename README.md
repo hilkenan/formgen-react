@@ -1,5 +1,7 @@
 # React Form Generator with UI Fabric React Components
 
+[![Join the chat at https://gitter.im/formgen-react/Lobby](https://badges.gitter.im/formgen-react/Lobby.svg)](https://gitter.im/formgen-react/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <b>All of you are very welcome to contribute with this project!</b>
 
 [![npm version](https://badge.fury.io/js/formgen-react.svg)](http://badge.fury.io/js/formgen-react)
