@@ -56,7 +56,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
     mountInput: PropTypes.func.isRequired,
     unmountInput: PropTypes.func.isRequired,
     submitValue: PropTypes.func.isRequired,
-    getFormData: PropTypes.func.isRequired,
+    formData: PropTypes.object.isRequired,
     container: PropTypes.object.isRequired
   };
 
@@ -139,13 +139,6 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
   }
 
   /**
-   * Get the data provider service with the form data.
-   */
-  private _getFormData(): JFormData {
-    return this.formData;
-  }
-
-  /**
    * Get the context for child components to use
    */
   public getChildContext(): IFormContext {
@@ -154,7 +147,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
       mountInput: this._mountInput,
       unmountInput: this._unmountInput,
       submitValue: this._submitValue,
-      getFormData: this._getFormData,
+      formData: this.formData,
       container: this._container
     };
   }

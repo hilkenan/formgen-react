@@ -99,7 +99,7 @@ export type IFormContext = {
   submitValue: (input: GenericFormInput, validate?: boolean) => void;
 
   /** Get the current form data */
-  getFormData: () => JFormData;
+  formData: JFormData;
 
   /** The Container for the service */
   container: Container;

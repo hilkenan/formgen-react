@@ -195,7 +195,7 @@ var FormBaseInput = /** @class */ (function (_super) {
     */
     FormBaseInput.prototype.componentWillMount = function () {
         this.formContext.mountInput(this);
-        var formData = this.formContext.getFormData();
+        var formData = this.formContext.formData;
         var container = this.formContext.container;
         if (this.props.dataBinder) {
             for (var _i = 0, _a = this.props.dataBinder; _i < _a.length; _i++) {
@@ -302,7 +302,7 @@ var FormBaseInput = /** @class */ (function (_super) {
         mountInput: PropTypes.func.isRequired,
         unmountInput: PropTypes.func.isRequired,
         submitValue: PropTypes.func.isRequired,
-        getFormData: PropTypes.func.isRequired,
+        formData: PropTypes.object.isRequired,
         container: PropTypes.object.isRequired
     };
     __decorate([

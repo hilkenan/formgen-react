@@ -75,7 +75,7 @@ export declare type IFormContext = {
     /** Validate the passed in field, set its error state, and call the onUpdate handler if there is one */
     submitValue: (input: GenericFormInput, validate?: boolean) => void;
     /** Get the current form data */
-    getFormData: () => JFormData;
+    formData: JFormData;
     /** The Container for the service */
     container: Container;
 };

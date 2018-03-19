@@ -104,12 +104,6 @@ var GenericForm = /** @class */ (function (_super) {
                 React.createElement("div", { className: 'Form-content', key: this.formData.ID + "Container" }, this._rendering.buildRowWlements(this.formData.ID + "/R", this.formData.Rows)))));
     };
     /**
-     * Get the data provider service with the form data.
-     */
-    GenericForm.prototype._getFormData = function () {
-        return this.formData;
-    };
-    /**
      * Get the context for child components to use
      */
     GenericForm.prototype.getChildContext = function () {
@@ -118,7 +112,7 @@ var GenericForm = /** @class */ (function (_super) {
             mountInput: this._mountInput,
             unmountInput: this._unmountInput,
             submitValue: this._submitValue,
-            getFormData: this._getFormData,
+            formData: this.formData,
             container: this._container
         };
     };
@@ -311,7 +305,7 @@ var GenericForm = /** @class */ (function (_super) {
         mountInput: PropTypes.func.isRequired,
         unmountInput: PropTypes.func.isRequired,
         submitValue: PropTypes.func.isRequired,
-        getFormData: PropTypes.func.isRequired,
+        formData: PropTypes.object.isRequired,
         container: PropTypes.object.isRequired
     };
     __decorate([

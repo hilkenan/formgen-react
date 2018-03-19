@@ -37,7 +37,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
     mountInput: PropTypes.func.isRequired,
     unmountInput: PropTypes.func.isRequired,
     submitValue: PropTypes.func.isRequired,
-    getFormData: PropTypes.func.isRequired,
+    formData: PropTypes.object.isRequired,
     container: PropTypes.object.isRequired    
   };
 
@@ -250,8 +250,8 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   */ 
  public componentWillMount(): void {
     this.formContext.mountInput(this);
-    let formData = this.formContext.getFormData();      
-    let container = this.formContext.container
+    let formData = this.formContext.formData;
+    let container = this.formContext.container;
     
     if (this.props.dataBinder) {
       for(let binder of this.props.dataBinder) {

@@ -42,10 +42,6 @@ export declare abstract class GenericForm<T extends JFormData> extends BaseCompo
     componentDidMount(): void;
     render(): JSX.Element;
     /**
-     * Get the data provider service with the form data.
-     */
-    private _getFormData();
-    /**
      * Get the context for child components to use
      */
     getChildContext(): IFormContext;
