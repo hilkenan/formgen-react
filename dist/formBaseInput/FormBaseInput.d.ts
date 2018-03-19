@@ -1,7 +1,7 @@
 /// <reference types="react-intl" />
 /// <reference types="react" />
 import * as React from 'react';
-import { IFormBaseInputProps, IFormBaseInputState } from './FormBaseInput.types';
+import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry } from './FormBaseInput.types';
 export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
 import { IFormContext, IFormValidationResult } from '../form/Form.types';
@@ -74,6 +74,13 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     * @param waitText The Waiting Text for async loading controls.
     */
     loadDataFromStore(dataStoreKey: string, loadedFunction: DataLoadedFunction, waitText: string): boolean;
+    /**
+    * Get the Data options entry
+    * @param staticData Static data array from config.
+    * @param key DataStore key (config or databinder)
+    * @param defaultPlaceholder Default placholder text.
+    */
+    protected getDataOptionEntry(staticData: any[], key: string, defaultPlaceholder: string): DataStoreEntry;
     /**
     * Property for the Control. In case of UI Fabric Controls the UI Fabric Interface class can be used. This Config will overgiven to the
     * Inner Control

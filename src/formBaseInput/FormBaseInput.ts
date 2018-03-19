@@ -1,7 +1,7 @@
 /* tslint:disable:no-any */
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry } from './FormBaseInput.types';
+import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry, typesForInject, IDataProviderService } from './FormBaseInput.types';
 export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
 import { TranslatedProperty, ValidatorTypes, BinderType } from '../Enums';
@@ -36,7 +36,9 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
     isFormValid: PropTypes.func.isRequired,
     mountInput: PropTypes.func.isRequired,
     unmountInput: PropTypes.func.isRequired,
-    submitValue: PropTypes.func.isRequired
+    submitValue: PropTypes.func.isRequired,
+    getFormData: PropTypes.func.isRequired,
+    container: PropTypes.object.isRequired    
   };
 
   public innerControl: any;
@@ -59,7 +61,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
    * If leading, the component will update immediately and then debounce.
    * Otherwise, the component will only update after the debounce interval. Defaults to true
    */
-  constructor(props: P, context: IFormContext, leadingDebounce?: boolean) {
+  constructor(props: P,  context: IFormContext, leadingDebounce?: boolean) {
     super(props, context);
       this.formContext = context;
       this.debouncedSubmitValue = this._async.debounce(
@@ -188,6 +190,35 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   }
 
   /**
+  * Get the Data options entry 
+  * @param staticData Static data array from config.
+  * @param key DataStore key (config or databinder)
+  * @param defaultPlaceholder Default placholder text.
+  */ 
+ protected getDataOptionEntry(staticData: any[], key:string, defaultPlaceholder: string): DataStoreEntry {
+    let optionsEntry:DataStoreEntry;
+
+    if (!staticData && this.state.dataStores){
+        optionsEntry = this.state.dataStores.find(e => e.key == key);
+    }
+    if (optionsEntry) {
+        optionsEntry.waitText = Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+    }
+    else {
+      optionsEntry = {
+        key: "default",
+        data: staticData,
+        onLoading: false,
+        waitText: Helper.getPlaceHolderText(undefined, defaultPlaceholder)
+      }
+    }
+    if (this.props.control.ReadOnly)
+      optionsEntry.onLoading = true;
+
+    return optionsEntry;
+  }
+
+  /**
   * Property for the Control. In case of UI Fabric Controls the UI Fabric Interface class can be used. This Config will overgiven to the 
   * Inner Control
   */ 
@@ -219,6 +250,9 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   */ 
  public componentWillMount(): void {
     this.formContext.mountInput(this);
+    let formData = this.formContext.getFormData();      
+    let container = this.formContext.container
+    
     if (this.props.dataBinder) {
       for(let binder of this.props.dataBinder) {
         let binderSync = binder.binderFunction as IDataBinder;
@@ -233,6 +267,19 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
           this.retrievFilterData[binder.typeName] = binderAsyncFilter; 
       }    
     }
+    if (this.props.control.DataProviderConfigKeys.length > 0 && container == undefined)
+      throw "No Data Service Container found"
+    if (this.props.control.DataProviderConfigKeys.length > 0) {
+      let dataProvide = container.get<IDataProviderService>(typesForInject.IDataProviderService);
+      if (dataProvide == undefined)
+        throw "No Data Service found"
+      dataProvide.formData = formData;
+      for(let configKey of this.props.control.DataProviderConfigKeys) {
+          this.dataStore[configKey] = dataProvide.retrieveListData(configKey, this.props.control, Helper.getLanguage()); 
+          this.loadDataFromStore(configKey,this.storeOptions, "");
+      }
+    }
+
     for(let binder of this.props.control.DataBinders) {
       let key = this.props.inputKey + "_" + binder;
       if (this.ConfigProperties[binder]) 

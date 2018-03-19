@@ -44,6 +44,7 @@ var Control = /** @class */ (function () {
         this.LabelPosition = Enums_1.LabelPositions.Top;
         this.CssClass = undefined;
         this.DataBinders = [];
+        this.DataProviderConfigKeys = [];
         this.Styles = undefined;
         this.FormValidators = [];
     }
@@ -204,6 +205,9 @@ var Control = /** @class */ (function () {
     __decorate([
         json2typescript_1.JsonProperty("databinders", [String], true)
     ], Control.prototype, "DataBinders", void 0);
+    __decorate([
+        json2typescript_1.JsonProperty("dataProviderConfigKeys", [String], true)
+    ], Control.prototype, "DataProviderConfigKeys", void 0);
     __decorate([
         json2typescript_1.JsonProperty("styles", json2typescript_1.Any, true)
     ], Control.prototype, "Styles", void 0);

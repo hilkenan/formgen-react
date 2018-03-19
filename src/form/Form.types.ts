@@ -7,6 +7,7 @@ import { CustomActions } from '../objects/CustomActions.types';
 import { DataBinder } from '../objects/DataBinder.types';
 import { FormInputs } from './FormInputs';
 import { JFormData } from '..';
+import { Container } from 'inversify';
 
 /**
  * The state for Form
@@ -24,6 +25,8 @@ export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes
 
   /** The Form Layout and controls in Json format. Is converted to JFormData*/
   jsonFormData: any;
+
+  container?: Container
 
   /** All used custom Controls has to be added here */
   customControls?: DynamicControl[];
@@ -94,4 +97,10 @@ export type IFormContext = {
 
   /** Validate the passed in field, set its error state, and call the onUpdate handler if there is one */
   submitValue: (input: GenericFormInput, validate?: boolean) => void;
+
+  /** Get the current form data */
+  getFormData: () => JFormData;
+
+  /** The Container for the service */
+  container: Container;
 };

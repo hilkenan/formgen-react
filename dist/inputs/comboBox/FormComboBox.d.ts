@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { IFormContext } from '../../form/Form.types';
 import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';

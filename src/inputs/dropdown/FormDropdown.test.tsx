@@ -9,8 +9,12 @@ import { PrimaryButton, IDropdownOption } from 'office-ui-fabric-react';
 import { Control } from '../../objects/Control';
 import { BinderType } from '../../Enums';
 import { DataBinder } from '../../objects/DataBinder.types';
+import { MockContainer } from './inversify.config';
+import { IDataProviderService, typesForInject } from '../../formBaseInput/FormBaseInput.types';
+
 var jsonForm = require('./FormDropdown.test.json');
 var jsonForm1 = require('./FormDropdown1.test.json');
+var jsonForm2 = require('./FormDropdown2.test.json');
 
 describe('FormDropdown Unit Tests', () => {
   describe('Renders for all combinations of props', () => {
@@ -46,36 +50,47 @@ describe('FormDropdown Unit Tests', () => {
       clock.restore();
     });
 
-    it('Dropdown is leading async', () => {
-      const binders:DataBinder[] = [{
-        typeName:"testform.dropdown_options",
-        binderType: BinderType.Async,    
-        binderFunction: {
-          retrieveData(controlConfig: Control, lang:string):Promise<any[]> {
-            return new Promise<any[]>(resolve => {
-              let dropDonwEntries:IDropdownOption[] = [{
-                key: 1,
-                text: "Test 1"
-              },
-              {
-                key: 2,
-                text: "Test2"
-              }];
-              resolve(dropDonwEntries);
-            });
-          }
-        }  
-      }]
-      let updateStub: sinon.SinonStub = sinon.stub();
+      it('Dropdown is leading async', () => {
+        const binders:DataBinder[] = [{
+          typeName:"testform.dropdown_options",
+          binderType: BinderType.Async,    
+          binderFunction: {
+            retrieveData(controlConfig: Control, lang:string):Promise<any[]> {
+              return new Promise<any[]>(resolve => {
+                let dropDonwEntries:IDropdownOption[] = [{
+                  key: 1,
+                  text: "Test 1"
+                },
+                {
+                  key: 2,
+                  text: "Test2"
+                }];
+                resolve(dropDonwEntries);
+              });
+            }
+          }  
+        }]
+        let updateStub: sinon.SinonStub = sinon.stub();
+        let renderedForm = ReactTestUtils.renderIntoDocument(
+            <Form jsonFormData={ jsonForm1 } dataBinders={ binders } onUpdated={ updateStub } />
+        ) as Form;
+    
+        let dropDown:HTMLSpanElement = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, "ms-Dropdown-title") as HTMLSpanElement
+        expect(dropDown.childNodes.length).toEqual(1);
+        expect(dropDown.childNodes[0].textContent).toEqual("Load data...");
+        
+    });    
+
+    it('Dropdown from data provider', () => {
+      let mockContainer:MockContainer = new MockContainer();
       let renderedForm = ReactTestUtils.renderIntoDocument(
-          <Form jsonFormData={ jsonForm1 } dataBinders={ binders } onUpdated={ updateStub } />
+          <Form container={ mockContainer } jsonFormData={ jsonForm2 } />
       ) as Form;
-  
+
       let dropDown:HTMLSpanElement = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, "ms-Dropdown-title") as HTMLSpanElement
       expect(dropDown.childNodes.length).toEqual(1);
       expect(dropDown.childNodes[0].textContent).toEqual("Load data...");
-      
-  });    
+    });    
 
     it('Dropdown is leading and trailing debounced', () => {
         let updateStub: sinon.SinonStub = sinon.stub();

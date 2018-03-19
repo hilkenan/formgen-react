@@ -1,5 +1,6 @@
 import {JsonObject, JsonProperty, Any } from "json2typescript";
 import { Control } from "./Control";
+import { NumberTypeConverter } from "./jsonConverters/NumberTypeConverter";
 
 /**
 * Column object for Rendering
@@ -12,7 +13,7 @@ export class Column {
     @JsonProperty("styles", Any, true) 
     Styles?: any = undefined;
 
-    @JsonProperty("label_with", Number, true) 
+    @JsonProperty("label_with", NumberTypeConverter, true) 
     LabelWith?: number = undefined;
 
     @JsonProperty("controls", [Control]) 

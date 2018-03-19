@@ -29,7 +29,6 @@ var Dropdown_1 = require("office-ui-fabric-react/lib/Dropdown");
 var Utilities_1 = require("office-ui-fabric-react/lib/Utilities");
 var InnerControl_1 = require("../../controls/innerControl/InnerControl");
 var FormBaseInput_1 = require("../../formBaseInput/FormBaseInput");
-var Helper_1 = require("../../Helper");
 /**
  * Dropdown input for Form
  */
@@ -55,12 +54,14 @@ var FormDropdown = /** @class */ (function (_super) {
      */
     FormDropdown.prototype.render = function () {
         var _this = this;
-        var optionsEntry = this.state.dataStores.find(function (e) { return e.key == _this.optionsDataStore; });
-        var placeHolder = Helper_1.Helper.getPlaceHolderText(optionsEntry, this.ConfigProperties.placeHolder);
+        var key = this.props.control.DataProviderConfigKeys.length > 0 ?
+            this.props.control.DataProviderConfigKeys[0] :
+            this.optionsDataStore;
+        var optionsEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.placeHolder);
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
-            React.createElement(Dropdown_1.Dropdown, __assign({ disabled: optionsEntry && optionsEntry.onLoading }, this.ConfigProperties, { 
+            React.createElement(Dropdown_1.Dropdown, __assign({ disabled: optionsEntry.onLoading }, this.ConfigProperties, { 
                 // These props cannot be overridden
-                placeHolder: placeHolder, options: (optionsEntry && optionsEntry.data) ? optionsEntry.data : this.ConfigProperties.options, ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, onChanged: this._onChanged, errorMessage: this.getErrorMessage(), label: "", selectedKey: this.state.currentValue }))));
+                placeHolder: optionsEntry.waitText, options: optionsEntry.data, ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, onChanged: this._onChanged, errorMessage: this.getErrorMessage(), label: "", selectedKey: this.state.currentValue }))));
     };
     /**
      * Stores the selected value of the dropdown to the state.

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import 'rc-cascader/assets/index.css';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
 import { IFormContext } from '../../form/Form.types';

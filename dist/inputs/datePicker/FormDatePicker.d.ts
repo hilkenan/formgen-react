@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import '../../styles/FormDatePicker.css';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
 import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';

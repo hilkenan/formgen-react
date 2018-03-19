@@ -17,6 +17,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var PropTypes = require("prop-types");
+var FormBaseInput_types_1 = require("./FormBaseInput.types");
 var Utilities_1 = require("office-ui-fabric-react/lib/Utilities");
 var Enums_1 = require("../Enums");
 var utilities_1 = require("@uifabric/utilities");
@@ -159,6 +160,32 @@ var FormBaseInput = /** @class */ (function (_super) {
         }
         return false;
     };
+    /**
+    * Get the Data options entry
+    * @param staticData Static data array from config.
+    * @param key DataStore key (config or databinder)
+    * @param defaultPlaceholder Default placholder text.
+    */
+    FormBaseInput.prototype.getDataOptionEntry = function (staticData, key, defaultPlaceholder) {
+        var optionsEntry;
+        if (!staticData && this.state.dataStores) {
+            optionsEntry = this.state.dataStores.find(function (e) { return e.key == key; });
+        }
+        if (optionsEntry) {
+            optionsEntry.waitText = Helper_1.Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+        }
+        else {
+            optionsEntry = {
+                key: "default",
+                data: staticData,
+                onLoading: false,
+                waitText: Helper_1.Helper.getPlaceHolderText(undefined, defaultPlaceholder)
+            };
+        }
+        if (this.props.control.ReadOnly)
+            optionsEntry.onLoading = true;
+        return optionsEntry;
+    };
     /** True if the Required validator is set. */
     FormBaseInput.prototype.IsRequired = function () {
         return this.props.control.FormValidators && this.props.control.FormValidators.find(function (v) { return v.ValidatorType == Enums_1.ValidatorTypes.Required; }) != undefined;
@@ -168,6 +195,8 @@ var FormBaseInput = /** @class */ (function (_super) {
     */
     FormBaseInput.prototype.componentWillMount = function () {
         this.formContext.mountInput(this);
+        var formData = this.formContext.getFormData();
+        var container = this.formContext.container;
         if (this.props.dataBinder) {
             for (var _i = 0, _a = this.props.dataBinder; _i < _a.length; _i++) {
                 var binder = _a[_i];
@@ -182,8 +211,21 @@ var FormBaseInput = /** @class */ (function (_super) {
                     this.retrievFilterData[binder.typeName] = binderAsyncFilter;
             }
         }
-        for (var _b = 0, _c = this.props.control.DataBinders; _b < _c.length; _b++) {
-            var binder = _c[_b];
+        if (this.props.control.DataProviderConfigKeys.length > 0 && container == undefined)
+            throw "No Data Service Container found";
+        if (this.props.control.DataProviderConfigKeys.length > 0) {
+            var dataProvide = container.get(FormBaseInput_types_1.typesForInject.IDataProviderService);
+            if (dataProvide == undefined)
+                throw "No Data Service found";
+            dataProvide.formData = formData;
+            for (var _b = 0, _c = this.props.control.DataProviderConfigKeys; _b < _c.length; _b++) {
+                var configKey = _c[_b];
+                this.dataStore[configKey] = dataProvide.retrieveListData(configKey, this.props.control, Helper_1.Helper.getLanguage());
+                this.loadDataFromStore(configKey, this.storeOptions, "");
+            }
+        }
+        for (var _d = 0, _e = this.props.control.DataBinders; _d < _e.length; _d++) {
+            var binder = _e[_d];
             var key = this.props.inputKey + "_" + binder;
             if (this.ConfigProperties[binder])
                 this.storeOptions(key, this.ConfigProperties[binder], "", false);
@@ -259,7 +301,9 @@ var FormBaseInput = /** @class */ (function (_super) {
         isFormValid: PropTypes.func.isRequired,
         mountInput: PropTypes.func.isRequired,
         unmountInput: PropTypes.func.isRequired,
-        submitValue: PropTypes.func.isRequired
+        submitValue: PropTypes.func.isRequired,
+        getFormData: PropTypes.func.isRequired,
+        container: PropTypes.object.isRequired
     };
     __decorate([
         utilities_1.autobind

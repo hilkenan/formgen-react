@@ -7,7 +7,7 @@ export declare class FormValidator {
     Message: string;
     ValidatorType: ValidatorTypes;
     MessageTranslates?: Translate[];
-    Value: number;
+    Value: Number;
     Regex: string;
     CustomTypeName: string;
 }

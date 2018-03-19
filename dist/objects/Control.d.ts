@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ObjectTranslate } from './ObjectTranslate';
 import { Row } from './Row';
 import { ControlTypes, LabelPositions } from '../Enums';
@@ -41,6 +40,7 @@ export declare class Control {
     LabelPosition: LabelPositions;
     CssClass?: string;
     DataBinders: string[];
+    DataProviderConfigKeys: string[];
     Styles?: any;
     FormValidators: FormValidator[];
 }

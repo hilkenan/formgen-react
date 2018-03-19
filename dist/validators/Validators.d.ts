@@ -9,7 +9,7 @@ export declare namespace Validators {
      * @param desiredLength The length of the string
      * @param formatError a callback which takes the length and formats an appropriate error message for validation failed
      */
-    function length(desiredLength: number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
+    function length(desiredLength: Number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
     /**
      * Returns a validator that checks the length of a string and ensures its greater than a value (inclusive)
      * @param lengthBound The min length of the string
@@ -21,7 +21,7 @@ export declare namespace Validators {
      * @param lengthBound The max length of the string
      * @param formatError a callback which takes the values length and formats an appropriate error message for validation failed
      */
-    function maxLength(lengthBound: number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
+    function maxLength(lengthBound: Number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
     /**
      * Returns a validator that calls the passed in regular expression aganist the string using exec()
      * @param expression The regular expression to use.
@@ -33,13 +33,13 @@ export declare namespace Validators {
      * @param bound The bound
      * @param formatError a callback which takes the length and formats an appropriate error message for validation failed
      */
-    function minValue(bound: number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
+    function minValue(bound: Number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
     /**
      * Returns a validator that checks if a number is less than the provided bound
      * @param bound The bound
      * @param formatError a callback which takes the length and formats an appropriate error message for validation failed
      */
-    function maxValue(bound: number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
+    function maxValue(bound: Number, formatError: (length: number) => string): (value?: string | null) => string | undefined;
     /**
      * Returns a validator that checks if a number is an integer
      * @param errorMessage Required error message to display

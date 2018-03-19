@@ -8,6 +8,7 @@ import { BinderType } from './Enums';
 import { Control } from './objects/Control';
 import { Form } from './form/Form';
 import { CustomValidator } from './objects/CustomValidator.types';
+import { MockContainer } from './inputs/dropdown/inversify.config';
 var jsonForm = require('./samples/test.json');
 
 const customAction:CustomActions[] = [{
@@ -120,8 +121,11 @@ function _doesTextStartWith(text: string, filterText: string): boolean {
   return text.toLowerCase().indexOf(filterText.toLowerCase()) === 0;
 }
 
+var mockContainer:MockContainer = new MockContainer();
+
 ReactDOM.render(
     <Form 
+      container={mockContainer}
       onCancelForm={ () => console.log("cancel click") }
       onSubmitForm={ (formData:any) => console.log("submit click: " + JSON.stringify(formData)) }
       dataBinders={ binders }

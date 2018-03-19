@@ -16,26 +16,37 @@ import { GenericFormInput } from '../formBaseInput/FormBaseInput';
 import { Control } from '../objects/Control';
 import { Row } from '../objects/Row';
 import { addLocaleData } from 'react-intl';
-import './polyfills.js';
+import 'babel-polyfill/browser.js';
 import Rendering from './Rendering';
+import "reflect-metadata";
+import { Container } from 'inversify';
 
 global.Intl = require('intl');
-
 let frLocaleData = require('react-intl/locale-data/fr');
 let deLocaleData = require('react-intl/locale-data/de');
 let enLocaleData = require('react-intl/locale-data/en');
+let esLocaleData = require('react-intl/locale-data/es');
+let itLocaleData = require('react-intl/locale-data/id');
+
 addLocaleData(frLocaleData);
 addLocaleData(deLocaleData);
 addLocaleData(enLocaleData);
-
+addLocaleData(itLocaleData);
+addLocaleData(esLocaleData);
 initializeIcons();
 
 export var FormLanguage = "";
 
 /**
+ * The Interface for the dependency injection
+ */
+export interface IGenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> {
+}
+
+/**
  * The main Form Control that renders the Control Tree
  */
-export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> {
+export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> implements IGenericForm<T> {
 
   /**
    * This is needed because React 15's context does not work well with typescript
@@ -45,27 +56,24 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
     mountInput: PropTypes.func.isRequired,
     unmountInput: PropTypes.func.isRequired,
     submitValue: PropTypes.func.isRequired,
+    getFormData: PropTypes.func.isRequired,
+    container: PropTypes.object.isRequired
   };
 
-  /**
-   * The Form Rendering Engine.
-   */
+  /** The Form Rendering Engine. */
   private _rendering:Rendering;
 
-  /**
-   The Converted jsonFormData as Object Model to render it.
-   */
+  /** The Converted jsonFormData as Object Model to render it. */
   public formData:T;
 
-  /**
-   * All registered inputs the form is aware of
-   */
+  /** All registered inputs the form is aware of */
   private _mountedInputs: GenericFormInput[];
 
-  /** 
-   * Flag which marks whether or not the form has attempted to have been submitted 
-   */
+  /** Flag which marks whether or not the form has attempted to have been submitted */
   private _pristine: boolean;
+
+  /** The data store container for injection. */
+  private _container: Container;
 
   /** 
    * Load the correct langauge, UI Fabric theme and the rendering engine.
@@ -75,7 +83,6 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
     if (this.props.Language) {
       FormLanguage = this.props.Language;
     }
-
     this._rendering = new Rendering(() => ObjectFabric.getJsonFromForm<T>(this.formData),  
       props.customControls, 
       props.customValidators, 
@@ -90,6 +97,8 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
     this.state = {
       validationResults: {}
     };
+
+    this._container = props.container;
 
     if (this.formData.Theme) {
       loadTheme({
@@ -130,6 +139,13 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
   }
 
   /**
+   * Get the data provider service with the form data.
+   */
+  private _getFormData(): JFormData {
+    return this.formData;
+  }
+
+  /**
    * Get the context for child components to use
    */
   public getChildContext(): IFormContext {
@@ -137,7 +153,9 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
       isFormValid: this._isFormValid,
       mountInput: this._mountInput,
       unmountInput: this._unmountInput,
-      submitValue: this._submitValue
+      submitValue: this._submitValue,
+      getFormData: this._getFormData,
+      container: this._container
     };
   }
     
@@ -336,4 +354,14 @@ export class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T
   }
 }
 
-export class Form extends GenericForm<JFormData> {}
+/**
+ * Type alias for any simple form input
+ */
+export class Form extends GenericForm<JFormData> {
+  /** 
+   * Load basic form
+   */
+  constructor(props: IFormProps<JFormData>) {
+    super(props);
+  }
+}

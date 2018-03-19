@@ -29,11 +29,15 @@
     "url": "https://github.com/hilkenan/formgen-react/issues"
   },
   "dependencies": {
+    "@types/inversify": "^2.0.33",
     "@types/prop-types": "^15.5.2",
     "@types/react-intl": "^2.3.5",
     "@uifabric/styling": "^5.19.0",
+    "babel-polyfill": "^6.26.0",
     "browser-locale": "^1.0.3",
     "intl": "^1.2.5",
+    "inversify": "^4.11.1",
+    "inversify-inject-decorators": "^3.1.0",
     "json2typescript": "^1.0.5",
     "moment": "^2.20.1",
     "node-sass-chokidar": "^1.1.0",
@@ -48,6 +52,7 @@
     "react-quill": "^1.2.6",
     "react-scripts-ts": "2.13.0",
     "react-times": "^3.0.0",
+    "reflect-metadata": "^0.1.12",
     "sinon": "^4.4.2"
   },
   "scripts": {

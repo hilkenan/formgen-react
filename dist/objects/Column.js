@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var json2typescript_1 = require("json2typescript");
 var Control_1 = require("./Control");
+var NumberTypeConverter_1 = require("./jsonConverters/NumberTypeConverter");
 /**
 * Column object for Rendering
 */
@@ -25,7 +26,7 @@ var Column = /** @class */ (function () {
         json2typescript_1.JsonProperty("styles", json2typescript_1.Any, true)
     ], Column.prototype, "Styles", void 0);
     __decorate([
-        json2typescript_1.JsonProperty("label_with", Number, true)
+        json2typescript_1.JsonProperty("label_with", NumberTypeConverter_1.NumberTypeConverter, true)
     ], Column.prototype, "LabelWith", void 0);
     __decorate([
         json2typescript_1.JsonProperty("controls", [Control_1.Control])

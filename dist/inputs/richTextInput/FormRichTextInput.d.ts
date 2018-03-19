@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ComponentProps } from 'react-quill';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
 import { IFormContext } from '../../form/Form.types';

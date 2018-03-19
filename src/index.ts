@@ -8,7 +8,6 @@ export { JFormData } from './objects/JFormData';
 export { IFormState, IFormProps, IFormContext, IFormValidationResult } from './form/Form.types';
 export { GenericFormInput } from './formBaseInput/FormBaseInput';
 export { Control } from './objects/Control';
-export { Form } from './form/Form';
-export { GenericForm } from './form/Form';
+export { GenericForm, IGenericForm, Form } from './form/Form';
 export { Row } from './objects/Row';
 export { Column } from './objects/Column';

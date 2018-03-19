@@ -53,13 +53,15 @@ var FormComboBox = /** @class */ (function (_super) {
      */
     FormComboBox.prototype.render = function () {
         var _this = this;
-        var optionsEntry = this.state.dataStores ?
-            this.state.dataStores.find(function (e) { return e.key == _this.optionsDataStore; }) : undefined;
+        var key = this.props.control.DataProviderConfigKeys.length > 0 ?
+            this.props.control.DataProviderConfigKeys[0] :
+            this.optionsDataStore;
+        var optionsEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.value);
         var value = Helper_1.Helper.getPlaceHolderText(optionsEntry, this.ConfigProperties.value);
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
-            React.createElement(lib_1.ComboBox, __assign({ disabled: optionsEntry && optionsEntry.onLoading, className: "ms-ComboBox-FormInput" }, this.ConfigProperties, { 
+            React.createElement(lib_1.ComboBox, __assign({ disabled: optionsEntry.onLoading, className: "ms-ComboBox-FormInput" }, this.ConfigProperties, { 
                 // These props cannot be overridden
-                options: optionsEntry && optionsEntry.data ? optionsEntry.data : this.ConfigProperties.options, ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, errorMessage: this.getErrorMessage(), onChanged: this._onChanged, value: this.state.currentValue == '' || !this.state.currentValue ? value : undefined, label: "", 
+                options: optionsEntry.data, ref: function (input) { return _this.innerControl = input; }, id: this.props.inputKey, errorMessage: this.getErrorMessage(), onChanged: this._onChanged, value: this.state.currentValue == '' || !this.state.currentValue ? value : undefined, label: "", 
                 //Its mutually exclusive, but not works correct without set value and selectedKey
                 selectedKey: this.state.currentValue }))));
     };

@@ -38,15 +38,20 @@ var Utilities_1 = require("office-ui-fabric-react/lib/Utilities");
 require("../styles/main.css");
 var Enums_1 = require("../Enums");
 var react_intl_1 = require("react-intl");
-require("./polyfills.js");
+require("babel-polyfill/browser.js");
 var Rendering_1 = require("./Rendering");
+require("reflect-metadata");
 global.Intl = require('intl');
 var frLocaleData = require('react-intl/locale-data/fr');
 var deLocaleData = require('react-intl/locale-data/de');
 var enLocaleData = require('react-intl/locale-data/en');
+var esLocaleData = require('react-intl/locale-data/es');
+var itLocaleData = require('react-intl/locale-data/id');
 react_intl_1.addLocaleData(frLocaleData);
 react_intl_1.addLocaleData(deLocaleData);
 react_intl_1.addLocaleData(enLocaleData);
+react_intl_1.addLocaleData(itLocaleData);
+react_intl_1.addLocaleData(esLocaleData);
 icons_1.initializeIcons();
 exports.FormLanguage = "";
 /**
@@ -69,6 +74,7 @@ var GenericForm = /** @class */ (function (_super) {
         _this.state = {
             validationResults: {}
         };
+        _this._container = props.container;
         if (_this.formData.Theme) {
             Styling_1.loadTheme({
                 palette: {
@@ -98,6 +104,12 @@ var GenericForm = /** @class */ (function (_super) {
                 React.createElement("div", { className: 'Form-content', key: this.formData.ID + "Container" }, this._rendering.buildRowWlements(this.formData.ID + "/R", this.formData.Rows)))));
     };
     /**
+     * Get the data provider service with the form data.
+     */
+    GenericForm.prototype._getFormData = function () {
+        return this.formData;
+    };
+    /**
      * Get the context for child components to use
      */
     GenericForm.prototype.getChildContext = function () {
@@ -105,7 +117,9 @@ var GenericForm = /** @class */ (function (_super) {
             isFormValid: this._isFormValid,
             mountInput: this._mountInput,
             unmountInput: this._unmountInput,
-            submitValue: this._submitValue
+            submitValue: this._submitValue,
+            getFormData: this._getFormData,
+            container: this._container
         };
     };
     /**
@@ -297,6 +311,8 @@ var GenericForm = /** @class */ (function (_super) {
         mountInput: PropTypes.func.isRequired,
         unmountInput: PropTypes.func.isRequired,
         submitValue: PropTypes.func.isRequired,
+        getFormData: PropTypes.func.isRequired,
+        container: PropTypes.object.isRequired
     };
     __decorate([
         Utilities_1.autobind
@@ -316,10 +332,16 @@ var GenericForm = /** @class */ (function (_super) {
     return GenericForm;
 }(Utilities_1.BaseComponent));
 exports.GenericForm = GenericForm;
+/**
+ * Type alias for any simple form input
+ */
 var Form = /** @class */ (function (_super) {
     __extends(Form, _super);
-    function Form() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    /**
+     * Load basic form
+     */
+    function Form(props) {
+        return _super.call(this, props) || this;
     }
     return Form;
 }(GenericForm));

@@ -176,6 +176,9 @@ export class Control {
     @JsonProperty("databinders", [String], true) 
     DataBinders: string[] = [];
 
+    @JsonProperty("dataProviderConfigKeys", [String], true) 
+    DataProviderConfigKeys: string[] = [];
+
     @JsonProperty("styles", Any, true) 
     Styles?: any = undefined;
 

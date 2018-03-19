@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { IDropdownProps } from 'office-ui-fabric-react/lib/Dropdown';
 import { IFormContext } from '../../form/Form.types';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';

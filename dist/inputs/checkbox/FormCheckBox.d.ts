@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ICheckboxProps } from 'office-ui-fabric-react/lib/Checkbox';
 import { IFormBaseInputProps, FormBaseInput } from '../../formBaseInput/FormBaseInput';
 import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';

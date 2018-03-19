@@ -118,6 +118,13 @@
 						"type": "string"
 					}
 				},
+				"dataProviderConfigKeys": {
+					"type": "array",
+					"minItems": 1,
+					"items": {
+						"type": "string"
+					}
+				},
 				"read_only": {
 					 "type": "boolean",
 					 "default": false

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { DynamicControl } from '../objects/DynamicControl.types';
 import { Control } from '../objects/Control';
 import { Row } from '../objects/Row';
