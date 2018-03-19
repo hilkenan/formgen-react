@@ -11,3 +11,4 @@ export { Control } from './objects/Control';
 export { GenericForm, IGenericForm, Form } from './form/Form';
 export { Row } from './objects/Row';
 export { Column } from './objects/Column';
+export { IDataProviderService, typesForInject } from './formBaseInput/FormBaseInput.types'

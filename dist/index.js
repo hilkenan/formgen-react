@@ -29,4 +29,6 @@ var Row_1 = require("./objects/Row");
 exports.Row = Row_1.Row;
 var Column_1 = require("./objects/Column");
 exports.Column = Column_1.Column;
+var FormBaseInput_types_1 = require("./formBaseInput/FormBaseInput.types");
+exports.typesForInject = FormBaseInput_types_1.typesForInject;
 //# sourceMappingURL=index.js.map

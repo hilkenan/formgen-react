@@ -14,7 +14,6 @@ export class MockDataProviderService implements IDataProviderService {
    * @param lang The current language to use.
    */
   public retrieveListData(configKey:string, controlConfig: Control, lang:string):Promise<any[]> {
-    console.log("START SENDING")
     return new Promise<any[]>((resolve, reject)  => {
         let dropDonwEntries:IDropdownOption[] = [{
             key: 1,

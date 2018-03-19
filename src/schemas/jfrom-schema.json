@@ -154,8 +154,7 @@
 								"type": "string"
 							}
 						},
-						"required": [
-							"validator_type" ],
+						"required": [ "validator_type" ],
 			 			"additionalProperties": false
 					}
 				},

@@ -18,7 +18,6 @@ var MockDataProviderService = /** @class */ (function () {
    * @param lang The current language to use.
    */
     MockDataProviderService.prototype.retrieveListData = function (configKey, controlConfig, lang) {
-        console.log("START SENDING");
         return new Promise(function (resolve, reject) {
             var dropDonwEntries = [{
                     key: 1,
