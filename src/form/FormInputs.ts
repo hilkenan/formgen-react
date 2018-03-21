@@ -29,11 +29,9 @@ import { ControlTypes } from "../Enums";
 */  
 export class FormInputs {
     /**
-    * Ge tall defined standart controls as Dynamic Control array
+    * Array with all registered Controls to that can be used in the form.
     */  
-    public static getStandartControls(): DynamicControl[] {
-    let controls:DynamicControl[] = [];
-    controls.push(
+    protected controls:DynamicControl[] = [
         { typeName: ControlTypes.Tab, controlType: Tab },
         { typeName: ControlTypes.TabContainer, controlType: TabContainer },
         { typeName: ControlTypes.SubmitButton, controlType: SubmitButton },
@@ -57,7 +55,12 @@ export class FormInputs {
         { typeName: ControlTypes.TimePicker, controlType: FormTimePicker },
         { typeName: ControlTypes.Time, controlType: FormTimeInput },
         { typeName: ControlTypes.InfoText, controlType: FormInfoText }
-        );
-        return controls;
+    ];
+   
+    /**
+    * Ge tall defined standart controls as Dynamic Control array
+    */  
+    public getStandartControls(): DynamicControl[] {
+        return this.controls;
     }  
 }

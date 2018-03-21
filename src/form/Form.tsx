@@ -16,26 +16,37 @@ import { GenericFormInput } from '../formBaseInput/FormBaseInput';
 import { Control } from '../objects/Control';
 import { Row } from '../objects/Row';
 import { addLocaleData } from 'react-intl';
-import './polyfills.js';
+import 'babel-polyfill/browser.js';
 import Rendering from './Rendering';
+import "reflect-metadata";
+import { Container } from 'inversify';
 
 global.Intl = require('intl');
-
 let frLocaleData = require('react-intl/locale-data/fr');
 let deLocaleData = require('react-intl/locale-data/de');
 let enLocaleData = require('react-intl/locale-data/en');
+let esLocaleData = require('react-intl/locale-data/es');
+let itLocaleData = require('react-intl/locale-data/id');
+
 addLocaleData(frLocaleData);
 addLocaleData(deLocaleData);
 addLocaleData(enLocaleData);
-
+addLocaleData(itLocaleData);
+addLocaleData(esLocaleData);
 initializeIcons();
 
 export var FormLanguage = "";
 
 /**
+ * The Interface for the dependency injection
+ */
+export interface IGenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> {
+}
+
+/**
  * The main Form Control that renders the Control Tree
  */
-export class Form extends BaseComponent<IFormProps, IFormState> {
+export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> implements IGenericForm<T> {
 
   /**
    * This is needed because React 15's context does not work well with typescript
@@ -45,50 +56,49 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
     mountInput: PropTypes.func.isRequired,
     unmountInput: PropTypes.func.isRequired,
     submitValue: PropTypes.func.isRequired,
+    formData: PropTypes.object.isRequired,
+    container: PropTypes.object.isRequired
   };
 
-  /**
-   * The Form Rendering Engine.
-   */
+  /** The Form Rendering Engine. */
   private _rendering:Rendering;
 
-  /**
-   The Converted jsonFormData as Object Model to render it.
-   */
-  public formData:JFormData
+  /** The Converted jsonFormData as Object Model to render it. */
+  public formData:T;
 
-  /**
-   * All registered inputs the form is aware of
-   */
+  /** All registered inputs the form is aware of */
   private _mountedInputs: GenericFormInput[];
 
-  /** 
-   * Flag which marks whether or not the form has attempted to have been submitted 
-   */
+  /** Flag which marks whether or not the form has attempted to have been submitted */
   private _pristine: boolean;
+
+  /** The data store container for injection. */
+  private _container: Container;
 
   /** 
    * Load the correct langauge, UI Fabric theme and the rendering engine.
    */
-  constructor(props: IFormProps) {
+  constructor(props: IFormProps<T>) {
     super(props);
     if (this.props.Language) {
       FormLanguage = this.props.Language;
     }
-
-    this._rendering = new Rendering(() => ObjectFabric.getJsonFromForm(this.formData),  
+    this._rendering = new Rendering(() => ObjectFabric.getJsonFromForm<T>(this.formData),  
       props.customControls, 
       props.customValidators, 
       props.customActions,  
       props.dataBinders,
+      props.formInputs,
       props.onCancelForm);
-    this.formData = ObjectFabric.getForm(props.jsonFormData);
+    this.formData = ObjectFabric.getForm(props.jsonFormData, props.formType ? props.formType : JFormData);
 
     this._mountedInputs = [];
     this._pristine = true;
     this.state = {
       validationResults: {}
     };
+
+    this._container = props.container;
 
     if (this.formData.Theme) {
       loadTheme({
@@ -136,7 +146,9 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
       isFormValid: this._isFormValid,
       mountInput: this._mountInput,
       unmountInput: this._unmountInput,
-      submitValue: this._submitValue
+      submitValue: this._submitValue,
+      formData: this.formData,
+      container: this._container
     };
   }
     
@@ -218,7 +230,7 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
     let validationResults = this._validateForm();
     let formIsValid: boolean = this._isFormValid(validationResults);
 
-    let jsonData = ObjectFabric.getJsonFromForm(this.formData);
+    let jsonData = ObjectFabric.getJsonFromForm<T>(this.formData);
     if (formIsValid && this.props.onSubmitForm) {
       this.props.onSubmitForm(jsonData);
     } else if (this.props.onInvalidSubmitForm) {
@@ -332,5 +344,17 @@ export class Form extends BaseComponent<IFormProps, IFormState> {
       }
     }
     return true;
+  }
+}
+
+/**
+ * Type alias for any simple form input
+ */
+export class Form extends GenericForm<JFormData> {
+  /** 
+   * Load basic form
+   */
+  constructor(props: IFormProps<JFormData>) {
+    super(props);
   }
 }

@@ -40,6 +40,7 @@ export declare class Control {
     LabelPosition: LabelPositions;
     CssClass?: string;
     DataBinders: string[];
+    DataProviderConfigKeys: string[];
     Styles?: any;
     FormValidators: FormValidator[];
 }

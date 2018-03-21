@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { IFormContext } from '../../form/Form.types';
-import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
+import { IFormBaseInputState, DataStoreEntry } from '../../formBaseInput/FormBaseInput.types';
 import { InnerControl } from '../../controls/innerControl/InnerControl';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
 import { ChoiceGroup, IChoiceGroupProps, IChoiceGroupOption } from "office-ui-fabric-react/lib";
@@ -32,16 +32,19 @@ export class FormChoiceGroup extends FormBaseInput<IChoiceGroupProps, IFormBaseI
      * Render a Fabric Dropdown
      */
     public render(): JSX.Element {
-        let optionsEntry = this.state.dataStores ?
-            this.state.dataStores.find(e => e.key == this.optionsDataStore) : undefined;
+        let key:string = this.props.control.DataProviderConfigKeys.length > 0 ?
+            this.props.control.DataProviderConfigKeys[0] :
+            this.optionsDataStore;
+        let optionsEntry:DataStoreEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.placeholder);
 
         return (
         <InnerControl BaseControl={ this } LabelWith={ this.props.labelWith } >
             <ChoiceGroup
-                disabled={ optionsEntry && optionsEntry.onLoading }            
+                disabled={ optionsEntry.onLoading }            
                 {...this.ConfigProperties}              
                 // These props cannot be overridden
-                options={ optionsEntry && optionsEntry.data ? optionsEntry.data : this.ConfigProperties.options }                    
+                options={ optionsEntry.data }                    
+                placeholder={ optionsEntry.waitText }
                 ref={(input) => this.innerControl = input }      
                 id={ this.props.inputKey }
                 onChange={ this._onChange }

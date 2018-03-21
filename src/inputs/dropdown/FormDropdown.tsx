@@ -4,8 +4,7 @@ import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { IFormContext } from '../../form/Form.types';
 import { InnerControl } from '../../controls/innerControl/InnerControl';
 import { FormBaseInput, IFormBaseInputProps } from '../../formBaseInput/FormBaseInput';
-import { Helper } from '../../Helper';
-import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
+import { IFormBaseInputState, DataStoreEntry } from '../../formBaseInput/FormBaseInput.types';
   
 /**
  * Dropdown input for Form
@@ -33,17 +32,19 @@ export class FormDropdown extends FormBaseInput<IDropdownProps, IFormBaseInputPr
      * Render a Fabric Dropdown
      */
     public render(): JSX.Element {
-        let optionsEntry = this.state.dataStores.find(e => e.key == this.optionsDataStore);
-        let placeHolder = Helper.getPlaceHolderText(optionsEntry, this.ConfigProperties.placeHolder);
+        let key:string = this.props.control.DataProviderConfigKeys.length > 0 ?
+            this.props.control.DataProviderConfigKeys[0] :
+            this.optionsDataStore;
+        let optionsEntry:DataStoreEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.placeHolder);
 
         return (
         <InnerControl BaseControl={ this } LabelWith={ this.props.labelWith } >
             <Dropdown
-                disabled={ optionsEntry && optionsEntry.onLoading }
+                disabled={ optionsEntry.onLoading }
                 {...this.ConfigProperties}              
                 // These props cannot be overridden
-                placeHolder={ placeHolder }
-                options={ (optionsEntry && optionsEntry.data) ? optionsEntry.data : this.ConfigProperties.options }                    
+                placeHolder={ optionsEntry.waitText }
+                options={ optionsEntry.data }                    
                 ref={(input) => this.innerControl = input }      
                 id={ this.props.inputKey }
                 onChanged={ this._onChanged }

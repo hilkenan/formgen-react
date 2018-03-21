@@ -10,6 +10,7 @@ var json2typescript_1 = require("json2typescript");
 var Enums_1 = require("../Enums");
 var ValidatorTypeConverter_1 = require("./jsonConverters/ValidatorTypeConverter");
 var TransConverter_1 = require("./jsonConverters/TransConverter");
+var NumberTypeConverter_1 = require("./jsonConverters/NumberTypeConverter");
 /**
  * Form Validator Representation for an validator json object.
  */
@@ -32,7 +33,7 @@ var FormValidator = /** @class */ (function () {
         json2typescript_1.JsonProperty("message_trans", TransConverter_1.TransConverter, true)
     ], FormValidator.prototype, "MessageTranslates", void 0);
     __decorate([
-        json2typescript_1.JsonProperty("value", Number, true)
+        json2typescript_1.JsonProperty("value", NumberTypeConverter_1.NumberTypeConverter, true)
     ], FormValidator.prototype, "Value", void 0);
     __decorate([
         json2typescript_1.JsonProperty("regex", String, true)

@@ -6,36 +6,36 @@ import { JFormData } from '../objects/JFormData';
 import { BaseComponent } from 'office-ui-fabric-react/lib/Utilities';
 import '../styles/main.css';
 import { IFormState, IFormProps, IFormContext } from './Form.types';
-import './polyfills.js';
+import 'babel-polyfill/browser.js';
+import "reflect-metadata";
 export declare var FormLanguage: string;
+/**
+ * The Interface for the dependency injection
+ */
+export interface IGenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> {
+}
 /**
  * The main Form Control that renders the Control Tree
  */
-export declare class Form extends BaseComponent<IFormProps, IFormState> {
+export declare abstract class GenericForm<T extends JFormData> extends BaseComponent<IFormProps<T>, IFormState> implements IGenericForm<T> {
     /**
      * This is needed because React 15's context does not work well with typescript
      */
     static childContextTypes: React.ValidationMap<IFormContext>;
-    /**
-     * The Form Rendering Engine.
-     */
+    /** The Form Rendering Engine. */
     private _rendering;
-    /**
-     The Converted jsonFormData as Object Model to render it.
-     */
-    formData: JFormData;
-    /**
-     * All registered inputs the form is aware of
-     */
+    /** The Converted jsonFormData as Object Model to render it. */
+    formData: T;
+    /** All registered inputs the form is aware of */
     private _mountedInputs;
-    /**
-     * Flag which marks whether or not the form has attempted to have been submitted
-     */
+    /** Flag which marks whether or not the form has attempted to have been submitted */
     private _pristine;
+    /** The data store container for injection. */
+    private _container;
     /**
      * Load the correct langauge, UI Fabric theme and the rendering engine.
      */
-    constructor(props: IFormProps);
+    constructor(props: IFormProps<T>);
     /**
      * Call the formDidMount event and take over the mounted controls
      */
@@ -102,4 +102,13 @@ export declare class Form extends BaseComponent<IFormProps, IFormState> {
      * @param validationResults All validation results from the control tree.
      */
     private _isFormValid(validationResults?);
+}
+/**
+ * Type alias for any simple form input
+ */
+export declare class Form extends GenericForm<JFormData> {
+    /**
+     * Load basic form
+     */
+    constructor(props: IFormProps<JFormData>);
 }

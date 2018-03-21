@@ -11,16 +11,16 @@ export class ObjectFabric {
     * Get a FormData object
     * @param json The Json object.
     */  
-    static getForm(json: any): JFormData {
+    static getForm<T extends JFormData>(json: any, formType: new () => T): any {
         let jsonConvert: JsonConvert = new JsonConvert();
-        return jsonConvert.deserializeObject(json, JFormData);
+        return jsonConvert.deserializeObject(json, formType);
     }
 
     /**
     * Get the Json from a FormData object
     * @param form The Form Control tree.
     */  
-    static getJsonFromForm(form: JFormData): any {
+    static getJsonFromForm<T extends JFormData>(form: T): any {
         let jsonConvert: JsonConvert = new JsonConvert();
         return jsonConvert.serializeObject(form);
     }

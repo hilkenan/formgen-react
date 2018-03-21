@@ -2,6 +2,31 @@ import { IBaseProps } from 'office-ui-fabric-react/lib/Utilities';
 import { IValidator } from '../validators/Validators';
 import { Control } from '../objects/Control';
 import { DataBinder } from '../objects/DataBinder.types';
+import { JFormData } from '..';
+
+/**
+ * The Types to use for injection
+ */
+export const typesForInject = { IDataProviderService: "IDataProviderService" };
+
+/**
+ * The Service to load any data from a injected data store system.
+ */
+export interface IDataProviderService {
+  /**
+   * The current Form Data 
+   */
+  formData?: JFormData
+  
+  /** 
+   * Retrieve data from the store 
+   * @param configKey Config Key from the control. This will use the by the provider to finde the correct configuration for this request
+   * @param formData The Current complete Form Model. Here the config should be found.
+   * @param controlConfig The control that calls the request.
+   * @param lang The current language to use.
+   */
+  retrieveListData(configKey:string, controlConfig: Control, lang:string):Promise<any[]>
+}
 
 /**
  * The base props for any simple form input
@@ -23,7 +48,7 @@ export interface IFormBaseInputProps extends IBaseProps {
   control: Control;   
 
   /** the used css Style number from UI Fabric (1-12) */  
-  labelWith?: number
+  labelWith?: number;
 }
 
 /**

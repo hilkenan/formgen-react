@@ -6,8 +6,7 @@ import { autobind } from '@uifabric/utilities';
 import { CascadingOption } from './FormCascader.types';
 import { InnerControl } from "../../controls/innerControl/InnerControl";
 import { TextField } from "office-ui-fabric-react/lib";
-import { Helper } from '../../Helper';
-import { IFormBaseInputState } from '../../formBaseInput/FormBaseInput.types';
+import { IFormBaseInputState, DataStoreEntry } from '../../formBaseInput/FormBaseInput.types';
 var Cascader = require('rc-cascader/lib/Cascader')
 
 /**
@@ -29,9 +28,11 @@ export class FormCascader extends FormBaseInput<any, IFormBaseInputProps, IFormB
      * Render a Cascading Drop Down from rs-cascader
      */
     public render(): JSX.Element {
-        let optionsEntry = this.state.dataStores.find(e => e.key == this.optionsDataStore);
-        let placeHolder = Helper.getPlaceHolderText(optionsEntry, this.ConfigProperties.placeHolder);
-        
+        let key:string = this.props.control.DataProviderConfigKeys.length > 0 ?
+            this.props.control.DataProviderConfigKeys[0] :
+            this.optionsDataStore;
+        let optionsEntry:DataStoreEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.placeHolder);
+
         return (       
         <InnerControl BaseControl={ this } LabelWith={ this.props.labelWith } >
             <Cascader
@@ -44,7 +45,7 @@ export class FormCascader extends FormBaseInput<any, IFormBaseInputProps, IFormB
           <TextField
             key={ this.props.inputKey }
             name={ this.props.inputKey }
-            placeholder={ placeHolder }
+            placeholder={ optionsEntry.waitText }
             disabled={ optionsEntry.onLoading }
             errorMessage= { this.getErrorMessage() }
             readOnly={true}

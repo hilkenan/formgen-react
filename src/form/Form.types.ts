@@ -5,6 +5,9 @@ import { GenericFormInput } from '../formBaseInput/FormBaseInput';
 import { CustomValidator } from '../objects/CustomValidator.types';
 import { CustomActions } from '../objects/CustomActions.types';
 import { DataBinder } from '../objects/DataBinder.types';
+import { FormInputs } from './FormInputs';
+import { JFormData } from '..';
+import { Container } from 'inversify';
 
 /**
  * The state for Form
@@ -17,11 +20,13 @@ export interface IFormState {
 /**
  * The props for Form
  */
-export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
+export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes<HTMLFormElement> {
   componentRef?: (component: any) => void;
 
   /** The Form Layout and controls in Json format. Is converted to JFormData*/
   jsonFormData: any;
+
+  container?: Container
 
   /** All used custom Controls has to be added here */
   customControls?: DynamicControl[];
@@ -55,6 +60,12 @@ export interface IFormProps extends React.AllHTMLAttributes<HTMLFormElement> {
 
   /** The Language to use for the Form. If not set then User Language is used. */
   Language?: string
+
+  /** Form inputs can be delivered from a inherinting form genreator. */
+  formInputs? : FormInputs,
+
+  /** The form type object to use. Default is JFormData */
+  formType?: new () => T
 }
 
 /**
@@ -86,4 +97,10 @@ export type IFormContext = {
 
   /** Validate the passed in field, set its error state, and call the onUpdate handler if there is one */
   submitValue: (input: GenericFormInput, validate?: boolean) => void;
+
+  /** Get the current form data */
+  formData: JFormData;
+
+  /** The Container for the service */
+  container: Container;
 };

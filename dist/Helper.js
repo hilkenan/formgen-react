@@ -45,13 +45,28 @@ var Helper = /** @class */ (function () {
             for (var _i = 0, _a = translations.Properties; _i < _a.length; _i++) {
                 var prop = _a[_i];
                 var keys = prop.Key.split(".");
-                var objectToTrans = orgObject;
+                var objectToTrans = void 0;
                 if (keys.length > 1) {
                     var lastKeyName = keys[keys.length - 1];
-                    for (var i = 0; i < keys.length - 2; i++) {
-                        objectToTrans = orgObject[keys[i]];
+                    var key = "";
+                    var index = -1;
+                    for (var i = 0; i < keys.length - 1; i++) {
+                        var startSqare = keys[i].indexOf("[");
+                        if (keys[i].indexOf("[") > 0) {
+                            key = keys[i].substring(0, startSqare);
+                            index = parseInt(keys[i].substring((startSqare + 1), keys[i].indexOf("]")));
+                            objectToTrans = orgObject[key][index];
+                        }
+                        else {
+                            key = keys[i];
+                            objectToTrans = orgObject[key];
+                        }
                     }
                     objectToTrans = Helper.getTranslatedPropertyFromObject(lastKeyName, objectToTrans, prop.ObjectTranslates);
+                    if (index > -1)
+                        orgObject[key][index][lastKeyName] = objectToTrans;
+                    else
+                        orgObject[key][lastKeyName] = objectToTrans;
                 }
                 else {
                     orgObject[prop.Key] = Helper.getTranslatedPropertyFromObject(prop.Key, orgObject, prop.ObjectTranslates);

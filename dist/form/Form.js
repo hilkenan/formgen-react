@@ -31,43 +31,50 @@ var ObjectFabric_1 = require("../objects/ObjectFabric");
 var Helper_1 = require("../Helper");
 var Styling_1 = require("office-ui-fabric-react/lib/Styling");
 var icons_1 = require("@uifabric/icons");
+var JFormData_1 = require("../objects/JFormData");
 var styling_1 = require("@uifabric/styling");
 var PropTypes = require("prop-types");
 var Utilities_1 = require("office-ui-fabric-react/lib/Utilities");
 require("../styles/main.css");
 var Enums_1 = require("../Enums");
 var react_intl_1 = require("react-intl");
-require("./polyfills.js");
+require("babel-polyfill/browser.js");
 var Rendering_1 = require("./Rendering");
+require("reflect-metadata");
 global.Intl = require('intl');
 var frLocaleData = require('react-intl/locale-data/fr');
 var deLocaleData = require('react-intl/locale-data/de');
 var enLocaleData = require('react-intl/locale-data/en');
+var esLocaleData = require('react-intl/locale-data/es');
+var itLocaleData = require('react-intl/locale-data/id');
 react_intl_1.addLocaleData(frLocaleData);
 react_intl_1.addLocaleData(deLocaleData);
 react_intl_1.addLocaleData(enLocaleData);
+react_intl_1.addLocaleData(itLocaleData);
+react_intl_1.addLocaleData(esLocaleData);
 icons_1.initializeIcons();
 exports.FormLanguage = "";
 /**
  * The main Form Control that renders the Control Tree
  */
-var Form = /** @class */ (function (_super) {
-    __extends(Form, _super);
+var GenericForm = /** @class */ (function (_super) {
+    __extends(GenericForm, _super);
     /**
      * Load the correct langauge, UI Fabric theme and the rendering engine.
      */
-    function Form(props) {
+    function GenericForm(props) {
         var _this = _super.call(this, props) || this;
         if (_this.props.Language) {
             exports.FormLanguage = _this.props.Language;
         }
-        _this._rendering = new Rendering_1.default(function () { return ObjectFabric_1.ObjectFabric.getJsonFromForm(_this.formData); }, props.customControls, props.customValidators, props.customActions, props.dataBinders, props.onCancelForm);
-        _this.formData = ObjectFabric_1.ObjectFabric.getForm(props.jsonFormData);
+        _this._rendering = new Rendering_1.default(function () { return ObjectFabric_1.ObjectFabric.getJsonFromForm(_this.formData); }, props.customControls, props.customValidators, props.customActions, props.dataBinders, props.formInputs, props.onCancelForm);
+        _this.formData = ObjectFabric_1.ObjectFabric.getForm(props.jsonFormData, props.formType ? props.formType : JFormData_1.JFormData);
         _this._mountedInputs = [];
         _this._pristine = true;
         _this.state = {
             validationResults: {}
         };
+        _this._container = props.container;
         if (_this.formData.Theme) {
             Styling_1.loadTheme({
                 palette: {
@@ -80,12 +87,12 @@ var Form = /** @class */ (function (_super) {
     /**
      * Call the formDidMount event and take over the mounted controls
      */
-    Form.prototype.componentDidMount = function () {
+    GenericForm.prototype.componentDidMount = function () {
         if (this.props.formDidMount) {
             this.props.formDidMount(this._mountedInputs);
         }
     };
-    Form.prototype.render = function () {
+    GenericForm.prototype.render = function () {
         var nativeProps = Utilities_1.getNativeProps(this.props, Utilities_1.divProperties);
         return (React.createElement("form", __assign({}, nativeProps, { onSubmit: this._onSubmit, key: this.formData.ID }),
             React.createElement("div", { className: "Form", key: this.formData.ID + "div1" },
@@ -99,19 +106,21 @@ var Form = /** @class */ (function (_super) {
     /**
      * Get the context for child components to use
      */
-    Form.prototype.getChildContext = function () {
+    GenericForm.prototype.getChildContext = function () {
         return {
             isFormValid: this._isFormValid,
             mountInput: this._mountInput,
             unmountInput: this._unmountInput,
-            submitValue: this._submitValue
+            submitValue: this._submitValue,
+            formData: this.formData,
+            container: this._container
         };
     };
     /**
      * Finde with the full control id the Control in the tree.
      * @param inputKey The full control id to finde the corresponding control
      */
-    Form.prototype._findeControlFromKey = function (inputKey) {
+    GenericForm.prototype._findeControlFromKey = function (inputKey) {
         var control;
         var controlStruct = inputKey.split(".");
         if (this.formData.Rows)
@@ -124,7 +133,7 @@ var Form = /** @class */ (function (_super) {
      * @param input The input to validate
      * @param showValidation Set to true if the error message shoul be set
      */
-    Form.prototype._validateComponent = function (input, showValidation) {
+    GenericForm.prototype._validateComponent = function (input, showValidation) {
         if (!input.doValidate && input.props.validators) {
             var control = this._findeControlFromKey(input.props.inputKey);
             if (control && control.FormValidators.find(function (v) { return v.ValidatorType == Enums_1.ValidatorTypes.Required; })) {
@@ -155,7 +164,7 @@ var Form = /** @class */ (function (_super) {
      * Validate all the individual inputs and set their error state
      * Returns a list of the validation results
      */
-    Form.prototype._validateForm = function () {
+    GenericForm.prototype._validateForm = function () {
         var _this = this;
         var validationResults = {};
         this._mountedInputs.forEach(function (input) {
@@ -171,7 +180,7 @@ var Form = /** @class */ (function (_super) {
      * When the form is submitted. This will validate the form and call the appropriate submit callback
      * @param event The form event
      */
-    Form.prototype._onSubmit = function (event) {
+    GenericForm.prototype._onSubmit = function (event) {
         event.preventDefault();
         if (this._pristine) {
             this._pristine = false;
@@ -192,7 +201,7 @@ var Form = /** @class */ (function (_super) {
      * @param controlStruct ID Structure. the Element 0 is the id from the form an will not be used
      * @param level The level in where to search in the contrlStruct.
      */
-    Form.prototype._findeControlInRow = function (rows, controlStruct, level) {
+    GenericForm.prototype._findeControlInRow = function (rows, controlStruct, level) {
         for (var _i = 0, rows_1 = rows; _i < rows_1.length; _i++) {
             var row = rows_1[_i];
             for (var _a = 0, _b = row.Columns; _a < _b.length; _a++) {
@@ -210,7 +219,7 @@ var Form = /** @class */ (function (_super) {
      * @param controlStruct ID Structure. the Element 0 is the id from the form an will not be used
      * @param level The level in where to search in the contrlStruct.
      */
-    Form.prototype._findeControlInControls = function (controls, controlStruct, level) {
+    GenericForm.prototype._findeControlInControls = function (controls, controlStruct, level) {
         var id = Helper_1.Helper.cleanUpKey(controlStruct[level]);
         var control = controls.find(function (c) { return c.ID == id; });
         if (controlStruct.length - 1 != level)
@@ -224,7 +233,7 @@ var Form = /** @class */ (function (_super) {
      * Register an input with the form
      * @param input The input to register
      */
-    Form.prototype._mountInput = function (input) {
+    GenericForm.prototype._mountInput = function (input) {
         var _this = this;
         var foundControl = this._mountedInputs.find(function (g) { return g.props.inputKey == input.props.inputKey; });
         if (foundControl == undefined) {
@@ -245,7 +254,7 @@ var Form = /** @class */ (function (_super) {
      * @param input The input that has rais an update
      * @param validate True if the input should validated.
      */
-    Form.prototype._submitValue = function (input, validate) {
+    GenericForm.prototype._submitValue = function (input, validate) {
         var validationResult = this._validateComponent(input, validate);
         this.setState(function (prevState) {
             prevState.validationResults[input.props.inputKey] = validationResult;
@@ -265,7 +274,7 @@ var Form = /** @class */ (function (_super) {
      * Unregister an input with the form
      * @param input The input to unregister
      */
-    Form.prototype._unmountInput = function (input) {
+    GenericForm.prototype._unmountInput = function (input) {
         var currentIndex = this._mountedInputs.indexOf(input);
         if (currentIndex > -1) {
             this._mountedInputs.splice(currentIndex, 1);
@@ -279,7 +288,7 @@ var Form = /** @class */ (function (_super) {
      * Check if the form is valid. If all validations are ok then reutrn true.
      * @param validationResults All validation results from the control tree.
      */
-    Form.prototype._isFormValid = function (validationResults) {
+    GenericForm.prototype._isFormValid = function (validationResults) {
         if (validationResults === void 0) { validationResults = this.state.validationResults; }
         for (var key in validationResults) {
             if (!validationResults[key].isValid) {
@@ -291,28 +300,44 @@ var Form = /** @class */ (function (_super) {
     /**
      * This is needed because React 15's context does not work well with typescript
      */
-    Form.childContextTypes = {
+    GenericForm.childContextTypes = {
         isFormValid: PropTypes.func.isRequired,
         mountInput: PropTypes.func.isRequired,
         unmountInput: PropTypes.func.isRequired,
         submitValue: PropTypes.func.isRequired,
+        formData: PropTypes.object.isRequired,
+        container: PropTypes.object.isRequired
     };
     __decorate([
         Utilities_1.autobind
-    ], Form.prototype, "_onSubmit", null);
+    ], GenericForm.prototype, "_onSubmit", null);
     __decorate([
         Utilities_1.autobind
-    ], Form.prototype, "_mountInput", null);
+    ], GenericForm.prototype, "_mountInput", null);
     __decorate([
         Utilities_1.autobind
-    ], Form.prototype, "_submitValue", null);
+    ], GenericForm.prototype, "_submitValue", null);
     __decorate([
         Utilities_1.autobind
-    ], Form.prototype, "_unmountInput", null);
+    ], GenericForm.prototype, "_unmountInput", null);
     __decorate([
         Utilities_1.autobind
-    ], Form.prototype, "_isFormValid", null);
-    return Form;
+    ], GenericForm.prototype, "_isFormValid", null);
+    return GenericForm;
 }(Utilities_1.BaseComponent));
+exports.GenericForm = GenericForm;
+/**
+ * Type alias for any simple form input
+ */
+var Form = /** @class */ (function (_super) {
+    __extends(Form, _super);
+    /**
+     * Load basic form
+     */
+    function Form(props) {
+        return _super.call(this, props) || this;
+    }
+    return Form;
+}(GenericForm));
 exports.Form = Form;
 //# sourceMappingURL=Form.js.map
