@@ -64,11 +64,15 @@ export class Helper {
                             objectToTrans = orgObject[key];
                         }
                     }
-                    objectToTrans = Helper.getTranslatedPropertyFromObject(lastKeyName,objectToTrans, prop.ObjectTranslates)
-                    if (index > -1)
-                        orgObject[key][index][lastKeyName]  = objectToTrans;
-                    else
-                        orgObject[key][lastKeyName] = objectToTrans;
+                    if (objectToTrans) {
+                        objectToTrans = Helper.getTranslatedPropertyFromObject(lastKeyName,objectToTrans, prop.ObjectTranslates)
+                        if (orgObject[key]) {
+                            if (index > -1)
+                            orgObject[key][index][lastKeyName]  = objectToTrans;
+                        else
+                            orgObject[key][lastKeyName] = objectToTrans;
+                        }
+                    }
                 }
                 else {
                     orgObject[prop.Key] = Helper.getTranslatedPropertyFromObject(prop.Key,orgObject, prop.ObjectTranslates)
