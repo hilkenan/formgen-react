@@ -47,13 +47,28 @@ export class Helper {
         if (translations && orgObject) {
             for(let prop of translations.Properties) {
                 let keys:string[] = prop.Key.split(".");
-                let objectToTrans = orgObject;
+                let objectToTrans:any;
                 if (keys.length > 1) {
                     let lastKeyName = keys[keys.length-1];
-                    for(let i = 0; i < keys.length-2; i++) {
-                        objectToTrans = orgObject[keys[i]];
+                    let key = "";
+                    let index = -1;
+                    for(let i = 0; i < keys.length-1; i++) {
+                        let startSqare:number = keys[i].indexOf("[");
+                        if (keys[i].indexOf("[") > 0) {
+                            key = keys[i].substring(0, startSqare);
+                            index = parseInt(keys[i].substring((startSqare + 1), keys[i].indexOf("]")));                            
+                            objectToTrans = orgObject[key][index];
+                        }
+                        else {
+                            key = keys[i];
+                            objectToTrans = orgObject[key];
+                        }
                     }
                     objectToTrans = Helper.getTranslatedPropertyFromObject(lastKeyName,objectToTrans, prop.ObjectTranslates)
+                    if (index > -1)
+                        orgObject[key][index][lastKeyName]  = objectToTrans;
+                    else
+                        orgObject[key][lastKeyName] = objectToTrans;
                 }
                 else {
                     orgObject[prop.Key] = Helper.getTranslatedPropertyFromObject(prop.Key,orgObject, prop.ObjectTranslates)
@@ -61,7 +76,7 @@ export class Helper {
             }
         }
         return orgObject;
-    } 
+    }     
 
     /**
      * Get from the given translatable Property the Translated String or default.
