@@ -30,7 +30,6 @@ var FormBaseInput_1 = require("../../formBaseInput/FormBaseInput");
 var utilities_1 = require("@uifabric/utilities");
 var InnerControl_1 = require("../../controls/innerControl/InnerControl");
 var lib_1 = require("office-ui-fabric-react/lib");
-var Helper_1 = require("../../Helper");
 var Cascader = require('rc-cascader/lib/Cascader');
 /**
  * Cascading Dropdown input for Form. Use rc-cascader
@@ -53,11 +52,13 @@ var FormCascader = /** @class */ (function (_super) {
      */
     FormCascader.prototype.render = function () {
         var _this = this;
-        var optionsEntry = this.state.dataStores.find(function (e) { return e.key == _this.optionsDataStore; });
-        var placeHolder = Helper_1.Helper.getPlaceHolderText(optionsEntry, this.ConfigProperties.placeHolder);
+        var key = this.props.control.DataProviderConfigKeys.length > 0 ?
+            this.props.control.DataProviderConfigKeys[0] :
+            this.optionsDataStore;
+        var optionsEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.placeHolder);
         return (React.createElement(InnerControl_1.InnerControl, { BaseControl: this, LabelWith: this.props.labelWith },
             React.createElement(Cascader, __assign({ popupClassName: "cascaderPopupClassName", onChange: this._onChange, ref: function (input) { return _this.innerControl = input; } }, this.ConfigProperties, { options: optionsEntry.data, id: this.props.inputKey }),
-                React.createElement(lib_1.TextField, { key: this.props.inputKey, name: this.props.inputKey, placeholder: placeHolder, disabled: optionsEntry.onLoading, errorMessage: this.getErrorMessage(), readOnly: true, label: "", value: this._getLabels(this.state.currentValue) }))));
+                React.createElement(lib_1.TextField, { key: this.props.inputKey, name: this.props.inputKey, placeholder: optionsEntry.waitText, disabled: optionsEntry.onLoading, errorMessage: this.getErrorMessage(), readOnly: true, label: "", value: this._getLabels(this.state.currentValue) }))));
     };
     /**
      * Store the selected Value as JSON in the form state.
