@@ -1,0 +1,40 @@
+{
+    "$schema": "../../schemas/jfrom-schema.json",
+    "id": "testform",
+	"title": "Test",
+	"rows": [{
+		"columns": [{
+			"controls": [ {
+                "id": "maskedtextbox",
+                "control_type": ["MaskedTextbox"],
+                "title": "MaskedTextbox EN",
+                "config": {
+                    "placeholder": "hh:mm:ss",
+                    "mask": "11:11:11"
+                }
+                },{
+				"id": "textbox",
+				"title": "TextBox",
+				"control_type": [ "Textbox" ],
+				"info": "Info Test",
+				"dataprovider_value_configkey": "mockDataService.[testform.maskedtextbox]"
+			},{
+                "id": "dropdown",
+                "title": "DropDown",
+                "dataprovider_list_configkeys": [
+                    "mockDataService.[testform.textbox].loadList1"
+                ],
+                "control_type": [ "DropDown" ],
+                "info": "Info Test",
+                "label_position": [ "Left"]
+            },
+            {
+                "id": "submit",
+                "control_type": ["SubmitButton"]
+            }]
+        }]
+    }]
+}
+                    
+
+

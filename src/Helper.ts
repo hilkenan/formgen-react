@@ -13,6 +13,57 @@ let locale = require('browser-locale')()
  * Helper Class with static variables for the Form 
  */    
 export class Helper {
+
+    /**
+     * Get if available the control key between square brackets in a key
+     * @param key The full key to get the value from
+     */    
+    public static getControlKeyFromConfigKey(key: string):string {
+        let result = key.match("\\[(.*)]")
+        if (result)
+            return result[0].substring(1,result[0].length-1);
+        else
+            return undefined;
+    }
+
+    /**
+     * Get from a key definition everything after the second .
+     * @param key The full key to get the value from
+     */    
+    public static getConfigKeyFromProviderKey(key:string): string {
+        let startIndex = key.indexOf("]");
+        let startIndexDot = key.indexOf(".");
+        
+        if (startIndex == -1 && startIndexDot != -1) {
+            return key.substring(startIndexDot + 1)
+        }
+        else if (startIndex != -1) {
+            return key.substring(startIndex + 2)
+        }
+        else
+            return key;
+    }
+
+    /**
+     * Compare two arrays.
+     */    
+    public static compareArrays(x:any[], y:any[]) {
+        var objectsAreSame = true;
+        if (x.length == 0 && y.length == 0) return true;
+        if (x.length != y.length) return false;
+        for(let i = 0;i < x.length;i++) {
+            let objectA = x[i];
+            let objectB = y[i];
+            for(var propertyName in objectA) {
+                if(objectA[propertyName] !== objectB[propertyName]) {
+                    objectsAreSame = false;
+                    break;
+                }
+            }
+        }
+        return objectsAreSame;
+    }
+
     /**
      * Return even the Language set at the form 
      * or when not set the language from the users browser.

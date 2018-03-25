@@ -71,6 +71,7 @@
       "!src/**/*.types.ts",
       "!src/index.tsx",
       "!src/index.ts",
+      "!src/inputs/dropdown/MockDataProviderService.ts",
       "!src/registerServiceWorker.ts"
     ],
     "coverageReporters": [

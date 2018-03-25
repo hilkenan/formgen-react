@@ -1,15 +1,16 @@
 /* tslint:disable:no-any */
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry, typesForInject, IDataProviderService } from './FormBaseInput.types';
+import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry, typesForInject, IDataProviderCollection } from './FormBaseInput.types';
 export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
 import { TranslatedProperty, ValidatorTypes, BinderType } from '../Enums';
 import { IFormContext, IFormValidationResult } from '../form/Form.types';
 import { autobind } from '@uifabric/utilities';
-import { IDataBinder, IDataBinderAsync, IDataBinderFilterAsync } from '../objects/DataBinder.types';
+import { IDataBinder, IDataBinderAsync, IDataBinderFilterAsync, IDataProviderFilterAsync } from '../objects/DataBinder.types';
 import { LocalsCommon } from '../locales/LocalsCommon';
 import { Helper } from '../Helper';
+import { Control } from '..';
 
 /**
  * Default Debaunce of 250 Ticks.
@@ -38,7 +39,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
     unmountInput: PropTypes.func.isRequired,
     submitValue: PropTypes.func.isRequired,
     formData: PropTypes.object.isRequired,
-    container: PropTypes.object.isRequired    
+    container: PropTypes.object.isRequired
   };
 
   public innerControl: any;
@@ -111,21 +112,26 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
       if (!options) 
         options = [];
       let entry = options.find(d => d.key == dataKey);
-      if (entry) {
-        entry.data = data;
+      let refresh = false;
+      if (entry && !entry.data) entry.data = [];
+      if (entry && (!Helper.compareArrays(entry.data, data) || entry.onLoading != isAsync || entry.waitText != waitText)) {
+        refresh = true;
+        entry.data = data && data.length == 0 ? undefined : data;
         entry.onLoading = isAsync;
         entry.waitText = waitText;
       }
-      else {
+      else if (!entry) {
+        refresh = true;
         options.push({
           key: dataKey,
-          data: data,
+          data: data && data.length == 0 ? undefined : data,
           onLoading: isAsync,
           waitText: waitText
         });
       }
 
-      this.setState({dataStores: options});
+      if (refresh)
+        this.setState({dataStores: options});
     }
 
   /**
@@ -164,6 +170,33 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
     }
   }
 
+
+  /**
+  * Loads the data from the Store async with a filter teext
+  * If Async loading the return true
+  * @param configKey The Key from the datastore
+  * @param provider The Data Provider for Async Filter
+  * @param loadedFunction The funtion to call after data is loaded
+  * @param waitText The Waiting Text for async loading controls.
+  * @param control The sender Control that has the Filter Text
+  * @param filter The Filter Text.
+  */
+ public loadDataFromStoreWithFilter(configKey:string, provider:IDataProviderFilterAsync, loadedFunction:DataLoadedFunction, 
+    waitText: string, control:Control, filter:string) {
+  if (provider) {
+    let entry = this.state.dataStores.find(e => e.key == configKey);
+    if (!entry) {
+      let waitText = this.commonFormater.formatMessage(LocalsCommon.loadData);
+      loadedFunction(configKey, undefined, waitText, true);
+    }
+    provider.retrieveFilteredListData(configKey,control,Helper.getLanguage(), filter).then((list) => {
+      let waitTextA = !list || list.length == 0 ?
+        this.commonFormater.formatMessage(LocalsCommon.nothingFound) : waitText;
+      loadedFunction(configKey, list, waitTextA, false);
+    });
+  }
+}
+
   /**
   * Loads the data from the Store async or sync.
   * If Async loading the return true
@@ -197,25 +230,34 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   */ 
  protected getDataOptionEntry(staticData: any[], key:string, defaultPlaceholder: string): DataStoreEntry {
     let optionsEntry:DataStoreEntry;
-
-    if (!staticData && this.state.dataStores){
-        optionsEntry = this.state.dataStores.find(e => e.key == key);
-    }
-    if (optionsEntry) {
-        optionsEntry.waitText = Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+    let controlKey = Helper.getControlKeyFromConfigKey(key);
+    if (controlKey && this.state.currentFilter) {
+        let provider = this.retrievFilterData[key] as IDataProviderFilterAsync;
+        let waitText = Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+        this.loadDataFromStoreWithFilter(key, provider, this.storeOptions, waitText, this.props.control, this.state.currentFilter);
+        let entry = this.state.dataStores.find(e => e.key == key);        
+        return entry;
     }
     else {
-      optionsEntry = {
-        key: "default",
-        data: staticData,
-        onLoading: false,
-        waitText: Helper.getPlaceHolderText(undefined, defaultPlaceholder)
+      if (!staticData && this.state.dataStores){
+        optionsEntry = this.state.dataStores.find(e => e.key == key);
       }
-    }
-    if (this.props.control.ReadOnly)
-      optionsEntry.onLoading = true;
+      if (optionsEntry) {
+          optionsEntry.waitText = Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+      }
+      else {
+        optionsEntry = {
+          key: "default",
+          data: staticData,
+          onLoading: false,
+          waitText: Helper.getPlaceHolderText(undefined, defaultPlaceholder)
+        }
+      }
+      if (this.props.control.ReadOnly)
+        optionsEntry.onLoading = true;
 
-    return optionsEntry;
+      return optionsEntry;
+    }
   }
 
   /**
@@ -242,8 +284,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   protected dataStore:{ [key: string]: any[] | Promise<any[]> } = {}
 
   /** The Asynchronous Filter Methods. */ 
-  protected retrievFilterData: { [key: string]: IDataBinderFilterAsync } = {}
-
+  protected retrievFilterData: { [key: string]: IDataBinderFilterAsync | IDataProviderFilterAsync } = {}
 
   /**
   * Load the Databinder. Sync and Async are loaded. AsyncFilter is loade when user type an filter.
@@ -270,13 +311,28 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
     if (this.props.control.DataProviderConfigKeys.length > 0 && container == undefined)
       throw "No Data Service Container found"
     if (this.props.control.DataProviderConfigKeys.length > 0) {
-      let dataProvide = container.get<IDataProviderService>(typesForInject.IDataProviderService);
-      if (dataProvide == undefined)
+      let dataProviders = container.get<IDataProviderCollection>(typesForInject.IDataProviderCollection);
+      if (dataProviders == undefined || dataProviders.providers.length == 0)
         throw "No Data Service found"
-      dataProvide.formData = formData;
       for(let configKey of this.props.control.DataProviderConfigKeys) {
-          this.dataStore[configKey] = dataProvide.retrieveListData(configKey, this.props.control, Helper.getLanguage()); 
+        let keyParts = configKey.split(".");
+        let dataProvider = dataProviders.providers.find(p => p.providerServiceKey ==  keyParts[0])
+        if (dataProvider == undefined)
+          throw "No DataProvider found with key " + keyParts[0] + " name is: " + dataProviders.providers[0].providerServiceKey;
+        dataProvider.formData = formData;
+
+        let result = Helper.getControlKeyFromConfigKey(configKey);
+        if (result && dataProvider.retrieveFilteredListData) {
+          let binderFuntion:IDataProviderFilterAsync = {
+            retrieveFilteredListData: dataProvider.retrieveFilteredListData 
+          }
+          this.retrievFilterData[configKey] = binderFuntion; 
+        }
+        else {
+          let providerConfigKey = Helper.getConfigKeyFromProviderKey(configKey);
+          this.dataStore[configKey] = dataProvider.retrieveListData(providerConfigKey, this.props.control, Helper.getLanguage()); 
           this.loadDataFromStore(configKey,this.storeOptions, "");
+        }
       }
     }
 

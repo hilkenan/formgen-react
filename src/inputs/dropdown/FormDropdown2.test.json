@@ -16,8 +16,8 @@
                     }
                 ],
                 "title": "DropDown",
-                "dataProviderConfigKeys": [
-                    "loadList1"
+                "dataprovider_list_configkeys": [
+                    "mockDataService.loadList1"
                 ],
                 "control_type": [ "DropDown" ],
                 "info": "Info Test",

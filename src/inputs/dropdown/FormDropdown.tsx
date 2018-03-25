@@ -35,7 +35,7 @@ export class FormDropdown extends FormBaseInput<IDropdownProps, IFormBaseInputPr
         let key:string = this.props.control.DataProviderConfigKeys.length > 0 ?
             this.props.control.DataProviderConfigKeys[0] :
             this.optionsDataStore;
-        let optionsEntry:DataStoreEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.placeHolder);
+        let optionsEntry = this.getDataOptionEntry(this.ConfigProperties.options, key, this.ConfigProperties.placeHolder) as DataStoreEntry;
 
         return (
         <InnerControl BaseControl={ this } LabelWith={ this.props.labelWith } >

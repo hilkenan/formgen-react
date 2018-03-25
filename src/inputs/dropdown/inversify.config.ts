@@ -1,6 +1,6 @@
 import { Container } from 'inversify';
-import { IDataProviderService, typesForInject } from '../../formBaseInput/FormBaseInput.types';
-import { MockDataProviderService } from './MockDataProviderService';
+import { typesForInject, IDataProviderCollection } from '../../formBaseInput/FormBaseInput.types';
+import { MockDataProviderCollection } from './MockDataProviderService';
 
 /**
 * Inversion Of Control class container
@@ -12,6 +12,6 @@ export class MockContainer extends Container {
     }
   
     declareDependencies() {
-      this.bind<IDataProviderService>(typesForInject.IDataProviderService).to(MockDataProviderService)
+      this.bind<IDataProviderCollection>(typesForInject.IDataProviderCollection).to(MockDataProviderCollection)
     }
 }

@@ -12,6 +12,10 @@ export const LocalsCommon = defineMessages({
     id: "required", 
     defaultMessage: "Required"
   },
+  nothingFound: {
+    id: "nothingFound",
+    defaultMessage : "No matches"
+  },
   loadData: { 
     id: "loadData", 
     defaultMessage: "Load data..."

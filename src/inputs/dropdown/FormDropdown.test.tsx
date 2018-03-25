@@ -11,10 +11,13 @@ import { BinderType } from '../../Enums';
 import { DataBinder } from '../../objects/DataBinder.types';
 import { MockContainer } from './inversify.config';
 import { IDataProviderService, typesForInject } from '../../formBaseInput/FormBaseInput.types';
+import { FormMaskedTextInput } from '../maskedTextInput/FormMaskedTextInput';
+import { FormTextInput } from '../textInput/FormTextInput';
 
 var jsonForm = require('./FormDropdown.test.json');
 var jsonForm1 = require('./FormDropdown1.test.json');
 var jsonForm2 = require('./FormDropdown2.test.json');
+var jsonForm3 = require('./FormDropdown3.test.json');
 
 describe('FormDropdown Unit Tests', () => {
   describe('Renders for all combinations of props', () => {
@@ -90,6 +93,25 @@ describe('FormDropdown Unit Tests', () => {
       let dropDown:HTMLSpanElement = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, "ms-Dropdown-title") as HTMLSpanElement
       expect(dropDown.childNodes.length).toEqual(1);
       expect(dropDown.childNodes[0].textContent).toEqual("Load data...");
+    });    
+
+    it('Dropdown from data provider width default', () => {
+      let updateStub: sinon.SinonStub = sinon.stub();
+      let mockContainer:MockContainer = new MockContainer();
+      let renderedForm = ReactTestUtils.renderIntoDocument(
+          <Form container={ mockContainer } jsonFormData={ jsonForm3 } onUpdated={ updateStub } />
+      ) as Form;
+
+      let textInputMask: FormMaskedTextInput = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormMaskedTextInput);
+      textInputMask.setValue("11:00:01", true);
+      expect(updateStub.callCount).toEqual(0);
+      clock.tick(DEFAULT_DEBOUNCE);
+      expect(updateStub.callCount).toEqual(1);
+
+      let renderedInput = ReactTestUtils.findRenderedDOMComponentWithClass(renderedForm, 'ms-TextField-field') as HTMLInputElement;
+      expect(renderedInput.value).toEqual("");
+      let formField: FormTextInput = ReactTestUtils.findRenderedComponentWithType(renderedForm, FormTextInput);
+      expect(formField.state.currentValue).toEqual("");
     });    
 
     it('Dropdown is leading and trailing debounced', () => {

@@ -66,6 +66,9 @@ export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes
 
   /** The form type object to use. Default is JFormData */
   formType?: new () => T
+
+  /** If its a new Form then set the default values */
+  isNewForm?: boolean;
 }
 
 /**
@@ -81,6 +84,17 @@ export type IFormValidationResult = {
   /** The validated input */
   component: GenericFormInput;
 };
+
+/**
+ * An Event Object for sender and reveicer of events.
+ */
+export class ControlBoundEvent {
+  /** The input key from the sender control */
+  senderControlKey: string ;
+
+  /** Colleciton of controls that receives the input */
+  receiverControl: GenericFormInput[];
+}
 
 /**
  * The child context for form inputs to use

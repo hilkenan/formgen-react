@@ -10,7 +10,7 @@ import { FontClassNames } from '@uifabric/styling';
 import * as PropTypes from 'prop-types';
 import { autobind, BaseComponent, getNativeProps, divProperties } from 'office-ui-fabric-react/lib/Utilities';
 import '../styles/main.css';
-import { IFormState, IFormProps, IFormContext, IFormValidationResult } from './Form.types';
+import { IFormState, IFormProps, IFormContext, IFormValidationResult, ControlBoundEvent } from './Form.types';
 import { TranslatedProperty, ValidatorTypes } from '../Enums';
 import { GenericFormInput } from '../formBaseInput/FormBaseInput';
 import { Control } from '../objects/Control';
@@ -20,6 +20,7 @@ import 'babel-polyfill/browser.js';
 import Rendering from './Rendering';
 import "reflect-metadata";
 import { Container } from 'inversify';
+import { IDataProviderCollection, typesForInject } from '../formBaseInput/FormBaseInput.types';
 
 global.Intl = require('intl');
 let frLocaleData = require('react-intl/locale-data/fr');
@@ -69,6 +70,9 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
   /** All registered inputs the form is aware of */
   private _mountedInputs: GenericFormInput[];
 
+  /** All registered inputs for an event of value changes */
+  private _controlEvents: ControlBoundEvent[];
+
   /** Flag which marks whether or not the form has attempted to have been submitted */
   private _pristine: boolean;
 
@@ -93,6 +97,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
     this.formData = ObjectFabric.getForm(props.jsonFormData, props.formType ? props.formType : JFormData);
 
     this._mountedInputs = [];
+    this._controlEvents = [];
     this._pristine = true;
     this.state = {
       validationResults: {}
@@ -113,6 +118,10 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
    * Call the formDidMount event and take over the mounted controls
    */  
   componentDidMount() {
+    for(let eventControl of this._controlEvents) {
+      let input = this._mountedInputs.find(c => c.props.inputKey == eventControl.senderControlKey);
+      this._sendValutToControls(eventControl, input);
+    }
     if (this.props.formDidMount) {
       this.props.formDidMount(this._mountedInputs);
     }
@@ -280,7 +289,8 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
     let foundControl = this._mountedInputs.find(g => g.props.inputKey == input.props.inputKey);
     if (foundControl == undefined) {
       if (!input.doValidate)
-      this._mountedInputs.push(input);
+        this._mountedInputs.push(input);
+
       this.setState((prevState: IFormState) => {
         prevState.validationResults[input.props.inputKey] = this._validateComponent(input);
         return prevState;
@@ -290,6 +300,51 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
       this._unmountInput(foundControl);
       this._mountInput(input)
     } 
+    let control:Control  = input.props.control;
+    this._registerEvents(input, control.DataProviderDefaultValueConfigKey);
+    this._registerEvents(input, control.DataProviderValueConfigKey);
+    for(let listProviderKey of control.DataProviderConfigKeys) {
+      this._registerEvents(input, listProviderKey);
+    }
+  }
+
+  /**
+   * Register if available the event on the control defined between squer brackets
+   * @param input The input that has rais an update
+   * @param key The key with square brackets
+   */ 
+  private _registerEvents(input: GenericFormInput, key?: string): void {
+    if (key) {
+      let controlKey = Helper.getControlKeyFromConfigKey(key);
+      if (controlKey) {
+        this._registerEventInControlEvents(controlKey, input);
+      }
+      else if (!controlKey) {
+        this._registerEventInControlEvents(input.props.inputKey, input);
+      }
+      else
+        throw "Control definitions are maximal one allowed per key definition: " + key
+    }
+  }
+
+  /**
+   * Register the input in the controlEvents
+   * @param controlKey The key from the control to register
+   * @param input The input that has to register.
+   */ 
+  private _registerEventInControlEvents(controlKey:string, input: GenericFormInput) {
+    let eventType = this._controlEvents.find(c => c.senderControlKey == controlKey);
+    let index = -1;
+    if (eventType == undefined) {
+      index = this._controlEvents.push({
+        senderControlKey: controlKey,
+        receiverControl: [] 
+      }) - 1
+    }
+    else {
+      index = this._controlEvents.indexOf(eventType);
+    }
+    this._controlEvents[index].receiverControl.push(input);
   }
 
   /**
@@ -305,15 +360,115 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
       return prevState;
     });
 
+    console.log("sender:" + input.props.inputKey + ":" + validationResult.isValid);
+
     if (validationResult.isValid) {
       let control:Control | undefined = this._findeControlFromKey(input.props.inputKey);
       if (control) {
           control.Value = input.state.currentValue;
       }
+      let eventControl = this._controlEvents.find(c => c.senderControlKey == input.props.inputKey);
+      if (eventControl) {
+        this._sendValutToControls(eventControl, input);
+      }
       if (this.props.onUpdated) {
         this.props.onUpdated(input.props.inputKey, input.state.currentValue);
       }
     }
+  }
+
+    /** 
+     * Sed the senderControl Infos to the Receiver at the bound Control
+     * @param eventControl The EventControl to get the receiver from
+     * @param senderControl The sending controll
+    */
+  private _sendValutToControls(eventControl:ControlBoundEvent, senderControl:GenericFormInput) {
+    for(let receiverControl of eventControl.receiverControl) {
+      if (!senderControl || receiverControl.props.inputKey == senderControl.props.inputKey)
+        this._sendValutToControl(receiverControl, undefined)
+      else
+        this._sendValutToControl(receiverControl, senderControl)
+    }
+  }
+
+  /**
+   * Send the value to an given control. If need convert it with the provider key to another value
+   * @param input The input that has rais an update
+   * @param value The value to be send 
+   */   
+  private _sendValutToControl(receiverControl: GenericFormInput, senderControl: GenericFormInput): void {
+    for (let providerKey of receiverControl.props.control.DataProviderConfigKeys) {
+      let result = Helper.getControlKeyFromConfigKey(providerKey)
+      if (result && senderControl) {
+        receiverControl.setState({ currentFilter: senderControl.state.currentValue })
+      }
+    }
+    this._getValueFromProvider(receiverControl, senderControl, receiverControl.props.control.DataProviderValueConfigKey).then(valutToUse => {
+      if (valutToUse && receiverControl.props.control.DataProviderValueConfigKey) {
+        receiverControl.setValue(valutToUse, true);
+      }
+      if (receiverControl.props.control.DataProviderDefaultValueConfigKey && this.props.isNewForm && !receiverControl.state.currentValue) {
+        this._getValueFromProvider(receiverControl, senderControl, receiverControl.props.control.DataProviderDefaultValueConfigKey).then(defaultValutToUse => {
+          if (defaultValutToUse)
+            receiverControl.setValue(defaultValutToUse, true);
+        });
+      }
+    })
+  }
+
+  /**
+   * Get the value from a defined provider or default value.
+   * @param input The input that has rais an update
+   * @param value The value to be used when nothing others devined
+   * @param keyToResolve The Key to resolve with the provider
+   */   
+  private _getValueFromProvider(receiverControl: GenericFormInput, senderControl: GenericFormInput, keyToResolve:string): Promise<any> {
+    return new Promise<any[]>((resolve, reject)  => {
+      if ((!keyToResolve || keyToResolve =="") && senderControl) {
+        resolve(senderControl.state.currentValue);
+        return;
+      }
+      if ((!keyToResolve || keyToResolve =="") && !senderControl) {
+        resolve(undefined);
+        return;
+      }
+
+      let controlKey = Helper.getControlKeyFromConfigKey(keyToResolve);
+      keyToResolve = keyToResolve.replace(controlKey, controlKey.replace(".", "/"));
+      let keyParts:string[] = keyToResolve.split(".");
+
+      if (keyToResolve.startsWith("[") && keyParts.length == 1 && senderControl) {
+        resolve(senderControl.state.currentValue);
+        return;
+      }
+  
+      if (keyToResolve.startsWith("[") && senderControl && senderControl.state.currentValue) {
+        let objectToUse = senderControl.state.currentValue[keyParts[1]];
+        if (keyParts.length > 2) {
+          for(let i = 2; i < keyParts.length; i++) {
+            if (objectToUse != undefined) {
+              objectToUse = objectToUse[keyParts[i]];
+            }
+          }
+        }
+        resolve(objectToUse);
+        return;
+      }
+      else {
+        let providerKey:string = keyParts[0];
+        let dataProviders = this._container.get<IDataProviderCollection>(typesForInject.IDataProviderCollection);
+        if (dataProviders == undefined)
+          throw "No DataProviders defined"
+        let provider = dataProviders.providers.find(p => p.providerServiceKey == providerKey);
+        if (provider == undefined)
+          throw "DataProvider with key " + providerKey + " not found";
+        let providerConfigKey = Helper.getConfigKeyFromProviderKey(keyToResolve);
+        let sender = senderControl ? senderControl.props.control : undefined;
+        provider.retrieveSingleData(providerConfigKey, sender, receiverControl.props.control, Helper.getLanguage()).then(value => {
+          resolve(value);
+        })
+      }
+    });
   }
 
   /**

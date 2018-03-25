@@ -8,6 +8,7 @@ import Rendering from '../../form/Rendering';;
 import { Helper } from '../../Helper';
 import { IFormPeoplePickerState, IFormPeoplePickerProps } from './FormPeoplePicker.types';
 import { LocalsPeoplePicker } from '../../locales/LocalsPeoplePicker';
+import { IDataBinderFilterAsync } from '../../objects/DataBinder.types';
 
 /**
  * People picker control. Let choose one ore more Persons.
@@ -157,7 +158,8 @@ export class FormPeoplePicker extends FormBaseInput<IFormPeoplePickerProps, IFor
   private _onFilterChanged(filterText: string, currentPersonas: IPersonaProps[], limitResults?: number) : PromiseLike<IPersonaProps[]> {
     return new Promise<IPersonaProps[]>((resolve, reject) => {
       if (filterText && this.retrievFilterData[this.peopleListFilterFunction]) {
-        this.retrievFilterData[this.peopleListFilterFunction].retrieveData(this.props.control, Helper.getLanguage(), filterText, limitResults).then((filteredPersonas) => {
+        let retrieverBinder = this.retrievFilterData[this.peopleListFilterFunction] as IDataBinderFilterAsync
+        retrieverBinder.retrieveData(this.props.control, Helper.getLanguage(), filterText, limitResults).then((filteredPersonas) => {
           filteredPersonas = this._removeDuplicates(filteredPersonas, currentPersonas);
           this.setState({mostRecentlyUsed: filteredPersonas});
           resolve(filteredPersonas)

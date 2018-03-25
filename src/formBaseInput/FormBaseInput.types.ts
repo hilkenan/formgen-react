@@ -7,25 +7,58 @@ import { JFormData } from '..';
 /**
  * The Types to use for injection
  */
-export const typesForInject = { IDataProviderService: "IDataProviderService" };
+export const typesForInject = { IDataProviderCollection: "IDataProviderCollection" };
+
+/**
+ * The collection of data services to use
+ */
+export interface IDataProviderCollection {
+
+  /** Collection of all used data service providers */
+  providers: IDataProviderService[];
+}
 
 /**
  * The Service to load any data from a injected data store system.
  */
 export interface IDataProviderService {
-  /**
-   * The current Form Data 
-   */
+
+  /** Provider Service key to identify an provider  */
+  providerServiceKey: string
+  
+  /** The current Form Data  */
   formData?: JFormData
   
   /** 
-   * Retrieve data from the store 
+   * Retrieve list data from the store 
    * @param configKey Config Key from the control. This will use the by the provider to finde the correct configuration for this request
-   * @param formData The Current complete Form Model. Here the config should be found.
    * @param controlConfig The control that calls the request.
    * @param lang The current language to use.
    */
-  retrieveListData(configKey:string, controlConfig: Control, lang:string):Promise<any[]>
+  retrieveListData?(configKey:string, controlConfig: Control, lang:string):Promise<any[]>
+  
+  /** 
+   * Retrieve list data from the store filtered and optional limited with count of result items
+   * @param configKey Config Key from the control. This will use the by the provider to finde the correct configuration for this request
+   * @param controlConfig The control that calls the request.
+   * @param lang The current language to use.
+   * @param filter The filterstring to use
+   * @param limitResults Count of items to return at max.
+   */
+  retrieveFilteredListData?(configKey:string, controlConfig: Control, lang:string, filter: string, limitResults?: number):Promise<any[]>
+  
+  /** 
+   * Retrieve singel data from the store based on an key. Variations of Key format:
+   * MyUserDataProvider.firstName --> Get for the current control from the "MyUserDataProvider (= providerServiceKey) the Information "firstName"
+   * MyUserDataProvider.manager.firstName --> Get for the current control from the element manager the firstName. This type of object for this control has to support sub elements.
+   * MyUserDataProvider.[thisForm.manager].firstName --> Get for control "thisForm.manager" the element "firstName"
+   * MyUserDataProvider.[thisForm.anyUser].manager.firstName --> Get for control "thisForm.anyUser" from the element manager the firstName. This type of object for this control has to support sub elements.
+   * @param configKey Config Key from the control. This will use the by the provider to finde the correct configuration for this request
+   * @param senderControl The control config that sends the request.
+   * @param receiverControl The control config that receives the value.
+   * @param lang The current language to use.
+   */
+  retrieveSingleData?(configKey:string, senderControl: Control, receiverControl: Control, lang:string):Promise<any>
 }
 
 /**
@@ -58,6 +91,7 @@ export interface IFormBaseInputState {
   isValid: boolean;
   currentValue?: any;
   currentError?: string;
+  currentFilter?: string;
   dataStores?: DataStoreEntry[];
 }
 

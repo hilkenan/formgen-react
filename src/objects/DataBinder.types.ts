@@ -9,7 +9,7 @@ import { BinderType } from "../Enums";
  */
 export class DataBinder {
     typeName:string;
-    binderFunction: IDataBinder | IDataBinderAsync | IDataBinderFilterAsync;
+    binderFunction: IDataBinder | IDataBinderAsync | IDataBinderFilterAsync | IDataProviderFilterAsync;
     binderType: BinderType;
 }
 
@@ -28,8 +28,15 @@ export interface IDataBinderAsync {
 }
 
 /**
- * The Type of an Async Databinding Class  with a Filter string that return the Type of any as array as Promise
+ * The Type of an Async Databinding Class with a Filter string that return the Type of any as array as Promise
  */
 export interface IDataBinderFilterAsync {
     retrieveData(controlConfig: Control, lang:string, filter: string, limitResults?: number):Promise<any[]>
+}
+
+/**
+ * The Type of an Async DataService Class with a Filter string that return the Type of any as array as Promise
+ */
+export interface IDataProviderFilterAsync {
+    retrieveFilteredListData(configKey:string, controlConfig: Control, lang:string, filter: string, limitResults?: number):Promise<any[]>       
 }

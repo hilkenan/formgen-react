@@ -4,6 +4,7 @@
     "pleaseSelect": "Veuillez sélectionner",
     "required": "Obligatoire",
     "loadData": "Charge des date...",
+    "nothingFound": "Aucun résultat",    
     "buttonSend": "Envoyer",
     "buttonCancel": "Annuler"  
   }
