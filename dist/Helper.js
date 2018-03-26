@@ -13,6 +13,54 @@ var Helper = /** @class */ (function () {
     function Helper() {
     }
     /**
+     * Get if available the control key between square brackets in a key
+     * @param key The full key to get the value from
+     */
+    Helper.getControlKeyFromConfigKey = function (key) {
+        var result = key.match("\\[(.*)]");
+        if (result)
+            return result[0].substring(1, result[0].length - 1);
+        else
+            return undefined;
+    };
+    /**
+     * Get from a key definition everything after the second .
+     * @param key The full key to get the value from
+     */
+    Helper.getConfigKeyFromProviderKey = function (key) {
+        var startIndex = key.indexOf("]");
+        var startIndexDot = key.indexOf(".");
+        if (startIndex == -1 && startIndexDot != -1) {
+            return key.substring(startIndexDot + 1);
+        }
+        else if (startIndex != -1) {
+            return key.substring(startIndex + 2);
+        }
+        else
+            return key;
+    };
+    /**
+     * Compare two arrays.
+     */
+    Helper.compareArrays = function (x, y) {
+        var objectsAreSame = true;
+        if (x.length == 0 && y.length == 0)
+            return true;
+        if (x.length != y.length)
+            return false;
+        for (var i = 0; i < x.length; i++) {
+            var objectA = x[i];
+            var objectB = y[i];
+            for (var propertyName in objectA) {
+                if (objectA[propertyName] !== objectB[propertyName]) {
+                    objectsAreSame = false;
+                    break;
+                }
+            }
+        }
+        return objectsAreSame;
+    };
+    /**
      * Return even the Language set at the form
      * or when not set the language from the users browser.
      */

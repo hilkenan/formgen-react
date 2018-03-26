@@ -13,6 +13,10 @@ exports.LocalsCommon = react_intl_1.defineMessages({
         id: "required",
         defaultMessage: "Required"
     },
+    nothingFound: {
+        id: "nothingFound",
+        defaultMessage: "No matches"
+    },
     loadData: {
         id: "loadData",
         defaultMessage: "Load data..."

@@ -41,6 +41,8 @@ export declare class Control {
     CssClass?: string;
     DataBinders: string[];
     DataProviderConfigKeys: string[];
+    DataProviderValueConfigKey?: string;
+    DataProviderDefaultValueConfigKey?: string;
     Styles?: any;
     FormValidators: FormValidator[];
 }

@@ -9,6 +9,20 @@ import { DataStoreEntry } from "./formBaseInput/FormBaseInput.types";
  */
 export declare class Helper {
     /**
+     * Get if available the control key between square brackets in a key
+     * @param key The full key to get the value from
+     */
+    static getControlKeyFromConfigKey(key: string): string;
+    /**
+     * Get from a key definition everything after the second .
+     * @param key The full key to get the value from
+     */
+    static getConfigKeyFromProviderKey(key: string): string;
+    /**
+     * Compare two arrays.
+     */
+    static compareArrays(x: any[], y: any[]): boolean;
+    /**
      * Return even the Language set at the form
      * or when not set the language from the users browser.
      */

@@ -28,6 +28,8 @@ export declare abstract class GenericForm<T extends JFormData> extends BaseCompo
     formData: T;
     /** All registered inputs the form is aware of */
     private _mountedInputs;
+    /** All registered inputs for an event of value changes */
+    private _controlEvents;
     /** Flag which marks whether or not the form has attempted to have been submitted */
     private _pristine;
     /** The data store container for injection. */
@@ -87,11 +89,42 @@ export declare abstract class GenericForm<T extends JFormData> extends BaseCompo
      */
     private _mountInput(input);
     /**
+     * Register if available the event on the control defined between squer brackets
+     * @param input The input that has rais an update
+     * @param key The key with square brackets
+     */
+    private _registerEvents(input, key?);
+    /**
+     * Register the input in the controlEvents
+     * @param controlKey The key from the control to register
+     * @param input The input that has to register.
+     */
+    private _registerEventInControlEvents(controlKey, input);
+    /**
      * Set the validation result, if Valid the control Value and if defined call the onUpdated Method
      * @param input The input that has rais an update
      * @param validate True if the input should validated.
      */
     private _submitValue(input, validate?);
+    /**
+     * Sed the senderControl Infos to the Receiver at the bound Control
+     * @param eventControl The EventControl to get the receiver from
+     * @param senderControl The sending controll
+    */
+    private _sendValutToControls(eventControl, senderControl);
+    /**
+     * Send the value to an given control. If need convert it with the provider key to another value
+     * @param input The input that has rais an update
+     * @param value The value to be send
+     */
+    private _sendValutToControl(receiverControl, senderControl);
+    /**
+     * Get the value from a defined provider or default value.
+     * @param input The input that has rais an update
+     * @param value The value to be used when nothing others devined
+     * @param keyToResolve The Key to resolve with the provider
+     */
+    private _getValueFromProvider(receiverControl, senderControl, keyToResolve);
     /**
      * Unregister an input with the form
      * @param input The input to unregister

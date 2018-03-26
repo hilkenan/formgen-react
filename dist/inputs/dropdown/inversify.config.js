@@ -24,7 +24,7 @@ var MockContainer = /** @class */ (function (_super) {
         return _this;
     }
     MockContainer.prototype.declareDependencies = function () {
-        this.bind(FormBaseInput_types_1.typesForInject.IDataProviderService).to(MockDataProviderService_1.MockDataProviderService);
+        this.bind(FormBaseInput_types_1.typesForInject.IDataProviderCollection).to(MockDataProviderService_1.MockDataProviderCollection);
     };
     return MockContainer;
 }(inversify_1.Container));

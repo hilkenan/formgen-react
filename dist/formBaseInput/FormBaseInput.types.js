@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * The Types to use for injection
  */
-exports.typesForInject = { IDataProviderService: "IDataProviderService" };
+exports.typesForInject = { IDataProviderCollection: "IDataProviderCollection" };
 /**
  * An data Store Entry object.
  */

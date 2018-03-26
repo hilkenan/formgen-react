@@ -10,6 +10,10 @@ export declare const LocalsCommon: {
         id: string;
         defaultMessage: string;
     };
+    nothingFound: {
+        id: string;
+        defaultMessage: string;
+    };
     loadData: {
         id: string;
         defaultMessage: string;

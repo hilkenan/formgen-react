@@ -156,7 +156,8 @@ var FormPeoplePicker = /** @class */ (function (_super) {
         var _this = this;
         return new Promise(function (resolve, reject) {
             if (filterText && _this.retrievFilterData[_this.peopleListFilterFunction]) {
-                _this.retrievFilterData[_this.peopleListFilterFunction].retrieveData(_this.props.control, Helper_1.Helper.getLanguage(), filterText, limitResults).then(function (filteredPersonas) {
+                var retrieverBinder = _this.retrievFilterData[_this.peopleListFilterFunction];
+                retrieverBinder.retrieveData(_this.props.control, Helper_1.Helper.getLanguage(), filterText, limitResults).then(function (filteredPersonas) {
                     filteredPersonas = _this._removeDuplicates(filteredPersonas, currentPersonas);
                     _this.setState({ mostRecentlyUsed: filteredPersonas });
                     resolve(filteredPersonas);

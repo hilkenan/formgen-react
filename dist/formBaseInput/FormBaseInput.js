@@ -89,20 +89,26 @@ var FormBaseInput = /** @class */ (function (_super) {
         if (!options)
             options = [];
         var entry = options.find(function (d) { return d.key == dataKey; });
-        if (entry) {
-            entry.data = data;
+        var refresh = false;
+        if (entry && !entry.data)
+            entry.data = [];
+        if (entry && (!Helper_1.Helper.compareArrays(entry.data, data) || entry.onLoading != isAsync || entry.waitText != waitText)) {
+            refresh = true;
+            entry.data = data && data.length == 0 ? undefined : data;
             entry.onLoading = isAsync;
             entry.waitText = waitText;
         }
-        else {
+        else if (!entry) {
+            refresh = true;
             options.push({
                 key: dataKey,
-                data: data,
+                data: data && data.length == 0 ? undefined : data,
                 onLoading: isAsync,
                 waitText: waitText
             });
         }
-        this.setState({ dataStores: options });
+        if (refresh)
+            this.setState({ dataStores: options });
     };
     /**
     * Get the Error Message back after falidation the Value.
@@ -138,6 +144,31 @@ var FormBaseInput = /** @class */ (function (_super) {
         }
     };
     /**
+    * Loads the data from the Store async with a filter teext
+    * If Async loading the return true
+    * @param configKey The Key from the datastore
+    * @param provider The Data Provider for Async Filter
+    * @param loadedFunction The funtion to call after data is loaded
+    * @param waitText The Waiting Text for async loading controls.
+    * @param control The sender Control that has the Filter Text
+    * @param filter The Filter Text.
+    */
+    FormBaseInput.prototype.loadDataFromStoreWithFilter = function (configKey, provider, loadedFunction, waitText, control, filter) {
+        var _this = this;
+        if (provider) {
+            var entry = this.state.dataStores ? this.state.dataStores.find(function (e) { return e.key == configKey; }) : undefined;
+            if (!entry) {
+                var waitText_1 = this.commonFormater.formatMessage(LocalsCommon_1.LocalsCommon.loadData);
+                loadedFunction(configKey, undefined, waitText_1, true);
+            }
+            provider.retrieveFilteredListData(configKey, control, Helper_1.Helper.getLanguage(), filter).then(function (list) {
+                var waitTextA = !list || list.length == 0 ?
+                    _this.commonFormater.formatMessage(LocalsCommon_1.LocalsCommon.nothingFound) : waitText;
+                loadedFunction(configKey, list, waitTextA, false);
+            });
+        }
+    };
+    /**
     * Loads the data from the Store async or sync.
     * If Async loading the return true
     * @param dataStoreKey The Key from the datastore
@@ -148,8 +179,8 @@ var FormBaseInput = /** @class */ (function (_super) {
         var dataBinderAsync = this.dataStore[dataStoreKey];
         var dataBinder = this.dataStore[dataStoreKey];
         if (dataBinderAsync && dataBinderAsync.then) {
-            var waitText_1 = this.commonFormater.formatMessage(LocalsCommon_1.LocalsCommon.loadData);
-            loadedFunction(dataStoreKey, undefined, waitText_1, true);
+            var waitText_2 = this.commonFormater.formatMessage(LocalsCommon_1.LocalsCommon.loadData);
+            loadedFunction(dataStoreKey, undefined, waitText_2, true);
             dataBinderAsync.then(function (optionList) {
                 loadedFunction(dataStoreKey, optionList, "", false);
             });
@@ -168,23 +199,34 @@ var FormBaseInput = /** @class */ (function (_super) {
     */
     FormBaseInput.prototype.getDataOptionEntry = function (staticData, key, defaultPlaceholder) {
         var optionsEntry;
-        if (!staticData && this.state.dataStores) {
-            optionsEntry = this.state.dataStores.find(function (e) { return e.key == key; });
-        }
-        if (optionsEntry) {
-            optionsEntry.waitText = Helper_1.Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+        var controlKey = Helper_1.Helper.getControlKeyFromConfigKey(key);
+        if (controlKey && this.state.currentFilter) {
+            var provider = this.retrievFilterData[key];
+            var waitText = Helper_1.Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+            this.loadDataFromStoreWithFilter(key, provider, this.storeOptions, waitText, this.props.control, this.state.currentFilter);
+            var entry = this.state.dataStores ?
+                this.state.dataStores.find(function (e) { return e.key == key; }) : undefined;
+            return entry;
         }
         else {
-            optionsEntry = {
-                key: "default",
-                data: staticData,
-                onLoading: false,
-                waitText: Helper_1.Helper.getPlaceHolderText(undefined, defaultPlaceholder)
-            };
+            if (!staticData && this.state.dataStores) {
+                optionsEntry = this.state.dataStores.find(function (e) { return e.key == key; });
+            }
+            if (optionsEntry) {
+                optionsEntry.waitText = Helper_1.Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
+            }
+            else {
+                optionsEntry = {
+                    key: "default",
+                    data: staticData,
+                    onLoading: false,
+                    waitText: Helper_1.Helper.getPlaceHolderText(undefined, defaultPlaceholder)
+                };
+            }
+            if (this.props.control.ReadOnly)
+                optionsEntry.onLoading = true;
+            return optionsEntry;
         }
-        if (this.props.control.ReadOnly)
-            optionsEntry.onLoading = true;
-        return optionsEntry;
     };
     /** True if the Required validator is set. */
     FormBaseInput.prototype.IsRequired = function () {
@@ -214,14 +256,32 @@ var FormBaseInput = /** @class */ (function (_super) {
         if (this.props.control.DataProviderConfigKeys.length > 0 && container == undefined)
             throw "No Data Service Container found";
         if (this.props.control.DataProviderConfigKeys.length > 0) {
-            var dataProvide = container.get(FormBaseInput_types_1.typesForInject.IDataProviderService);
-            if (dataProvide == undefined)
+            var dataProviders = container.get(FormBaseInput_types_1.typesForInject.IDataProviderCollection);
+            if (dataProviders == undefined || dataProviders.providers.length == 0)
                 throw "No Data Service found";
-            dataProvide.formData = formData;
+            var _loop_1 = function (configKey) {
+                var keyParts = configKey.split(".");
+                var dataProvider = dataProviders.providers.find(function (p) { return p.providerServiceKey == keyParts[0]; });
+                if (dataProvider == undefined)
+                    throw "No DataProvider found with key " + keyParts[0] + " name is: " + dataProviders.providers[0].providerServiceKey;
+                dataProvider.formData = formData;
+                var result = Helper_1.Helper.getControlKeyFromConfigKey(configKey);
+                if (result && dataProvider.retrieveFilteredListData) {
+                    var binderFuntion = {
+                        retrieveFilteredListData: dataProvider.retrieveFilteredListData
+                    };
+                    this_1.retrievFilterData[configKey] = binderFuntion;
+                }
+                else {
+                    var providerConfigKey = Helper_1.Helper.getConfigKeyFromProviderKey(configKey);
+                    this_1.dataStore[configKey] = dataProvider.retrieveListData(providerConfigKey, this_1.props.control, Helper_1.Helper.getLanguage());
+                    this_1.loadDataFromStore(configKey, this_1.storeOptions, "");
+                }
+            };
+            var this_1 = this;
             for (var _b = 0, _c = this.props.control.DataProviderConfigKeys; _b < _c.length; _b++) {
                 var configKey = _c[_b];
-                this.dataStore[configKey] = dataProvide.retrieveListData(configKey, this.props.control, Helper_1.Helper.getLanguage());
-                this.loadDataFromStore(configKey, this.storeOptions, "");
+                _loop_1(configKey);
             }
         }
         for (var _d = 0, _e = this.props.control.DataBinders; _d < _e.length; _d++) {

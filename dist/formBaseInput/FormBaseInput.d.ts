@@ -5,7 +5,8 @@ import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry } from './Form
 export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
 import { IFormContext, IFormValidationResult } from '../form/Form.types';
-import { IDataBinderFilterAsync } from '../objects/DataBinder.types';
+import { IDataBinderFilterAsync, IDataProviderFilterAsync } from '../objects/DataBinder.types';
+import { Control } from '..';
 /**
  * Default Debaunce of 250 Ticks.
  */
@@ -67,6 +68,17 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     */
     protected validateProps(props?: any): void;
     /**
+    * Loads the data from the Store async with a filter teext
+    * If Async loading the return true
+    * @param configKey The Key from the datastore
+    * @param provider The Data Provider for Async Filter
+    * @param loadedFunction The funtion to call after data is loaded
+    * @param waitText The Waiting Text for async loading controls.
+    * @param control The sender Control that has the Filter Text
+    * @param filter The Filter Text.
+    */
+    loadDataFromStoreWithFilter(configKey: string, provider: IDataProviderFilterAsync, loadedFunction: DataLoadedFunction, waitText: string, control: Control, filter: string): void;
+    /**
     * Loads the data from the Store async or sync.
     * If Async loading the return true
     * @param dataStoreKey The Key from the datastore
@@ -100,7 +112,7 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     };
     /** The Asynchronous Filter Methods. */
     protected retrievFilterData: {
-        [key: string]: IDataBinderFilterAsync;
+        [key: string]: IDataBinderFilterAsync | IDataProviderFilterAsync;
     };
     /**
     * Load the Databinder. Sync and Async are loaded. AsyncFilter is loade when user type an filter.

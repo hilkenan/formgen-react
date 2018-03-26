@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var inversify_1 = require("inversify");
 var MockDataProviderService = /** @class */ (function () {
     function MockDataProviderService() {
+        this.providerServiceKey = "mockDataService";
     }
     /**
    * Retrieve data from the store
@@ -30,10 +31,54 @@ var MockDataProviderService = /** @class */ (function () {
             setTimeout(function () { return resolve(dropDonwEntries); }, 5000);
         });
     };
-    MockDataProviderService = __decorate([
-        inversify_1.injectable()
-    ], MockDataProviderService);
+    MockDataProviderService.prototype.retrieveSingleData = function (configKey, senderControl, receiverControl, lang) {
+        return new Promise(function (resolve, reject) {
+            if (senderControl && senderControl.Value == "11:00:01") {
+                resolve("nothing else");
+                return;
+            }
+            if (configKey == "testA") {
+                resolve("1");
+                return;
+            }
+            else {
+                resolve("");
+                return;
+            }
+        });
+    };
+    MockDataProviderService.prototype.retrieveFilteredListData = function (configKey, controlConfig, lang, filter, limitResults) {
+        return new Promise(function (resolve, reject) {
+            var dropDonwEntries = [];
+            if (filter == "1") {
+                dropDonwEntries.push({
+                    key: 1,
+                    text: "Test 1"
+                });
+            }
+            if (filter == "2") {
+                dropDonwEntries.push({
+                    key: 2,
+                    text: "Test2"
+                });
+            }
+            setTimeout(function () { return resolve(dropDonwEntries); }, 1000);
+        });
+    };
     return MockDataProviderService;
 }());
 exports.MockDataProviderService = MockDataProviderService;
+var MockDataProviderCollection = /** @class */ (function () {
+    function MockDataProviderCollection() {
+        this.providers = [];
+        var mockProvider = new MockDataProviderService();
+        mockProvider.providerServiceKey;
+        this.providers.push(mockProvider);
+    }
+    MockDataProviderCollection = __decorate([
+        inversify_1.injectable()
+    ], MockDataProviderCollection);
+    return MockDataProviderCollection;
+}());
+exports.MockDataProviderCollection = MockDataProviderCollection;
 //# sourceMappingURL=MockDataProviderService.js.map

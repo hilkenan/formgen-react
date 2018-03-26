@@ -45,6 +45,8 @@ var Control = /** @class */ (function () {
         this.CssClass = undefined;
         this.DataBinders = [];
         this.DataProviderConfigKeys = [];
+        this.DataProviderValueConfigKey = "";
+        this.DataProviderDefaultValueConfigKey = "";
         this.Styles = undefined;
         this.FormValidators = [];
     }
@@ -206,8 +208,14 @@ var Control = /** @class */ (function () {
         json2typescript_1.JsonProperty("databinders", [String], true)
     ], Control.prototype, "DataBinders", void 0);
     __decorate([
-        json2typescript_1.JsonProperty("dataProviderConfigKeys", [String], true)
+        json2typescript_1.JsonProperty("dataprovider_list_configkeys", [String], true)
     ], Control.prototype, "DataProviderConfigKeys", void 0);
+    __decorate([
+        json2typescript_1.JsonProperty("dataprovider_value_configkey", String, true)
+    ], Control.prototype, "DataProviderValueConfigKey", void 0);
+    __decorate([
+        json2typescript_1.JsonProperty("dataprovider_defaultvalue_configkey", String, true)
+    ], Control.prototype, "DataProviderDefaultValueConfigKey", void 0);
     __decorate([
         json2typescript_1.JsonProperty("styles", json2typescript_1.Any, true)
     ], Control.prototype, "Styles", void 0);
