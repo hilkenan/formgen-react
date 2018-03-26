@@ -11,8 +11,26 @@
 	"rows": [{
 		"columns": [{
 				"controls": [{
+					"id": "textbox",
+					"title": "TextBox",
+					"control_type": [ "Textbox" ],
+					"info": "Info Test",
+					"dataprovider_value_configkey": "mockDataService.[testform.maskedtextbox]",
+					"validators": [{
+							"validator_type": [ "Required" ]
+						},{
+							"validator_type": [ "MaxLength" ],
+							"value": 10,
+							"message": "Maximal 10 chars"
+						}
+					],
+					"label_position": [ "Top"]
+				},{
 					"id": "info",
-                "title": "<b>This is a Info about this Test Document in Englisch</b>",
+				"title": "<b>This is a Info about this Test Document in Englisch</b>",
+                "dataprovider_list_configkeys": [
+                    "mockDataService.[testform.textbox].loadList1"
+                ],
 				"control_type": [ "InfoText" ],
 				"title_trans": {
 					"de": "<b>Das ist ein Info Text über dieses Dokument in Deutsch</b>",
@@ -107,21 +125,6 @@
 				},
 				"label_position": [ "Top"]
 			}, {
-				"id": "textbox",
-				"title": "TextBox",
-				"control_type": [ "Textbox" ],
-				"info": "Info Test",
-				"dataprovider_value_configkey": "mockDataService.[testform.maskedtextbox]",
-				"validators": [{
-						"validator_type": [ "Required" ]
-					},{
-						"validator_type": [ "MaxLength" ],
-						"value": 10,
-						"message": "Maximal 10 chars"
-					}
-				],
-				"label_position": [ "Top"]
-			},{
                 "id": "dropdown",
                     "validators": [{
                         "validator_type": [ "Required" ]
@@ -134,7 +137,7 @@
                 ],
                 "title": "DropDown",
                 "dataprovider_list_configkeys": [
-                    "mockDataService.[testform.textbox].loadList1"
+                    "mockDataService.loadList1"
                 ],
                 "control_type": [ "DropDown" ],
                 "info": "Info Test",

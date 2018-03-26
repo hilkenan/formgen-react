@@ -184,7 +184,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
  public loadDataFromStoreWithFilter(configKey:string, provider:IDataProviderFilterAsync, loadedFunction:DataLoadedFunction, 
     waitText: string, control:Control, filter:string) {
   if (provider) {
-    let entry = this.state.dataStores.find(e => e.key == configKey);
+    let entry = this.state.dataStores ? this.state.dataStores.find(e => e.key == configKey) : undefined;
     if (!entry) {
       let waitText = this.commonFormater.formatMessage(LocalsCommon.loadData);
       loadedFunction(configKey, undefined, waitText, true);
@@ -235,7 +235,8 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
         let provider = this.retrievFilterData[key] as IDataProviderFilterAsync;
         let waitText = Helper.getPlaceHolderText(optionsEntry, defaultPlaceholder);
         this.loadDataFromStoreWithFilter(key, provider, this.storeOptions, waitText, this.props.control, this.state.currentFilter);
-        let entry = this.state.dataStores.find(e => e.key == key);        
+        let entry = this.state.dataStores ?
+          this.state.dataStores.find(e => e.key == key) : undefined;
         return entry;
     }
     else {
