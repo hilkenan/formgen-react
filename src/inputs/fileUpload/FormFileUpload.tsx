@@ -43,6 +43,7 @@ export class FormFileUpload extends FormBaseInput<IFormFileUploadProps, IFormBas
       throw "Provider must be specified for upload files"
     if (this.props.control.DataProviderConfigKeys.length != 1)
       throw "Only one Data Provider is allowed for file management"
+    
     let providerConfigKey = Helper.getConfigKeyFromProviderKey(this.props.control.DataProviderConfigKeys[0]);
     this.dataProviderService.removeFile(providerConfigKey, this.props.control, fileName);
     let usedFiles = this.state.currentValue as IFileObject[];
@@ -61,6 +62,9 @@ export class FormFileUpload extends FormBaseInput<IFormFileUploadProps, IFormBas
       throw "Provider must be specified for upload files"
     if (this.props.control.DataProviderConfigKeys.length != 1)
       throw "Only one Data Provider is allowed for file management"
+    if (this.dataProviderService.addFile == undefined)
+      throw "The Provider does not suppoort adding files."
+      
     let providerConfigKey = Helper.getConfigKeyFromProviderKey(this.props.control.DataProviderConfigKeys[0]);
 
     let storedFiles: IFileObject[] = [];
@@ -105,7 +109,9 @@ export class FormFileUpload extends FormBaseInput<IFormFileUploadProps, IFormBas
             {
               this.state.currentValue.map(f => <li key={f.fileName}>
                 <a href={ f.storedPath }>{f.fileName} - {f.fileSize} { bytes } </a>  
-                <button className="ms-Icon ms-Icon--Delete" aria-hidden="true" onClick={ () => this.onRemove(f.fileName) } ></button>
+                { this.dataProviderService.removeFile && (
+                  <button className="ms-Icon ms-Icon--Delete" aria-hidden="true" onClick={ () => this.onRemove(f.fileName) } ></button>
+                )}
                 </li>)
             }
           </ul>

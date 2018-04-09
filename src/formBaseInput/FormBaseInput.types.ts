@@ -68,7 +68,7 @@ export interface IDataProviderService {
    * @param fileContent The Content of the file.
    * @returns The full path where the file was stored.
    */
-  addFile(configKey:string, controlConfig: Control, fileName:string, fileContent: any) : string;
+  addFile?(configKey:string, controlConfig: Control, fileName:string, fileContent: any) : string;
 
   /** 
    * Remove a file from the data store
@@ -76,7 +76,7 @@ export interface IDataProviderService {
    * @param controlConfig The control that calls the request.
    * @param fileName The FileName to be removed.
    */
-  removeFile(configKey:string, controlConfig: Control, fileName:string);
+  removeFile?(configKey:string, controlConfig: Control, fileName:string);
 }
 
 /**
