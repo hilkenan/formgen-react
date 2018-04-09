@@ -25,7 +25,8 @@ export enum ControlTypes {
     CustomButton = "CustomButton",
     PeoplePicker = "PeoplePicker",
     DateTimePicker = "DateTimePicker",
-    TimePicker = "TimePicker"
+    TimePicker = "TimePicker",
+    FileUpload = "FileUpload"
 }
 
 /**

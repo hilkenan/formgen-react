@@ -6,6 +6,7 @@
     "loadData": "Charge des date...",
     "nothingFound": "Aucun résultat",    
     "buttonSend": "Envoyer",
-    "buttonCancel": "Annuler"  
+    "buttonCancel": "Annuler",
+    "bytes": "octets"
   }
 }

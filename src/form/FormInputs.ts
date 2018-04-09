@@ -22,6 +22,7 @@ import { FormTimeInput } from '../inputs/timeInput/FormTimeInput';
 import { FormInfoText } from '../inputs/info/FormInfoText';
 import { Tab } from '../inputs/tab/Tab';
 import { TabContainer } from '../inputs/tab/TabContainer';
+import { FormFileUpload } from '../inputs/fileUpload/FormFileUpload';
 import { ControlTypes } from "../Enums";
 
 /**
@@ -54,7 +55,9 @@ export class FormInputs {
         { typeName: ControlTypes.DateTimePicker, controlType: FormDateTimePicker },
         { typeName: ControlTypes.TimePicker, controlType: FormTimePicker },
         { typeName: ControlTypes.Time, controlType: FormTimeInput },
-        { typeName: ControlTypes.InfoText, controlType: FormInfoText }
+        { typeName: ControlTypes.InfoText, controlType: FormInfoText },
+        { typeName: ControlTypes.FileUpload, controlType: FormFileUpload }
+       
     ];
    
     /**

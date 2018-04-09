@@ -1,7 +1,7 @@
 /* tslint:disable:no-any */
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry, typesForInject, IDataProviderCollection } from './FormBaseInput.types';
+import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry, typesForInject, IDataProviderCollection, IDataProviderService } from './FormBaseInput.types';
 export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
 import { TranslatedProperty, ValidatorTypes, BinderType } from '../Enums';
@@ -287,6 +287,9 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
   /** The Asynchronous Filter Methods. */ 
   protected retrievFilterData: { [key: string]: IDataBinderFilterAsync | IDataProviderFilterAsync } = {}
 
+  /** The Data Provier Service used for this control */ 
+  protected dataProviderService?: IDataProviderService;
+
   /**
   * Load the Databinder. Sync and Async are loaded. AsyncFilter is loade when user type an filter.
   */ 
@@ -317,21 +320,21 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
         throw "No Data Service found"
       for(let configKey of this.props.control.DataProviderConfigKeys) {
         let keyParts = configKey.split(".");
-        let dataProvider = dataProviders.providers.find(p => p.providerServiceKey ==  keyParts[0])
-        if (dataProvider == undefined)
+        this.dataProviderService = dataProviders.providers.find(p => p.providerServiceKey ==  keyParts[0])
+        if (this.dataProviderService == undefined)
           throw "No DataProvider found with key " + keyParts[0] + " name is: " + dataProviders.providers[0].providerServiceKey;
-        dataProvider.formData = formData;
+        this.dataProviderService.formData = formData;
 
         let result = Helper.getControlKeyFromConfigKey(configKey);
-        if (result && dataProvider.retrieveFilteredListData) {
+        if (result && this.dataProviderService.retrieveFilteredListData) {
           let binderFuntion:IDataProviderFilterAsync = {
-            retrieveFilteredListData: dataProvider.retrieveFilteredListData 
+            retrieveFilteredListData: this.dataProviderService.retrieveFilteredListData 
           }
           this.retrievFilterData[configKey] = binderFuntion; 
         }
         else {
           let providerConfigKey = Helper.getConfigKeyFromProviderKey(configKey);
-          this.dataStore[configKey] = dataProvider.retrieveListData(providerConfigKey, this.props.control, Helper.getLanguage()); 
+          this.dataStore[configKey] = this.dataProviderService.retrieveListData(providerConfigKey, this.props.control, Helper.getLanguage()); 
           this.loadDataFromStore(configKey,this.storeOptions, "");
         }
       }

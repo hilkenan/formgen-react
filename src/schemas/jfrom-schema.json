@@ -260,7 +260,8 @@
 					"CustomButton",
 					"PeoplePicker",
 					"DateTimePicker",
-					"TimePicker"
+					"TimePicker",
+					"FileUpload"
 				]
 			}
 		}

@@ -6,6 +6,7 @@
     "loadData": "Lädt Daten...",
     "nothingFound": "Keine Treffer",
     "buttonSend": "Senden",
-    "buttonCancel": "Abbrechen"
+    "buttonCancel": "Abbrechen",
+    "bytes": "bytes"
   }
 }

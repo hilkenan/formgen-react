@@ -59,6 +59,24 @@ export interface IDataProviderService {
    * @param lang The current language to use.
    */
   retrieveSingleData?(configKey:string, senderControl: Control, receiverControl: Control, lang:string):Promise<any>
+
+  /** 
+   * Add a file to the data store
+   * @param configKey Config Key from the control. This will use the by the provider to finde the correct configuration for this request
+   * @param controlConfig The control that calls the request.
+   * @param fileName The FileName to be stored.
+   * @param fileContent The Content of the file.
+   * @returns The full path where the file was stored.
+   */
+  addFile(configKey:string, controlConfig: Control, fileName:string, fileContent: any) : string;
+
+  /** 
+   * Remove a file from the data store
+   * @param configKey Config Key from the control. This will use the by the provider to finde the correct configuration for this request
+   * @param controlConfig The control that calls the request.
+   * @param fileName The FileName to be removed.
+   */
+  removeFile(configKey:string, controlConfig: Control, fileName:string);
 }
 
 /**

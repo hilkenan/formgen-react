@@ -27,5 +27,9 @@ export const LocalsCommon = defineMessages({
   buttonCancel: { 
     id: "buttonCancel", 
     defaultMessage: "Cancel"
-  }
+  },
+  bytes: { 
+    id: "bytes", 
+    defaultMessage: "bytes"
+  },
 }); 
