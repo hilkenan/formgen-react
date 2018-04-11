@@ -45,6 +45,14 @@ export class MockDataProviderService implements IDataProviderService {
     });
   }
 
+  public addFile(configKey:string, controlConfig: Control, fileName:string, fileContent: any) : string {
+      return "http://test/" + fileName
+  }
+
+  public removeFile(configKey:string, controlConfig: Control, fileName:string) {
+
+  }
+
   public retrieveFilteredListData?(configKey:string, controlConfig: Control, lang:string, filter: string, limitResults?: number):Promise<any[]> {
     return new Promise<any[]>((resolve, reject)  => {
         let dropDonwEntries:IDropdownOption[] = [];

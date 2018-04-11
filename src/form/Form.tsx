@@ -434,7 +434,8 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
       }
 
       let controlKey = Helper.getControlKeyFromConfigKey(keyToResolve);
-      keyToResolve = keyToResolve.replace(controlKey, controlKey.replace(".", "/"));
+      if (controlKey)
+        keyToResolve = keyToResolve.replace(controlKey, controlKey.replace(".", "/"));
       let keyParts:string[] = keyToResolve.split(".");
 
       if (keyToResolve.startsWith("[") && keyParts.length == 1 && senderControl) {
