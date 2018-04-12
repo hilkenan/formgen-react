@@ -267,9 +267,7 @@ var FormBaseInput = /** @class */ (function (_super) {
                 this_1.dataProviderService.formData = formData;
                 var result = Helper_1.Helper.getControlKeyFromConfigKey(configKey);
                 if (result && this_1.dataProviderService.retrieveFilteredListData) {
-                    var binderFuntion = {
-                        retrieveFilteredListData: this_1.dataProviderService.retrieveFilteredListData
-                    };
+                    var binderFuntion = this_1.dataProviderService;
                     this_1.retrievFilterData[configKey] = binderFuntion;
                 }
                 else {

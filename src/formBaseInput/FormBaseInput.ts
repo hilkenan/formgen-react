@@ -327,9 +327,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
 
         let result = Helper.getControlKeyFromConfigKey(configKey);
         if (result && this.dataProviderService.retrieveFilteredListData) {
-          let binderFuntion:IDataProviderFilterAsync = {
-            retrieveFilteredListData: this.dataProviderService.retrieveFilteredListData 
-          }
+          let binderFuntion = this.dataProviderService as IDataProviderFilterAsync;
           this.retrievFilterData[configKey] = binderFuntion; 
         }
         else {
