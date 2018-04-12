@@ -82,7 +82,7 @@ var FormFileUpload = /** @class */ (function (_super) {
         var storedFiles = this.state.currentValue;
         acceptedFiles.forEach(function (file) {
             var reader = new FileReader();
-            reader.onload = function () {
+            reader.onloadend = function (e) {
                 var fileAsBinaryArray = reader.result;
                 var fileName = file.name;
                 var storedPath = _this.dataProviderService.addFile(providerConfigKey, _this.props.control, fileName, fileAsBinaryArray);

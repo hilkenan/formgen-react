@@ -75,7 +75,7 @@ export class FormFileUpload extends FormBaseInput<IFormFileUploadProps, IFormBas
     let storedFiles = this.state.currentValue as IFileObject[];
     acceptedFiles.forEach(file => {
       const reader = new FileReader();
-      reader.onload = () => {
+      reader.onloadend = (e) => {
           const fileAsBinaryArray = reader.result;
           const fileName = file.name;
           let storedPath = this.dataProviderService.addFile(providerConfigKey, this.props.control, fileName, fileAsBinaryArray);
