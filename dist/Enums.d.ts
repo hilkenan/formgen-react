@@ -26,6 +26,7 @@ export declare enum ControlTypes {
     PeoplePicker = "PeoplePicker",
     DateTimePicker = "DateTimePicker",
     TimePicker = "TimePicker",
+    FileUpload = "FileUpload",
 }
 /**
  * Enum for all current supported Languages

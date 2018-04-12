@@ -1,7 +1,7 @@
 /// <reference types="react-intl" />
 /// <reference types="react" />
 import * as React from 'react';
-import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry } from './FormBaseInput.types';
+import { IFormBaseInputProps, IFormBaseInputState, DataStoreEntry, IDataProviderService } from './FormBaseInput.types';
 export { IFormBaseInputProps };
 import { BaseComponent, ICancelable } from 'office-ui-fabric-react/lib/Utilities';
 import { IFormContext, IFormValidationResult } from '../form/Form.types';
@@ -114,6 +114,8 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     protected retrievFilterData: {
         [key: string]: IDataBinderFilterAsync | IDataProviderFilterAsync;
     };
+    /** The Data Provier Service used for this control */
+    protected dataProviderService?: IDataProviderService;
     /**
     * Load the Databinder. Sync and Async are loaded. AsyncFilter is loade when user type an filter.
     */

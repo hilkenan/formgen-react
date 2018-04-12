@@ -26,4 +26,8 @@ export declare const LocalsCommon: {
         id: string;
         defaultMessage: string;
     };
+    bytes: {
+        id: string;
+        defaultMessage: string;
+    };
 };

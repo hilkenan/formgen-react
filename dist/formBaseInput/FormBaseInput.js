@@ -261,20 +261,20 @@ var FormBaseInput = /** @class */ (function (_super) {
                 throw "No Data Service found";
             var _loop_1 = function (configKey) {
                 var keyParts = configKey.split(".");
-                var dataProvider = dataProviders.providers.find(function (p) { return p.providerServiceKey == keyParts[0]; });
-                if (dataProvider == undefined)
+                this_1.dataProviderService = dataProviders.providers.find(function (p) { return p.providerServiceKey == keyParts[0]; });
+                if (this_1.dataProviderService == undefined)
                     throw "No DataProvider found with key " + keyParts[0] + " name is: " + dataProviders.providers[0].providerServiceKey;
-                dataProvider.formData = formData;
+                this_1.dataProviderService.formData = formData;
                 var result = Helper_1.Helper.getControlKeyFromConfigKey(configKey);
-                if (result && dataProvider.retrieveFilteredListData) {
+                if (result && this_1.dataProviderService.retrieveFilteredListData) {
                     var binderFuntion = {
-                        retrieveFilteredListData: dataProvider.retrieveFilteredListData
+                        retrieveFilteredListData: this_1.dataProviderService.retrieveFilteredListData
                     };
                     this_1.retrievFilterData[configKey] = binderFuntion;
                 }
                 else {
                     var providerConfigKey = Helper_1.Helper.getConfigKeyFromProviderKey(configKey);
-                    this_1.dataStore[configKey] = dataProvider.retrieveListData(providerConfigKey, this_1.props.control, Helper_1.Helper.getLanguage());
+                    this_1.dataStore[configKey] = this_1.dataProviderService.retrieveListData(providerConfigKey, this_1.props.control, Helper_1.Helper.getLanguage());
                     this_1.loadDataFromStore(configKey, this_1.storeOptions, "");
                 }
             };

@@ -28,6 +28,10 @@ exports.LocalsCommon = react_intl_1.defineMessages({
     buttonCancel: {
         id: "buttonCancel",
         defaultMessage: "Cancel"
-    }
+    },
+    bytes: {
+        id: "bytes",
+        defaultMessage: "bytes"
+    },
 });
 //# sourceMappingURL=LocalsCommon.js.map

@@ -388,7 +388,8 @@ var GenericForm = /** @class */ (function (_super) {
                 return;
             }
             var controlKey = Helper_1.Helper.getControlKeyFromConfigKey(keyToResolve);
-            keyToResolve = keyToResolve.replace(controlKey, controlKey.replace(".", "/"));
+            if (controlKey)
+                keyToResolve = keyToResolve.replace(controlKey, controlKey.replace(".", "/"));
             var keyParts = keyToResolve.split(".");
             if (keyToResolve.startsWith("[") && keyParts.length == 1 && senderControl) {
                 resolve(senderControl.state.currentValue);

@@ -23,6 +23,7 @@ var FormTimeInput_1 = require("../inputs/timeInput/FormTimeInput");
 var FormInfoText_1 = require("../inputs/info/FormInfoText");
 var Tab_1 = require("../inputs/tab/Tab");
 var TabContainer_1 = require("../inputs/tab/TabContainer");
+var FormFileUpload_1 = require("../inputs/fileUpload/FormFileUpload");
 var Enums_1 = require("../Enums");
 /**
 * Class the prepare the matching from the ControlTypes enum to the real control types.
@@ -55,7 +56,8 @@ var FormInputs = /** @class */ (function () {
             { typeName: Enums_1.ControlTypes.DateTimePicker, controlType: FormDateTimePicker_1.FormDateTimePicker },
             { typeName: Enums_1.ControlTypes.TimePicker, controlType: FormTimePicker_1.FormTimePicker },
             { typeName: Enums_1.ControlTypes.Time, controlType: FormTimeInput_1.FormTimeInput },
-            { typeName: Enums_1.ControlTypes.InfoText, controlType: FormInfoText_1.FormInfoText }
+            { typeName: Enums_1.ControlTypes.InfoText, controlType: FormInfoText_1.FormInfoText },
+            { typeName: Enums_1.ControlTypes.FileUpload, controlType: FormFileUpload_1.FormFileUpload }
         ];
     }
     /**

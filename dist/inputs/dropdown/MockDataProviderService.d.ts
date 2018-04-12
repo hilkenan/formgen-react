@@ -11,6 +11,8 @@ export declare class MockDataProviderService implements IDataProviderService {
    */
     retrieveListData(configKey: string, controlConfig: Control, lang: string): Promise<any[]>;
     retrieveSingleData(configKey: string, senderControl: Control, receiverControl: Control, lang: string): Promise<any>;
+    addFile(configKey: string, controlConfig: Control, fileName: string, fileContent: any): string;
+    removeFile(configKey: string, controlConfig: Control, fileName: string): void;
     retrieveFilteredListData?(configKey: string, controlConfig: Control, lang: string, filter: string, limitResults?: number): Promise<any[]>;
 }
 export declare class MockDataProviderCollection implements IDataProviderCollection {

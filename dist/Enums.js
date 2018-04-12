@@ -29,6 +29,7 @@ var ControlTypes;
     ControlTypes["PeoplePicker"] = "PeoplePicker";
     ControlTypes["DateTimePicker"] = "DateTimePicker";
     ControlTypes["TimePicker"] = "TimePicker";
+    ControlTypes["FileUpload"] = "FileUpload";
 })(ControlTypes = exports.ControlTypes || (exports.ControlTypes = {}));
 /**
  * Enum for all current supported Languages

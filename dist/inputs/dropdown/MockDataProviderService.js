@@ -47,6 +47,11 @@ var MockDataProviderService = /** @class */ (function () {
             }
         });
     };
+    MockDataProviderService.prototype.addFile = function (configKey, controlConfig, fileName, fileContent) {
+        return "http://test/" + fileName;
+    };
+    MockDataProviderService.prototype.removeFile = function (configKey, controlConfig, fileName) {
+    };
     MockDataProviderService.prototype.retrieveFilteredListData = function (configKey, controlConfig, lang, filter, limitResults) {
         return new Promise(function (resolve, reject) {
             var dropDonwEntries = [];
