@@ -30,7 +30,7 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
     /**
      * The debounced version of formContext.submitValue
      */
-    protected readonly debouncedSubmitValue: ICancelable<void> & ((input: GenericFormInput, validateIt?: boolean) => void);
+    protected readonly debouncedSubmitValue: ICancelable<void> & ((input: GenericFormInput, validateIt?: boolean, skipSendValue?: boolean) => void);
     /**
      * Form context passed by the parent form
      */
@@ -142,5 +142,5 @@ export declare abstract class FormBaseInput<T, P extends IFormBaseInputProps, S 
      * @param value The value to set
      * @param validate True if the value should be validated.
      */
-    setValue(value: any, validate?: boolean): void;
+    setValue(value: any, validate?: boolean, skipSendValue?: boolean): void;
 }

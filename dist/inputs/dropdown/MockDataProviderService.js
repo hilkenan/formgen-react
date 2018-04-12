@@ -38,7 +38,7 @@ var MockDataProviderService = /** @class */ (function () {
                 return;
             }
             if (configKey == "testA") {
-                resolve("1");
+                resolve("Test A");
                 return;
             }
             else {

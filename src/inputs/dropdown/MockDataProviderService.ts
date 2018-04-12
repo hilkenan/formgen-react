@@ -35,7 +35,7 @@ export class MockDataProviderService implements IDataProviderService {
             return;
         } 
         if (configKey == "testA") {
-            resolve("1");
+            resolve("Test A");
             return;
         }
         else {

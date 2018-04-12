@@ -347,14 +347,14 @@ var FormBaseInput = /** @class */ (function (_super) {
      * @param value The value to set
      * @param validate True if the value should be validated.
      */
-    FormBaseInput.prototype.setValue = function (value, validate) {
+    FormBaseInput.prototype.setValue = function (value, validate, skipSendValue) {
         var _this = this;
         this.setState(function (prevState) {
             _this.props.control.Value = value;
             prevState.currentValue = value;
             return prevState;
         }, function () {
-            _this.debouncedSubmitValue(_this, validate);
+            _this.debouncedSubmitValue(_this, validate, skipSendValue);
         });
     };
     FormBaseInput.contextTypes = {

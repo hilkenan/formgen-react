@@ -84,7 +84,7 @@ export declare type IFormContext = {
     /** Unregister the input with SimpleForm. Should be called during componentWillUnmount */
     unmountInput: (input: GenericFormInput) => void;
     /** Validate the passed in field, set its error state, and call the onUpdate handler if there is one */
-    submitValue: (input: GenericFormInput, validate?: boolean) => void;
+    submitValue: (input: GenericFormInput, validate?: boolean, skipSendValue?: boolean) => void;
     /** Get the current form data */
     formData: JFormData;
     /** The Container for the service */

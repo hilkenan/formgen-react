@@ -92,7 +92,7 @@ var GenericForm = /** @class */ (function (_super) {
     GenericForm.prototype.componentDidMount = function () {
         var _loop_1 = function (eventControl) {
             var input = this_1._mountedInputs.find(function (c) { return c.props.inputKey == eventControl.senderControlKey; });
-            this_1._sendValutToControls(eventControl, input);
+            this_1._sendValutToControls(eventControl, input, true);
         };
         var this_1 = this;
         for (var _i = 0, _a = this._controlEvents; _i < _a.length; _i++) {
@@ -308,8 +308,9 @@ var GenericForm = /** @class */ (function (_super) {
      * Set the validation result, if Valid the control Value and if defined call the onUpdated Method
      * @param input The input that has rais an update
      * @param validate True if the input should validated.
+     * @param skipSendValue True if the sendValutToControls should to be used (avoid recalling the event)
      */
-    GenericForm.prototype._submitValue = function (input, validate) {
+    GenericForm.prototype._submitValue = function (input, validate, skipSendValue) {
         var validationResult = this._validateComponent(input, validate);
         this.setState(function (prevState) {
             prevState.validationResults[input.props.inputKey] = validationResult;
@@ -322,7 +323,7 @@ var GenericForm = /** @class */ (function (_super) {
                 control.Value = input.state.currentValue;
             }
             var eventControl = this._controlEvents.find(function (c) { return c.senderControlKey == input.props.inputKey; });
-            if (eventControl) {
+            if (eventControl && !skipSendValue) {
                 this._sendValutToControls(eventControl, input);
             }
             if (this.props.onUpdated) {
@@ -334,14 +335,19 @@ var GenericForm = /** @class */ (function (_super) {
      * Sed the senderControl Infos to the Receiver at the bound Control
      * @param eventControl The EventControl to get the receiver from
      * @param senderControl The sending controll
+     * @param loadInitials If true then load also the controls that receiver and sender are the same control
     */
-    GenericForm.prototype._sendValutToControls = function (eventControl, senderControl) {
+    GenericForm.prototype._sendValutToControls = function (eventControl, senderControl, loadInitials) {
         for (var _i = 0, _a = eventControl.receiverControl; _i < _a.length; _i++) {
             var receiverControl = _a[_i];
-            if (!senderControl || receiverControl.props.inputKey == senderControl.props.inputKey)
-                this._sendValutToControl(receiverControl, undefined);
-            else
+            if (!senderControl || receiverControl.props.inputKey == senderControl.props.inputKey) {
+                if (loadInitials) {
+                    this._sendValutToControl(receiverControl, undefined);
+                }
+            }
+            else {
                 this._sendValutToControl(receiverControl, senderControl);
+            }
         }
     };
     /**
@@ -360,12 +366,12 @@ var GenericForm = /** @class */ (function (_super) {
         }
         this._getValueFromProvider(receiverControl, senderControl, receiverControl.props.control.DataProviderValueConfigKey).then(function (valutToUse) {
             if (valutToUse && receiverControl.props.control.DataProviderValueConfigKey) {
-                receiverControl.setValue(valutToUse, true);
+                receiverControl.setValue(valutToUse, true, true);
             }
             if (receiverControl.props.control.DataProviderDefaultValueConfigKey && _this.props.isNewForm && !receiverControl.state.currentValue) {
                 _this._getValueFromProvider(receiverControl, senderControl, receiverControl.props.control.DataProviderDefaultValueConfigKey).then(function (defaultValutToUse) {
                     if (defaultValutToUse)
-                        receiverControl.setValue(defaultValutToUse, true);
+                        receiverControl.setValue(defaultValutToUse, true, true);
                 });
             }
         });

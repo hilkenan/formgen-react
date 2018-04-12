@@ -120,7 +120,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
   componentDidMount() {
     for(let eventControl of this._controlEvents) {
       let input = this._mountedInputs.find(c => c.props.inputKey == eventControl.senderControlKey);
-      this._sendValutToControls(eventControl, input);
+      this._sendValutToControls(eventControl, input, true);
     }
     if (this.props.formDidMount) {
       this.props.formDidMount(this._mountedInputs);
@@ -351,9 +351,10 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
    * Set the validation result, if Valid the control Value and if defined call the onUpdated Method
    * @param input The input that has rais an update
    * @param validate True if the input should validated.
+   * @param skipSendValue True if the sendValutToControls should to be used (avoid recalling the event)
    */ 
   @autobind
-  private _submitValue(input: GenericFormInput, validate?: boolean): void {
+  private _submitValue(input: GenericFormInput, validate?: boolean, skipSendValue?: boolean): void {
     let validationResult: IFormValidationResult = this._validateComponent(input, validate);
     this.setState((prevState: IFormState) => {
       prevState.validationResults[input.props.inputKey] = validationResult;
@@ -368,7 +369,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
           control.Value = input.state.currentValue;
       }
       let eventControl = this._controlEvents.find(c => c.senderControlKey == input.props.inputKey);
-      if (eventControl) {
+      if (eventControl && !skipSendValue) {
         this._sendValutToControls(eventControl, input);
       }
       if (this.props.onUpdated) {
@@ -381,13 +382,18 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
      * Sed the senderControl Infos to the Receiver at the bound Control
      * @param eventControl The EventControl to get the receiver from
      * @param senderControl The sending controll
+     * @param loadInitials If true then load also the controls that receiver and sender are the same control
     */
-  private _sendValutToControls(eventControl:ControlBoundEvent, senderControl:GenericFormInput) {
+  private _sendValutToControls(eventControl:ControlBoundEvent, senderControl:GenericFormInput, loadInitials?: boolean) {
     for(let receiverControl of eventControl.receiverControl) {
-      if (!senderControl || receiverControl.props.inputKey == senderControl.props.inputKey)
-        this._sendValutToControl(receiverControl, undefined)
-      else
+      if (!senderControl || receiverControl.props.inputKey == senderControl.props.inputKey) {
+        if (loadInitials) {
+          this._sendValutToControl(receiverControl, undefined)
+        }
+      }
+      else {
         this._sendValutToControl(receiverControl, senderControl)
+      }
     }
   }
 
@@ -405,12 +411,12 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
     }
     this._getValueFromProvider(receiverControl, senderControl, receiverControl.props.control.DataProviderValueConfigKey).then(valutToUse => {
       if (valutToUse && receiverControl.props.control.DataProviderValueConfigKey) {
-        receiverControl.setValue(valutToUse, true);
+        receiverControl.setValue(valutToUse, true, true);
       }
       if (receiverControl.props.control.DataProviderDefaultValueConfigKey && this.props.isNewForm && !receiverControl.state.currentValue) {
         this._getValueFromProvider(receiverControl, senderControl, receiverControl.props.control.DataProviderDefaultValueConfigKey).then(defaultValutToUse => {
           if (defaultValutToUse)
-            receiverControl.setValue(defaultValutToUse, true);
+            receiverControl.setValue(defaultValutToUse, true, true);
         });
       }
     })

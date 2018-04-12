@@ -36,7 +36,7 @@
 					"title": "TextBox",
 					"control_type": [ "Textbox" ],
 					"info": "Info Test",
-					"dataprovider_value_configkey": "mockDataService.[testform.maskedtextbox]",
+					"dataprovider_value_configkey": "mockDataService.testA",
 					"validators": [{
 							"validator_type": [ "Required" ]
 						},{

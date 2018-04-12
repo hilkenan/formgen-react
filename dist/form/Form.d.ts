@@ -104,14 +104,16 @@ export declare abstract class GenericForm<T extends JFormData> extends BaseCompo
      * Set the validation result, if Valid the control Value and if defined call the onUpdated Method
      * @param input The input that has rais an update
      * @param validate True if the input should validated.
+     * @param skipSendValue True if the sendValutToControls should to be used (avoid recalling the event)
      */
-    private _submitValue(input, validate?);
+    private _submitValue(input, validate?, skipSendValue?);
     /**
      * Sed the senderControl Infos to the Receiver at the bound Control
      * @param eventControl The EventControl to get the receiver from
      * @param senderControl The sending controll
+     * @param loadInitials If true then load also the controls that receiver and sender are the same control
     */
-    private _sendValutToControls(eventControl, senderControl);
+    private _sendValutToControls(eventControl, senderControl, loadInitials?);
     /**
      * Send the value to an given control. If need convert it with the provider key to another value
      * @param input The input that has rais an update
