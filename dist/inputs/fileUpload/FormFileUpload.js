@@ -83,9 +83,9 @@ var FormFileUpload = /** @class */ (function (_super) {
         acceptedFiles.forEach(function (file) {
             var reader = new FileReader();
             reader.onload = function () {
-                var fileAsBinaryString = reader.result;
+                var fileAsBinaryArray = reader.result;
                 var fileName = file.name;
-                var storedPath = _this.dataProviderService.addFile(providerConfigKey, _this.props.control, fileName, fileAsBinaryString);
+                var storedPath = _this.dataProviderService.addFile(providerConfigKey, _this.props.control, fileName, fileAsBinaryArray);
                 storedFiles.push({
                     fileName: fileName,
                     fileSize: file.size,
@@ -95,7 +95,7 @@ var FormFileUpload = /** @class */ (function (_super) {
             };
             reader.onabort = function () { return console.log('file reading was aborted'); };
             reader.onerror = function () { return console.log('file reading has failed'); };
-            reader.readAsBinaryString(file);
+            reader.readAsArrayBuffer(file);
         });
         this.setValue(storedFiles, true);
     };

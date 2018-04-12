@@ -76,9 +76,9 @@ export class FormFileUpload extends FormBaseInput<IFormFileUploadProps, IFormBas
     acceptedFiles.forEach(file => {
       const reader = new FileReader();
       reader.onload = () => {
-          const fileAsBinaryString = reader.result;
+          const fileAsBinaryArray = reader.result;
           const fileName = file.name;
-          let storedPath = this.dataProviderService.addFile(providerConfigKey, this.props.control, fileName, fileAsBinaryString);
+          let storedPath = this.dataProviderService.addFile(providerConfigKey, this.props.control, fileName, fileAsBinaryArray);
           storedFiles.push({
             fileName: fileName,
             fileSize: file.size,
@@ -88,7 +88,7 @@ export class FormFileUpload extends FormBaseInput<IFormFileUploadProps, IFormBas
       };
       reader.onabort = () => console.log('file reading was aborted');
       reader.onerror = () => console.log('file reading has failed');
-      reader.readAsBinaryString(file);
+      reader.readAsArrayBuffer(file);
     });
     this.setValue(storedFiles, true);
   }  
