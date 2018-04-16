@@ -6,7 +6,6 @@ import { JFormData } from '../objects/JFormData';
 import { BaseComponent } from 'office-ui-fabric-react/lib/Utilities';
 import '../styles/main.css';
 import { IFormState, IFormProps, IFormContext } from './Form.types';
-import 'babel-polyfill/browser.js';
 import "reflect-metadata";
 export declare var FormLanguage: string;
 /**

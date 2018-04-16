@@ -38,7 +38,6 @@ var Utilities_1 = require("office-ui-fabric-react/lib/Utilities");
 require("../styles/main.css");
 var Enums_1 = require("../Enums");
 var react_intl_1 = require("react-intl");
-require("babel-polyfill/browser.js");
 var Rendering_1 = require("./Rendering");
 require("reflect-metadata");
 var FormBaseInput_types_1 = require("../formBaseInput/FormBaseInput.types");

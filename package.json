@@ -1,7 +1,7 @@
 {
   "author": "hilkenan",
   "name": "formgen-react",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "Formula generator with JSON for react. UI Fabric controls are used for rendering",
   "license": "MIT",
   "homepage": "https://github.com/hilkenan/formgen-react",
@@ -34,7 +34,6 @@
     "@types/react-dropzone": "^4.2.0",
     "@types/react-intl": "^2.3.5",
     "@uifabric/styling": "^5.19.0",
-    "babel-polyfill": "^6.26.0",
     "browser-locale": "^1.0.3",
     "intl": "^1.2.5",
     "inversify": "^4.11.1",

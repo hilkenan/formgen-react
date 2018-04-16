@@ -30,6 +30,18 @@ The package can be installed via NPM:
 ```
 npm install formgen-react --save
 ```
+If you not just add, then add the babel-polyfill to your project:
+
+```
+npm install babel-polyfill
+```
+
+Then add at your entry point the statement:
+```ts
+import 'babel-polyfill/browser.js';
+
+```
+Otherwise you get Problems with some browsers.
 
 ## Documentation
 

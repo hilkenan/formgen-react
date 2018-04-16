@@ -16,7 +16,6 @@ import { GenericFormInput } from '../formBaseInput/FormBaseInput';
 import { Control } from '../objects/Control';
 import { Row } from '../objects/Row';
 import { addLocaleData } from 'react-intl';
-import 'babel-polyfill/browser.js';
 import Rendering from './Rendering';
 import "reflect-metadata";
 import { Container } from 'inversify';
