@@ -69,6 +69,9 @@ export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes
 
   /** If its a new Form then set the default values */
   isNewForm?: boolean;
+
+  /** If this is set then use this as title insed ot the static title */
+  formTitle?: string;
 }
 
 /**

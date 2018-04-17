@@ -135,7 +135,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
           <header className={ [
               "Form-header",
               FontClassNames.medium ].join(' ') } key={this.formData.ID + "heder" }>
-            <h1 key={this.formData.ID + "h1" } >{ Helper.getTranslatedProperty(TranslatedProperty.Title, this.formData) }</h1>
+            <h1 key={this.formData.ID + "h1" } >{ this.props.formTitle ? this.props.formTitle : Helper.getTranslatedProperty(TranslatedProperty.Title, this.formData) }</h1>
           </header>
         ) }                
         <div className='Form-content' key={this.formData.ID + "Container" }>

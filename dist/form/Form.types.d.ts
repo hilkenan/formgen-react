@@ -52,6 +52,8 @@ export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes
     formType?: new () => T;
     /** If its a new Form then set the default values */
     isNewForm?: boolean;
+    /** If this is set then use this as title insed ot the static title */
+    formTitle?: string;
 }
 /**
  * Validation result for a simple form input. All calls to validate return this type

@@ -110,7 +110,7 @@ var GenericForm = /** @class */ (function (_super) {
                         "Form-header",
                         styling_1.FontClassNames.medium
                     ].join(' '), key: this.formData.ID + "heder" },
-                    React.createElement("h1", { key: this.formData.ID + "h1" }, Helper_1.Helper.getTranslatedProperty(Enums_1.TranslatedProperty.Title, this.formData)))),
+                    React.createElement("h1", { key: this.formData.ID + "h1" }, this.props.formTitle ? this.props.formTitle : Helper_1.Helper.getTranslatedProperty(Enums_1.TranslatedProperty.Title, this.formData)))),
                 React.createElement("div", { className: 'Form-content', key: this.formData.ID + "Container" }, this._rendering.buildRowWlements(this.formData.ID + "/R", this.formData.Rows)))));
     };
     /**
