@@ -16,6 +16,15 @@ export class JFormData {
     @JsonProperty("theme", String, true) 
     Theme?: string = "";
 
+    @JsonProperty("template", String, true)
+    Message: string = "";     
+    
+    @JsonProperty("dataprovider_config_name", String, true)
+    DataProviderConfigName: string = "";     
+
+    @JsonProperty("template_trans", TransConverter, true)
+    MessageTranslates?: Translate[] = undefined;        
+
     @JsonProperty("title_trans", TransConverter, true)
     TitleTranslates?: Translate[] = undefined;    
 

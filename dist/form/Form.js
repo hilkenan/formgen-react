@@ -41,6 +41,7 @@ var react_intl_1 = require("react-intl");
 var Rendering_1 = require("./Rendering");
 require("reflect-metadata");
 var FormBaseInput_types_1 = require("../formBaseInput/FormBaseInput.types");
+var TemplateHelper_1 = require("../objects/TemplateHelper");
 global.Intl = require('intl');
 var frLocaleData = require('react-intl/locale-data/fr');
 var deLocaleData = require('react-intl/locale-data/de');
@@ -104,13 +105,16 @@ var GenericForm = /** @class */ (function (_super) {
     };
     GenericForm.prototype.render = function () {
         var nativeProps = Utilities_1.getNativeProps(this.props, Utilities_1.divProperties);
+        var internalFormTitle = this.props.showTemplateTitle ? TemplateHelper_1.TemplateHelper.getTemplatedTitle(this.props.jsonFormData) : undefined;
+        if (!internalFormTitle)
+            internalFormTitle = Helper_1.Helper.getTranslatedProperty(Enums_1.TranslatedProperty.Title, this.formData);
         return (React.createElement("form", __assign({}, nativeProps, { onSubmit: this._onSubmit, key: this.formData.ID }),
             React.createElement("div", { className: "Form", key: this.formData.ID + "div1" },
                 Enums_1.TranslatedProperty.Title && (React.createElement("header", { className: [
                         "Form-header",
                         styling_1.FontClassNames.medium
                     ].join(' '), key: this.formData.ID + "heder" },
-                    React.createElement("h1", { key: this.formData.ID + "h1" }, this.props.formTitle ? this.props.formTitle : Helper_1.Helper.getTranslatedProperty(Enums_1.TranslatedProperty.Title, this.formData)))),
+                    React.createElement("h1", { key: this.formData.ID + "h1" }, this.props.formTitle ? this.props.formTitle : internalFormTitle))),
                 React.createElement("div", { className: 'Form-content', key: this.formData.ID + "Container" }, this._rendering.buildRowWlements(this.formData.ID + "/R", this.formData.Rows)))));
     };
     /**

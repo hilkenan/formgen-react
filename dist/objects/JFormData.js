@@ -17,6 +17,9 @@ var JFormData = /** @class */ (function () {
         this.ID = "";
         this.Title = "";
         this.Theme = "";
+        this.Message = "";
+        this.DataProviderConfigName = "";
+        this.MessageTranslates = undefined;
         this.TitleTranslates = undefined;
         this.Rows = undefined;
         this.LabelWith = undefined;
@@ -30,6 +33,15 @@ var JFormData = /** @class */ (function () {
     __decorate([
         json2typescript_1.JsonProperty("theme", String, true)
     ], JFormData.prototype, "Theme", void 0);
+    __decorate([
+        json2typescript_1.JsonProperty("template", String, true)
+    ], JFormData.prototype, "Message", void 0);
+    __decorate([
+        json2typescript_1.JsonProperty("dataprovider_config_name", String, true)
+    ], JFormData.prototype, "DataProviderConfigName", void 0);
+    __decorate([
+        json2typescript_1.JsonProperty("template_trans", TransConverter_1.TransConverter, true)
+    ], JFormData.prototype, "MessageTranslates", void 0);
     __decorate([
         json2typescript_1.JsonProperty("title_trans", TransConverter_1.TransConverter, true)
     ], JFormData.prototype, "TitleTranslates", void 0);

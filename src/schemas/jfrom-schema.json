@@ -15,11 +15,20 @@
 		 "theme": {
 			 "type": "string"
 		},
+		"template": {
+			"type": "string"
+		},
+		"template_trans": {
+			"$ref": "./translation-schema.json"
+		},		
 		 "title_trans": {
 			 "$ref": "translation-schema.json"
 		},
 		 "rows": {
 			 "$ref": "#/definitions/rows"
+		},
+		"dataprovider_config_name": {
+			"type": "string"
 		},
 		"label_with": {
 			"type": "integer",

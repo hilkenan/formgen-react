@@ -72,6 +72,9 @@ export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes
 
   /** If this is set then use this as title insed ot the static title */
   formTitle?: string;
+
+  /** When set to true then show the templated title string insed of the static title */
+  showTemplateTitle?: boolean;
 }
 
 /**

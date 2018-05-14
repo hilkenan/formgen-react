@@ -54,6 +54,8 @@ export interface IFormProps<T extends JFormData> extends React.AllHTMLAttributes
     isNewForm?: boolean;
     /** If this is set then use this as title insed ot the static title */
     formTitle?: string;
+    /** When set to true then show the templated title string insed of the static title */
+    showTemplateTitle?: boolean;
 }
 /**
  * Validation result for a simple form input. All calls to validate return this type

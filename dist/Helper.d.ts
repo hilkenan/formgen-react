@@ -14,6 +14,13 @@ export declare class Helper {
      */
     static getControlKeyFromConfigKey(key: string): string;
     /**
+     * Replace the all occurencies from search in the target with replacments
+     * @param target the origin string
+     * @param search the search string
+     * @param replacement the replacment string
+     */
+    static replaceAll(target: string, search: string, replacement: string): string;
+    /**
      * Get from a key definition everything after the second .
      * @param key The full key to get the value from
      */

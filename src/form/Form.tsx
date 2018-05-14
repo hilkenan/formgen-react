@@ -20,6 +20,7 @@ import Rendering from './Rendering';
 import "reflect-metadata";
 import { Container } from 'inversify';
 import { IDataProviderCollection, typesForInject } from '../formBaseInput/FormBaseInput.types';
+import { TemplateHelper } from '../objects/TemplateHelper';
 
 global.Intl = require('intl');
 let frLocaleData = require('react-intl/locale-data/fr');
@@ -128,6 +129,10 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
 
   public render(): JSX.Element {
     let nativeProps = getNativeProps(this.props, divProperties);
+    let internalFormTitle = this.props.showTemplateTitle ? TemplateHelper.getTemplatedTitle(this.props.jsonFormData) : undefined;
+    if (!internalFormTitle)
+      internalFormTitle = Helper.getTranslatedProperty(TranslatedProperty.Title, this.formData)    
+    
     return (
       <form {...nativeProps} onSubmit={ this._onSubmit } key={this.formData.ID } >
       <div className="Form" key={this.formData.ID + "div1" }>
@@ -135,7 +140,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
           <header className={ [
               "Form-header",
               FontClassNames.medium ].join(' ') } key={this.formData.ID + "heder" }>
-            <h1 key={this.formData.ID + "h1" } >{ this.props.formTitle ? this.props.formTitle : Helper.getTranslatedProperty(TranslatedProperty.Title, this.formData) }</h1>
+            <h1 key={this.formData.ID + "h1" } >{ this.props.formTitle ? this.props.formTitle : internalFormTitle }</h1>
           </header>
         ) }                
         <div className='Form-content' key={this.formData.ID + "Container" }>
