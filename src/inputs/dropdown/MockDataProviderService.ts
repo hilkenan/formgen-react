@@ -28,6 +28,8 @@ export class MockDataProviderService implements IDataProviderService {
     });
   }
 
+  public initialize() {}
+
   public retrieveSingleData(configKey:string, senderControl: Control, receiverControl: Control, lang:string):Promise<any> {
     return new Promise<any>((resolve, reject)  => {
         if (senderControl && senderControl.Value == "11:00:01"){

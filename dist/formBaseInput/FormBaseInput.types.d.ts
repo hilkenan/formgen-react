@@ -20,6 +20,8 @@ export interface IDataProviderCollection {
  * The Service to load any data from a injected data store system.
  */
 export interface IDataProviderService {
+    /** Initialize the Provider after setting the form data */
+    initialize(): void;
     /** Provider Service key to identify an provider  */
     providerServiceKey: string;
     /** The current Form Data  */

@@ -10,6 +10,7 @@ export declare class MockDataProviderService implements IDataProviderService {
    * @param lang The current language to use.
    */
     retrieveListData(configKey: string, controlConfig: Control, lang: string): Promise<any[]>;
+    initialize(): void;
     retrieveSingleData(configKey: string, senderControl: Control, receiverControl: Control, lang: string): Promise<any>;
     addFile(configKey: string, controlConfig: Control, fileName: string, fileContent: any): string;
     removeFile(configKey: string, controlConfig: Control, fileName: string): void;

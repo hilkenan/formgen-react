@@ -23,6 +23,9 @@ export interface IDataProviderCollection {
  */
 export interface IDataProviderService {
 
+  /** Initialize the Provider after setting the form data */
+  initialize(): void
+
   /** Provider Service key to identify an provider  */
   providerServiceKey: string
   

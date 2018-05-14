@@ -31,6 +31,7 @@ var MockDataProviderService = /** @class */ (function () {
             setTimeout(function () { return resolve(dropDonwEntries); }, 5000);
         });
     };
+    MockDataProviderService.prototype.initialize = function () { };
     MockDataProviderService.prototype.retrieveSingleData = function (configKey, senderControl, receiverControl, lang) {
         return new Promise(function (resolve, reject) {
             if (senderControl && senderControl.Value == "11:00:01") {

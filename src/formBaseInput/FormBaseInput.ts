@@ -324,6 +324,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
         if (this.dataProviderService == undefined)
           throw "No DataProvider found with key " + keyParts[0] + " name is: " + dataProviders.providers[0].providerServiceKey;
         this.dataProviderService.formData = formData;
+        this.dataProviderService.initialize();
 
         let result = Helper.getControlKeyFromConfigKey(configKey);
         if (result && this.dataProviderService.retrieveFilteredListData) {

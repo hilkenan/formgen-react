@@ -265,6 +265,7 @@ var FormBaseInput = /** @class */ (function (_super) {
                 if (this_1.dataProviderService == undefined)
                     throw "No DataProvider found with key " + keyParts[0] + " name is: " + dataProviders.providers[0].providerServiceKey;
                 this_1.dataProviderService.formData = formData;
+                this_1.dataProviderService.initialize();
                 var result = Helper_1.Helper.getControlKeyFromConfigKey(configKey);
                 if (result && this_1.dataProviderService.retrieveFilteredListData) {
                     var binderFuntion = this_1.dataProviderService;
