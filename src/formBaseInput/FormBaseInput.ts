@@ -333,6 +333,7 @@ export abstract class FormBaseInput<T, P extends IFormBaseInputProps, S extends 
         }
         else {
           let providerConfigKey = Helper.getConfigKeyFromProviderKey(configKey);
+          this.dataProviderService.initialize();
           this.dataStore[configKey] = this.dataProviderService.retrieveListData(providerConfigKey, this.props.control, Helper.getLanguage()); 
           this.loadDataFromStore(configKey,this.storeOptions, "");
         }

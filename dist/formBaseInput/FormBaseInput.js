@@ -273,6 +273,7 @@ var FormBaseInput = /** @class */ (function (_super) {
                 }
                 else {
                     var providerConfigKey = Helper_1.Helper.getConfigKeyFromProviderKey(configKey);
+                    this_1.dataProviderService.initialize();
                     this_1.dataStore[configKey] = this_1.dataProviderService.retrieveListData(providerConfigKey, this_1.props.control, Helper_1.Helper.getLanguage());
                     this_1.loadDataFromStore(configKey, this_1.storeOptions, "");
                 }

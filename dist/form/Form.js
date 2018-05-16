@@ -424,6 +424,7 @@ var GenericForm = /** @class */ (function (_super) {
                 var provider = dataProviders.providers.find(function (p) { return p.providerServiceKey == providerKey_1; });
                 if (provider == undefined)
                     throw "DataProvider with key " + providerKey_1 + " not found";
+                provider.initialize();
                 var providerConfigKey = Helper_1.Helper.getConfigKeyFromProviderKey(keyToResolve);
                 var sender = senderControl ? senderControl.props.control : undefined;
                 provider.retrieveSingleData(providerConfigKey, sender, receiverControl.props.control, Helper_1.Helper.getLanguage()).then(function (value) {
