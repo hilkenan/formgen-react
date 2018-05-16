@@ -473,7 +473,7 @@ export abstract class GenericForm<T extends JFormData> extends BaseComponent<IFo
         let provider = dataProviders.providers.find(p => p.providerServiceKey == providerKey);
         if (provider == undefined)
           throw "DataProvider with key " + providerKey + " not found";
-
+        provider.formData = this.formData;
         provider.initialize();
         let providerConfigKey = Helper.getConfigKeyFromProviderKey(keyToResolve);
         let sender = senderControl ? senderControl.props.control : undefined;
